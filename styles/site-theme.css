@@ -6303,10 +6303,36 @@ body.nav-open {
   box-shadow: 
     0 16px 36px rgba(214, 167, 118, 0.28),
     0 0 0 0 rgba(214, 167, 118, 0.34);
-  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 360ms ease, border-color 360ms ease;
+  transition: transform 360ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 360ms ease, border-color 360ms ease, opacity 520ms ease, transform 520ms ease;
   margin-top: clamp(0.35rem, 1vw, 0.68rem);
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(18px);
+  animation: bioBannerCtaIn 820ms ease forwards;
+}
+
+@keyframes bioBannerCtaIn {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bio-banner__cta.is-visible {
+  animation-delay: 120ms;
+}
+
+@media (max-width: 640px) {
+  .bio-banner__cta {
+    width: 100%;
+    justify-self: stretch;
+    border-radius: clamp(0.9rem, 4vw, 1.6rem);
+  }
 }
 
 .bio-banner__cta::before {
