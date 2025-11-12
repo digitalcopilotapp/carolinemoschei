@@ -6310,6 +6310,8 @@ body.nav-open {
   opacity: 0;
   transform: translateY(18px);
   animation: bioBannerCtaIn 820ms ease forwards;
+  white-space: normal;
+  text-align: center;
 }
 
 @keyframes bioBannerCtaIn {
@@ -6332,6 +6334,12 @@ body.nav-open {
     width: 100%;
     justify-self: stretch;
     border-radius: clamp(0.9rem, 4vw, 1.6rem);
+    padding-left: clamp(1.2rem, 5vw, 1.6rem);
+    padding-right: clamp(1.2rem, 5vw, 1.6rem);
+  }
+
+  .bio-banner--immersion .bio-banner__cta {
+    justify-content: center;
   }
 }
 
