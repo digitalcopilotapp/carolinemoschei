@@ -1,0 +1,16 @@
+{
+  "name": "myoak-stripe-server",
+  "version": "1.0.0",
+  "description": "Servidor auxiliar para checkout Stripe do MyOak",
+  "type": "module",
+  "main": "stripe.js",
+  "scripts": {
+    "start": "node stripe.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "stripe": "^16.10.0"
+  }
+}

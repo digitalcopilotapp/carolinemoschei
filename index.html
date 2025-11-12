@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black November - Caroline Moschei</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script>
+        // Hero Slide Navigation - Netflix Style
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.hero-indicator');
+            let currentSlide = 0;
+            let slideInterval;
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === index);
+                });
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }
+
+            function startAutoSlide() {
+                slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+
+            function stopAutoSlide() {
+                clearInterval(slideInterval);
+            }
+
+            // Indicator click handlers
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    showSlide(index);
+                    stopAutoSlide();
+                    startAutoSlide();
+                });
+            });
+
+            // Pause on hover
+            const heroModern = document.querySelector('.hero-modern');
+            if (heroModern) {
+                heroModern.addEventListener('mouseenter', stopAutoSlide);
+                heroModern.addEventListener('mouseleave', startAutoSlide);
+            }
+
+            // Start auto slide
+            startAutoSlide();
+
+            // Modules Carousel Navigation
+            const carouselWrapper = document.querySelector('.carousel-wrapper');
+            const prevBtn = document.querySelector('.carousel-btn-prev');
+            const nextBtn = document.querySelector('.carousel-btn-next');
+            
+            if (carouselWrapper && prevBtn && nextBtn) {
+                const cardWidth = 280 + 16;
+                const scrollAmount = cardWidth * 2;
+                
+                prevBtn.addEventListener('click', () => {
+                    carouselWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+                
+                nextBtn.addEventListener('click', () => {
+                    carouselWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+                
+                const updateButtons = () => {
+                    const isAtStart = carouselWrapper.scrollLeft <= 0;
+                    const isAtEnd = carouselWrapper.scrollLeft >= carouselWrapper.scrollWidth - carouselWrapper.clientWidth - 10;
+                    
+                    prevBtn.style.opacity = isAtStart ? '0.3' : '1';
+                    nextBtn.style.opacity = isAtEnd ? '0.3' : '1';
+                    prevBtn.style.pointerEvents = isAtStart ? 'none' : 'all';
+                    nextBtn.style.pointerEvents = isAtEnd ? 'none' : 'all';
+                };
+                
+                carouselWrapper.addEventListener('scroll', updateButtons);
+                updateButtons();
+            }
+        });
+    </script>
+    <!-- Animated Top Bar -->
+    <div class="top-banner">
+        <div class="marquee">
+            <div class="marquee-content">
+                <span class="marquee-text white">BLACK NOVEMBER</span>
+                <span class="marquee-text black">BLACK NOVEMBER</span>
+                <span class="marquee-text white">BLACK NOVEMBER</span>
+                <span class="marquee-text black">BLACK NOVEMBER</span>
+                <span class="marquee-text white">BLACK NOVEMBER</span>
+                <span class="marquee-text black">BLACK NOVEMBER</span>
+            </div>
+        </div>
+    </div>
+
+    <div data-site-header></div>
+
+    <!-- Hero Section - Netflix Style -->
+    <section class="hero-modern">
+        <!-- Slide 1 -->
+        <div class="hero-slide active">
+            <div class="hero-background">
+                <div class="hero-image"></div>
+                <div class="hero-gradient"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg class="hero-badge-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2L12.5 7.5L18.5 8.5L14 12.5L15 18.5L10 15.5L5 18.5L6 12.5L1.5 8.5L7.5 7.5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>MAIOR OFERTA DO ANO</span>
+                </div>
+                <h1 class="hero-title">Black November</h1>
+                <h2 class="hero-subtitle">A maior oferta em produtos digitais</h2>
+                <p class="hero-description">
+                    Transforme sua fotografia em um negócio lucrativo com acesso completo a mais de 5 produtos digitais. Aulas práticas, técnicas profissionais e estratégias de vendas que vão elevar o valor do seu trabalho.
+                </p>
+                <div class="hero-timer">
+                    <svg class="timer-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="timer-text">Oferta válida até 30 de Novembro</span>
+                </div>
+                <div class="hero-cta-group">
+                    <button class="hero-cta-primary">
+                        <span>Garantir 50% OFF</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="hero-cta-secondary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Ver detalhes</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="hero-slide">
+            <div class="hero-background">
+                <div class="hero-image"></div>
+                <div class="hero-gradient"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg class="hero-badge-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2L12.5 7.5L18.5 8.5L14 12.5L15 18.5L10 15.5L5 18.5L6 12.5L1.5 8.5L7.5 7.5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>ATÉ 50% DE DESCONTO</span>
+                </div>
+                <h1 class="hero-title">Verso & Reverso</h1>
+                <h2 class="hero-subtitle">Curso Completo de Fotografia</h2>
+                <p class="hero-description">
+                    Mais de 150 aulas práticas que cobrem desde técnicas fundamentais até estratégias avançadas de edição e marketing. Inclui acesso à comunidade exclusiva com feedback direto da Caroline Moschei.
+                </p>
+                <div class="hero-timer">
+                    <svg class="timer-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="timer-text">Oferta válida até 30 de Novembro</span>
+                </div>
+                <div class="hero-cta-group">
+                    <button class="hero-cta-primary">
+                        <span>Aproveitar 30% OFF</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="hero-cta-secondary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Ver detalhes</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="hero-slide">
+            <div class="hero-background">
+                <div class="hero-image"></div>
+                <div class="hero-gradient"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg class="hero-badge-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 2L12.5 7.5L18.5 8.5L14 12.5L15 18.5L10 15.5L5 18.5L6 12.5L1.5 8.5L7.5 7.5L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>OFERTA ESPECIAL</span>
+                </div>
+                <h1 class="hero-title">Guia de Poses</h1>
+                <h2 class="hero-subtitle">Fotografia de Gestantes</h2>
+                <p class="hero-description">
+                    Um guia completo e prático com mais de 50 poses profissionais, técnicas de iluminação específicas para gestantes e dicas de direção que vão elevar a qualidade dos seus ensaios.
+                </p>
+                <div class="hero-timer">
+                    <svg class="timer-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="timer-text">Oferta válida até 30 de Novembro</span>
+                </div>
+                <div class="hero-cta-group">
+                    <button class="hero-cta-primary">
+                        <span>Aproveitar 30% OFF</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="hero-cta-secondary">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M10 6V10L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span>Ver detalhes</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="hero-indicators">
+            <div class="hero-indicator active"></div>
+            <div class="hero-indicator"></div>
+            <div class="hero-indicator"></div>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Main CTA Section -->
+    <section class="main-cta">
+        <div class="cta-icon-wrapper">
+            <svg class="cta-main-icon" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 4L30 18L44 20L32 30L34 44L24 36L14 44L16 30L4 20L18 18L24 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <h2 class="main-title">Transforme sua fotografia em um negócio lucrativo</h2>
+        <div class="benefits-list">
+            <div class="benefit-item">
+                <svg class="benefit-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.667 5L7.5 14.167L3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Mais de 5 produtos digitais</span>
+            </div>
+            <div class="benefit-item">
+                <svg class="benefit-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.667 5L7.5 14.167L3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Aulas práticas e técnicas profissionais</span>
+            </div>
+            <div class="benefit-item">
+                <svg class="benefit-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16.667 5L7.5 14.167L3.333 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Estratégias de vendas comprovadas</span>
+            </div>
+        </div>
+        <p class="main-description">
+            Aproveite o Black November e tenha acesso a mais de 5 produtos digitais em um único pacote. Aulas práticas, técnicas profissionais e estratégias de vendas que vão elevar o valor do seu trabalho e transformar sua paixão em uma carreira de sucesso.
+        </p>
+        <button class="cta-button">
+            <span class="button-text">Garantir 50% de desconto</span>
+            <div class="button-icon">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="17" cy="17" r="16" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M12 17L17 12L22 17M17 12V22" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+        </button>
+    </section>
+
+    <!-- Modules Carousel -->
+    <section class="modules-section">
+        <div class="modules-header">
+            <h2 class="modules-title">
+                <svg class="modules-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                O que você vai aprender
+            </h2>
+            <p class="modules-subtitle">Explore os módulos do curso e descubra todo o conteúdo</p>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-track">
+                    <div class="module-card">
+                        <div class="module-number">01</div>
+                        <h3 class="module-card-title">Fundamentos da Fotografia</h3>
+                        <p class="module-card-description">Aprenda os conceitos básicos de exposição, composição, enquadramento e os princípios fundamentais para criar fotografias profissionais.</p>
+                        <div class="module-features">
+                            <span class="module-feature">Exposição</span>
+                            <span class="module-feature">Composição</span>
+                            <span class="module-feature">Enquadramento</span>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-number">02</div>
+                        <h3 class="module-card-title">Iluminação Profissional</h3>
+                        <p class="module-card-description">Domine técnicas de iluminação natural e artificial, aprenda a criar diferentes atmosferas e trabalhar com luzes em estúdio e externas.</p>
+                        <div class="module-features">
+                            <span class="module-feature">Luz Natural</span>
+                            <span class="module-feature">Estúdio</span>
+                            <span class="module-feature">Técnicas</span>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-number">03</div>
+                        <h3 class="module-card-title">Edição no Photoshop</h3>
+                        <p class="module-card-description">Técnicas avançadas de edição, tratamento de pele, correção de cores, composição e uso de inteligência artificial para otimizar seu fluxo de trabalho.</p>
+                        <div class="module-features">
+                            <span class="module-feature">Photoshop</span>
+                            <span class="module-feature">I.A</span>
+                            <span class="module-feature">Retoque</span>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-number">04</div>
+                        <h3 class="module-card-title">Lightroom e Fluxo de Trabalho</h3>
+                        <p class="module-card-description">Organize e edite suas fotos com eficiência, aprenda a criar presets personalizados e desenvolver um fluxo de trabalho profissional.</p>
+                        <div class="module-features">
+                            <span class="module-feature">Lightroom</span>
+                            <span class="module-feature">Presets</span>
+                            <span class="module-feature">Organização</span>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-number">05</div>
+                        <h3 class="module-card-title">Marketing e Vendas</h3>
+                        <p class="module-card-description">Estratégias para valorizar seu trabalho, precificação adequada, construção de portfólio e técnicas de vendas para fotógrafos.</p>
+                        <div class="module-features">
+                            <span class="module-feature">Precificação</span>
+                            <span class="module-feature">Portfólio</span>
+                            <span class="module-feature">Vendas</span>
+                        </div>
+                    </div>
+                    <div class="module-card">
+                        <div class="module-number">06</div>
+                        <h3 class="module-card-title">Fotografia de Gestantes</h3>
+                        <p class="module-card-description">Técnicas específicas para ensaios de gestantes, poses profissionais, direção de modelo e criação de imagens emocionantes e memoráveis.</p>
+                        <div class="module-features">
+                            <span class="module-feature">Poses</span>
+                            <span class="module-feature">Direção</span>
+                            <span class="module-feature">Ensaio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn carousel-btn-prev" aria-label="Anterior">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="carousel-btn carousel-btn-next" aria-label="Próximo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Product Showcase 1 -->
+    <section class="product-showcase">
+        <div class="showcase-image">
+            <div class="showcase-overlay"></div>
+            <div class="discount-badge">30% off</div>
+        </div>
+        <div class="showcase-content">
+            <div class="showcase-left">
+                <div class="showcase-header">
+                    <svg class="showcase-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <a href="pages/verso-reverso.html" class="showcase-title-link">
+                        <h3 class="showcase-title">Verso & Reverso: Curso Completo de Fotografia</h3>
+                    </a>
+                </div>
+                <div class="showcase-features">
+                    <div class="feature-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.333 4L6 11.333L2.667 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>150+ aulas práticas</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.333 4L6 11.333L2.667 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Comunidade exclusiva</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.333 4L6 11.333L2.667 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Feedback direto</span>
+                    </div>
+                </div>
+                <p class="showcase-description">
+                    Mais de 150 aulas práticas que cobrem desde técnicas fundamentais até estratégias avançadas de edição e marketing. Inclui acesso à comunidade exclusiva onde você pode trocar experiências e receber feedback direto da Caroline Moschei.
+                </p>
+                <a href="pages/verso-reverso.html" class="cta-button">
+                    <span class="button-text">Aproveitar 30% OFF</span>
+                    <div class="button-icon">
+                        <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+                            <circle cx="17" cy="17" r="16" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M12 17L17 12L22 17M17 12V22" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+            <div class="showcase-divider"></div>
+            <div class="showcase-right">
+                <div class="module-glass-section">
+                    <h4 class="glass-section-title">O que você vai aprender</h4>
+                    <div class="glass-section-content">
+                        <span class="glass-tag">Fotografia</span>
+                        <span class="glass-tag">Iluminação</span>
+                        <span class="glass-tag">Photoshop</span>
+                        <span class="glass-tag">Inteligência Artificial</span>
+                        <span class="glass-tag">Lightroom</span>
+                        <span class="glass-tag">Marketing Digital</span>
+                        <span class="glass-tag">Estratégias de Vendas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase 2 -->
+    <section class="product-showcase">
+        <div class="showcase-image">
+            <div class="showcase-overlay"></div>
+            <div class="discount-badge">30% off</div>
+        </div>
+        <div class="showcase-content">
+            <div class="showcase-left">
+                <div class="showcase-header">
+                    <svg class="showcase-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 16L8.586 11.414C9.367 10.633 10.633 10.633 11.414 11.414L16 16M14 14L15.586 12.414C16.367 11.633 17.633 11.633 18.414 12.414L22 16M14 8H14.01M6 20H18C19.105 20 20 19.105 20 18V6C20 4.895 19.105 4 18 4H6C4.895 4 4 4.895 4 6V18C4 19.105 4.895 20 6 20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3 class="showcase-title">Guia Completo de Poses para Fotografia de Gestantes</h3>
+                </div>
+                <div class="showcase-features">
+                    <div class="feature-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.333 4L6 11.333L2.667 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>50+ poses profissionais</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.333 4L6 11.333L2.667 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Técnicas de iluminação</span>
+                    </div>
+                    <div class="feature-item">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.333 4L6 11.333L2.667 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Dicas de direção</span>
+                    </div>
+                </div>
+                <p class="showcase-description">
+                    Um guia completo e prático com mais de 50 poses profissionais, técnicas de iluminação específicas para gestantes e dicas de direção que vão elevar a qualidade dos seus ensaios. Aprenda a criar imagens emocionantes e memoráveis.
+                </p>
+                <button class="cta-button">
+                    <span class="button-text">Aproveitar 30% OFF</span>
+                    <div class="button-icon">
+                        <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+                            <circle cx="17" cy="17" r="16" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M12 17L17 12L22 17M17 12V22" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            <div class="showcase-divider"></div>
+            <div class="showcase-right">
+                <div class="module-glass-section">
+                    <h4 class="glass-section-title">Conteúdo do guia</h4>
+                    <div class="glass-section-content">
+                        <span class="glass-tag">Poses Profissionais</span>
+                        <span class="glass-tag">Direção de Modelo</span>
+                        <span class="glass-tag">Iluminação Natural</span>
+                        <span class="glass-tag">Composição</span>
+                        <span class="glass-tag">Edição Específica</span>
+                        <span class="glass-tag">Dicas de Produção</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script defer src="scripts/site-interactions.js"></script>
+</body>
+</html>
+

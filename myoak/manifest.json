@@ -1,0 +1,25 @@
+{
+  "name": "MyOak Frequências de Manifestação",
+  "short_name": "MyOak",
+  "description": "Experiência imersiva em frequências, visualizações e rituais guiados.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "assets/icons/logo-verso-reverso.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192"
+    },
+    {
+      "src": "assets/images/guide/guide-cover-01.jpg",
+      "type": "image/jpeg",
+      "sizes": "512x512"
+    }
+  ],
+  "categories": ["productivity", "lifestyle", "education"],
+  "lang": "pt-BR"
+}

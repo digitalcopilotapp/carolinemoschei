@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0604" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>MyOak • O Segredo Revelado</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="assets/icons/logo-verso-reverso.svg" />
+    <link rel="apple-touch-icon" href="assets/images/guide/guide-cover-01.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <main class="vsl">
+        <section id="experience" class="vsl-hero">
+            <header class="vsl-hero__header">
+                <span class="vsl-pill">manifesto MyOak</span>
+                <h1>Quando dívidas, luto e fracassos parecem escrever seu futuro, existe um roteiro oculto para reescrevê-lo.</h1>
+                <p>
+                    Talvez você já tenha tentado cursos, orações e promessas motivacionais. Mesmo assim, a conta negativa volta,
+                    a dor da perda continua e a sensação de “nada muda” assombra cada amanhecer. Este é o ponto onde a maioria
+                    abandona. Mas é também o ponto onde “The Secret” revela uma chave que nunca contaram a você — uma forma de
+                    alinhar emoção, foco e ação para criar uma nova realidade tangível.
+                </p>
+                <p>
+                    Nesta experiência MyOak, o filme é interrompido no minuto exato em que o roteiro da sua mente precisa ser
+                    reescrito. Complete o ritual, continue de onde parou e receba o método ManifestAI para transformar dívida em
+                    direção, luto em propósito e estagnação em movimento.
+                </p>
+            </header>
+            <div class="vsl-hero__video" aria-label="Player de vídeo do Segredo">
+                <div id="secretPlayer" role="region" aria-live="polite"></div>
+                <div id="unlockOverlay" class="unlock" role="dialog" aria-modal="true">
+                    <div class="unlock__card">
+                        <h2>Rito de liberação</h2>
+                        <p>
+                            Para continuar o filme e acessar o Método ManifestAI, confirme seus dados. O vídeo retomará exatamente
+                            do ponto em que parou.
+                        </p>
+                        <ol class="unlock__steps">
+                            <li data-unlock-indicator="1" class="is-active">Identidade</li>
+                            <li data-unlock-indicator="2">Contato</li>
+                            <li data-unlock-indicator="3">Confirmação</li>
+                        </ol>
+                        <form id="unlockForm" class="unlock__form">
+                            <div data-unlock-step="1" class="is-active">
+                                <label>
+                                    <span>Nome completo</span>
+                                    <input type="text" id="fullName" name="fullName" placeholder="Seu nome" required />
+                                </label>
+                                <p class="unlock__hint">Use o nome como deseja ser chamado nas mensagens do ManifestAI.</p>
+                            </div>
+                            <div data-unlock-step="2">
+                                <label>
+                                    <span>WhatsApp com DDD</span>
+                                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="(11) 99999-9999" required />
+                                </label>
+                                <p class="unlock__hint">Precisamos do seu número para enviar o roteiro diário e avisos do método.</p>
+                            </div>
+                            <div data-unlock-step="3">
+                                <label>
+                                    <span>E-mail (opcional)</span>
+                                    <input type="email" id="email" name="email" placeholder="[email protected]" />
+                                </label>
+                                <p class="unlock__hint">Informe um e-mail se quiser receber backup das instruções e atualizações.</p>
+                                <div class="unlock__summary">
+                                    <h3>Revise antes de continuar</h3>
+                                    <p><strong>Nome:</strong> <span id="unlockSummaryName">—</span></p>
+                                    <p><strong>WhatsApp:</strong> <span id="unlockSummaryPhone">—</span></p>
+                                    <p><strong>E-mail:</strong> <span id="unlockSummaryEmail">—</span></p>
+                                </div>
+                            </div>
+                            <div class="unlock__actions">
+                                <button type="button" id="unlockBack" class="btn btn-text hidden">Voltar</button>
+                                <button type="button" id="unlockNext" class="btn btn-primary">Continuar</button>
+                                <button type="submit" id="unlockSubmit" class="btn btn-primary hidden">Liberar continuação</button>
+                            </div>
+                            <small>
+                                Ao continuar, você concorda em receber instruções do ManifestAI via WhatsApp e e-mail.
+                            </small>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </section>
+
+        <section class="evidence">
+            <h2>E quando dizem que “é só misticismo”, mostramos dados.</h2>
+            <div class="evidence__grid">
+                <article class="evidence__card">
+                    <div class="evidence__logo" aria-hidden="true">Harvard</div>
+                    <h3>Visualização molda o cérebro</h3>
+                    <p>
+                        Pesquisas de Pascual-Leone no <strong>Harvard Medical School</strong> demonstraram que treinos apenas
+                        imaginados ativam a mesma área motora que treinos físicos, provando que o cérebro responde ao que você
+                        visualiza repetidamente.
+                    </p>
+                </article>
+                <article class="evidence__card">
+                    <div class="evidence__logo" aria-hidden="true">Stanford</div>
+                    <h3>Emoção positiva reduz o estresse tóxico</h3>
+                    <p>
+                        O <strong>Center for Compassion and Altruism Research</strong> de Stanford (Jazaieri et al., 2013)
+                        comprovou que treinar compaixão e gratidão diminui cortisol e aumenta a resiliência emocional — pilares
+                        da Lei da Atração.
+                    </p>
+                </article>
+                <article class="evidence__card">
+                    <div class="evidence__logo" aria-hidden="true">UW</div>
+                    <h3>Frequência emocional reescreve o corpo</h3>
+                    <p>
+                        O laboratório de Richard Davidson na <strong>Universidade de Wisconsin-Madison</strong> mostrou que
+                        práticas mentais elevam a imunidade e criam estados emocionais duradouros, validando a mudança vibracional
+                        proposta pelo filme.
+                    </p>
+                </article>
+            </div>
+    </section>
+
+        <section id="checkoutFlow" class="checkout hidden">
+            <div class="checkout__shadow"></div>
+            <header class="checkout__header">
+                <strong>ManifestAI • Protocolo Lei da Atração 360º</strong>
+                <span>Desbloqueio completo + acesso contínuo via PWA</span>
+            </header>
+
+            <ol class="checkout__steps">
+                <li data-step-indicator="1" class="is-active">1. Identificação</li>
+                <li data-step-indicator="2">2. Pagamento</li>
+                <li data-step-indicator="3">3. Confirmação</li>
+            </ol>
+
+            <div data-step-panel="1" class="checkout__panel is-active">
+                <h3>Você está quase lá</h3>
+                <p>Revise seus dados antes de avançar.</p>
+                <dl class="contact-summary">
+                    <div>
+                        <dt>Nome</dt>
+                        <dd id="summaryName">—</dd>
+                    </div>
+                    <div>
+                        <dt>WhatsApp</dt>
+                        <dd id="summaryPhone">—</dd>
+                    </div>
+                    <div>
+                        <dt>E-mail</dt>
+                        <dd id="summaryEmail">—</dd>
+                    </div>
+                </dl>
+                <button id="proceedToPayment" class="btn btn-primary">Prosseguir para pagamento</button>
+            </div>
+
+            <div data-step-panel="2" class="checkout__panel">
+                <h3>Escolha como desbloquear</h3>
+                <p>Oferta exclusiva: de R$ 497,00 por <strong id="pixPrice">R$ 99,40</strong> no PIX.</p>
+                <div class="payment-grid">
+                    <div class="payment-card">
+                        <h4>PIX via PixGo</h4>
+                        <p>Liberação imediata com 80% de desconto.</p>
+                        <button id="pixButton" class="btn btn-primary">Gerar PIX</button>
+                        <small>⚠️ Oferta digital e sem estorno automático.</small>
+                    </div>
+                    <div class="payment-card">
+                        <h4>Cartão via Stripe</h4>
+                        <p>Pagamento seguro em até 12x (tarifas Stripe). </p>
+                        <button id="stripeButton" class="btn btn-outline">Pagar no cartão</button>
+                    </div>
+                </div>
+            </div>
+
+            <div data-step-panel="3" class="checkout__panel">
+                <h3>Finalize a ativação</h3>
+                <div id="pixResult" class="pix-result hidden">
+                    <p class="warning">⚠️ Atenção! Oferta digital sem estorno. Token emitido via PixGo.</p>
+                    <img id="pixQrImage" alt="QR Code PIX" />
+                    <p id="pixExpiration"></p>
+                    <button id="copyPixCode" class="btn btn-outline">Copiar código PIX</button>
+                    <textarea id="pixCode" class="hidden" readonly></textarea>
+                </div>
+                <div id="stripeStatus" class="stripe-status hidden"></div>
+                <button id="backToPayment" class="btn btn-text">Voltar às opções</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mo-footer glass-panel">
+        <p>© 2025 MyOak Frequências de Manifestação. Todos os direitos reservados.</p>
+        <p class="mo-footer__links">
+            <a href="#experience">Experiência</a>
+            <span>•</span>
+            <a href="#checkoutFlow">Oferta</a>
+            <span>•</span>
+            <a href="mailto:[email protected]">Suporte</a>
+        </p>
+        <div class="references">
+            <p><strong>Referências científicas citadas:</strong></p>
+            <ol>
+                <li>Pascual-Leone, A. et al. (1995). Modulation of muscle responses by motor imagery. <em>Harvard Medical School</em>.</li>
+                <li>Jazaieri, H. et al. (2013). Enhancing compassion: Stanford CCARE Compassion Cultivation Training. <em>Stanford University</em>.</li>
+                <li>Davidson, R. J. & Kabat-Zinn, J. (2003). Alterations in brain and immune function. <em>University of Wisconsin-Madison</em>.</li>
+            </ol>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="module" src="app.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("./sw.js").catch(console.error);
+            });
+        }
+    </script>
+</body>
+</html>

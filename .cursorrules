@@ -1,0 +1,39 @@
+# Cursor Rules - Caroline Moschei Project
+
+## MCP Usage Guidelines
+
+- Default to the built-in Cursor tools for editing, reading, searching, and running commands.
+- Start an MCP tool only when you are assembling a review package, need auditable evidence, or the task is impossible/unsafe without MCP.
+- When MCP is required, complete as much work as possible within the same authorization window to avoid repeated prompts.
+- Prefer a single Desktop Commander session for file writes or long-running commands; Browser or other MCPs should be used only with clear validation needs.
+
+## Task Execution Principles
+
+- Keep routine development outside MCP to maximize speed.
+- Document in the review summary whenever MCP tooling was used and why.
+- Once MCP highlights an issue, fall back to standard tools for the follow-up unless further evidence is needed.
+
+## Verification Workflow
+
+1. Implement and test using non-MCP tools whenever feasible.
+2. Before publishing a review, optionally invoke MCP for final checks, screenshots, or structured analysis if evidence is required.
+3. Avoid rerunning MCP verification unless the previous evidence becomes outdated.
+4. Após concluir ajustes significativos, abra o browser embutido da IDE para visualizar as alterações e garantir que o resultado esteja conforme o esperado.
+
+## Priority Order (When MCP Is Unavoidable)
+
+1. Desktop Commander MCP – consolidated file writes, terminal workflows, or automation that cannot be done safely otherwise.
+2. Browser MCP – limited to visual validation or screenshots that must be captured for review.
+3. Tractatus Thinking MCP – structured reasoning on ambiguous problems where written decomposition is necessary.
+4. Supabase PostgREST MCP – database operations that demand the provided abstraction.
+5. Brevo MCP – email/contact management actions tied to MCP workflows.
+
+## Examples
+
+✅ **CORRECT**: Use `read_file`, `grep`, or `run_terminal_cmd` for day-to-day work; reserve MCP for the final review step.
+✅ **CORRECT**: Capture a Browser MCP screenshot only when attaching review evidence.
+✅ **CORRECT**: Run Desktop Commander once to bundle multiple required edits.
+
+❌ **INCORRECT**: Launch MCP for every navigation or quick command.
+❌ **INCORRECT**: Restart MCP sessions repeatedly within the same task instead of finishing work in one go.
+❌ **INCORRECT**: Depend on MCP when lightweight built-in tools already solve the problem.

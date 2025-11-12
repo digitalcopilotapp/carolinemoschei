@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionando para WhatsApp...</title>
+    <script>
+        // Pega o parâmetro cta da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const cta = urlParams.get('cta') || 'contato';
+        
+        // Mensagens padrão baseadas no CTA
+        const messages = {
+            'links-orcamentos': 'Olá! Gostaria de solicitar um orçamento para ensaios, casamentos ou campanhas.',
+            'mentoria-online': 'Olá! Tenho interesse na mentoria online.',
+            'mentoria-sp': 'Olá! Tenho interesse na mentoria presencial em São Paulo.',
+            'mentoria-ny': 'Olá! Tenho interesse na mentoria em Nova York.',
+            'links-consultoria': 'Olá! Tenho interesse na consultoria 1:1.',
+            'presets-pack': 'Olá! Tenho interesse nos presets profissionais.',
+            'curso-mobile': 'Olá! Tenho interesse no curso de Fotografia com Celular.'
+        };
+        
+        const message = encodeURIComponent(messages[cta] || 'Olá! Gostaria de mais informações.');
+        
+        // Número de WhatsApp - ATUALIZE AQUI com o número correto
+        // Formato: 5511999999999 (código do país + DDD + número sem espaços ou caracteres especiais)
+        const whatsappNumber = '5511999999999'; // SUBSTITUA pelo número real
+        
+        // Redireciona para WhatsApp
+        window.location.href = `https://wa.me/${whatsappNumber}?text=${message}`;
+    </script>
+</head>
+<body>
+    <p>Redirecionando para WhatsApp...</p>
+    <p>Se não redirecionar automaticamente, <a id="whatsapp-link" href="#">clique aqui</a>.</p>
+</body>
+</html>

@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verso & Reverso - Curso Completo de Fotografia | Caroline Moschei Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../verso-reverso.css">
+</head>
+<body class="verso-reverso-page">
+    <script>
+        // Modules Carousel Navigation (Modern Style)
+        document.addEventListener('DOMContentLoaded', function() {
+            const modulesCarouselWrapper = document.querySelector('.modules-carousel-wrapper');
+            const modulesPrevBtn = document.querySelector('.modules-carousel-btn-prev');
+            const modulesNextBtn = document.querySelector('.modules-carousel-btn-next');
+            
+            if (modulesCarouselWrapper && modulesPrevBtn && modulesNextBtn) {
+                const modulesCardWidth = 400 + 16; // card width + gap
+                const modulesScrollAmount = modulesCardWidth * 2; // scroll 2 cards at a time
+                
+                modulesPrevBtn.addEventListener('click', () => {
+                    modulesCarouselWrapper.scrollBy({ left: -modulesScrollAmount, behavior: 'smooth' });
+                });
+                
+                modulesNextBtn.addEventListener('click', () => {
+                    modulesCarouselWrapper.scrollBy({ left: modulesScrollAmount, behavior: 'smooth' });
+                });
+                
+                const updateModulesButtons = () => {
+                    const isAtStart = modulesCarouselWrapper.scrollLeft <= 0;
+                    const isAtEnd = modulesCarouselWrapper.scrollLeft >= modulesCarouselWrapper.scrollWidth - modulesCarouselWrapper.clientWidth - 10;
+                    
+                    modulesPrevBtn.style.opacity = isAtStart ? '0.3' : '1';
+                    modulesNextBtn.style.opacity = isAtEnd ? '0.3' : '1';
+                    modulesPrevBtn.style.pointerEvents = isAtStart ? 'none' : 'all';
+                    modulesNextBtn.style.pointerEvents = isAtEnd ? 'none' : 'all';
+                };
+                
+                modulesCarouselWrapper.addEventListener('scroll', updateModulesButtons);
+                updateModulesButtons();
+            }
+
+            // Lives Carousel Navigation
+            const livesCarouselWrapper = document.querySelector('.vr-lives-carousel-wrapper');
+            const livesPrevBtn = document.querySelector('.vr-lives-carousel-btn-prev');
+            const livesNextBtn = document.querySelector('.vr-lives-carousel-btn-next');
+            
+            if (livesCarouselWrapper && livesPrevBtn && livesNextBtn) {
+                const livesCardWidth = 400 + 16; // card width + gap
+                const livesScrollAmount = livesCardWidth * 2; // scroll 2 cards at a time
+                
+                livesPrevBtn.addEventListener('click', () => {
+                    livesCarouselWrapper.scrollBy({ left: -livesScrollAmount, behavior: 'smooth' });
+                });
+                
+                livesNextBtn.addEventListener('click', () => {
+                    livesCarouselWrapper.scrollBy({ left: livesScrollAmount, behavior: 'smooth' });
+                });
+                
+                const updateLivesButtons = () => {
+                    const isAtStart = livesCarouselWrapper.scrollLeft <= 0;
+                    const isAtEnd = livesCarouselWrapper.scrollLeft >= livesCarouselWrapper.scrollWidth - livesCarouselWrapper.clientWidth - 10;
+                    
+                    livesPrevBtn.style.opacity = isAtStart ? '0.3' : '1';
+                    livesNextBtn.style.opacity = isAtEnd ? '0.3' : '1';
+                    livesPrevBtn.style.pointerEvents = isAtStart ? 'none' : 'all';
+                    livesNextBtn.style.pointerEvents = isAtEnd ? 'none' : 'all';
+                };
+                
+                livesCarouselWrapper.addEventListener('scroll', updateLivesButtons);
+                updateLivesButtons();
+            }
+
+            // Ensure background video stays muted and playing
+            let headerPrimeVideo = document.querySelector('.vr-header-prime-video');
+            
+            // Header Scroll Effect (Optional - for nav bar styling on scroll)
+            const headerPrimeNav = document.querySelector('.vr-header-prime-nav');
+            
+            if (headerPrimeNav) {
+                window.addEventListener('scroll', () => {
+                    const currentScroll = window.pageYOffset;
+                    const headerPrime = document.querySelector('.vr-header-prime');
+                    
+                    if (headerPrime) {
+                        const headerBottom = headerPrime.offsetTop + headerPrime.offsetHeight;
+                        
+                        if (currentScroll > headerBottom - 100) {
+                            headerPrimeNav.style.background = 'rgba(0, 0, 0, 0.9)';
+                            headerPrimeNav.style.backdropFilter = 'blur(10px)';
+                        } else {
+                            headerPrimeNav.style.background = 'linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%)';
+                            headerPrimeNav.style.backdropFilter = 'none';
+                        }
+                    }
+                });
+            }
+
+            // Ensure background video is always muted and playing
+            if (!headerPrimeVideo) {
+                headerPrimeVideo = document.querySelector('.vr-header-prime-video');
+            }
+            if (headerPrimeVideo) {
+                headerPrimeVideo.muted = true;
+                headerPrimeVideo.volume = 0;
+                headerPrimeVideo.setAttribute('muted', '');
+                headerPrimeVideo.setAttribute('autoplay', '');
+                headerPrimeVideo.setAttribute('playsinline', '');
+                headerPrimeVideo.setAttribute('loop', '');
+                headerPrimeVideo.setAttribute('preload', 'auto');
+                
+                // Force play function with retry logic
+                const playVideo = async (retryCount = 0) => {
+                    try {
+                        if (headerPrimeVideo.paused) {
+                            await headerPrimeVideo.play();
+                            console.log('Video playing successfully');
+                        }
+                    } catch (error) {
+                        console.log('Video play attempt failed:', error.message);
+                        // Retry up to 3 times with increasing delays
+                        if (retryCount < 3) {
+                            setTimeout(() => {
+                                playVideo(retryCount + 1);
+                            }, 500 * (retryCount + 1));
+                        } else {
+                            // If all retries fail, try on user interaction
+                            document.addEventListener('click', () => {
+                                headerPrimeVideo.play().catch(e => console.log('Video play on click:', e));
+                            }, { once: true });
+                        }
+                    }
+                };
+                
+                // Play immediately if video is ready
+                if (headerPrimeVideo.readyState >= 2) {
+                    playVideo();
+                } else {
+                    headerPrimeVideo.addEventListener('loadeddata', () => playVideo(), { once: true });
+                    headerPrimeVideo.addEventListener('canplay', () => playVideo(), { once: true });
+                    headerPrimeVideo.addEventListener('loadedmetadata', () => playVideo(), { once: true });
+                }
+                
+                // Ensure video keeps playing if it pauses
+                headerPrimeVideo.addEventListener('pause', () => {
+                    if (!headerPrimeVideo.ended) {
+                        playVideo();
+                    }
+                });
+                
+                // Ensure it stays muted even if user tries to unmute
+                headerPrimeVideo.addEventListener('volumechange', () => {
+                    if (!headerPrimeVideo.muted) {
+                        headerPrimeVideo.muted = true;
+                        headerPrimeVideo.volume = 0;
+                    }
+                });
+            }
+
+            // Video Modal - "O que é o Verso & Reverso?"
+            const whatIsBtn = document.getElementById('vr-what-is-btn');
+            const videoModal = document.getElementById('vr-video-modal');
+            const videoModalClose = document.querySelector('.vr-video-modal-close');
+            const videoModalVideo = document.querySelector('.vr-video-modal-video');
+            
+            // Debug: Check if elements exist
+            console.log('Modal elements check:', {
+                whatIsBtn: !!whatIsBtn,
+                videoModal: !!videoModal,
+                videoModalVideo: !!videoModalVideo
+            });
+            
+            if (whatIsBtn && videoModal) {
+                // Use both click and mousedown to ensure event is captured
+                const openModal = (e) => {
+                    if (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    console.log('Button clicked, opening modal');
+                    
+                    videoModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Small delay to ensure modal is visible before playing video
+                    setTimeout(() => {
+                        if (videoModalVideo && headerPrimeVideo) {
+                            // Sync modal video with background video
+                            // Get current time from background video
+                            const currentTime = headerPrimeVideo.currentTime;
+                            
+                            // Set modal video to same time position
+                            videoModalVideo.currentTime = currentTime;
+                        videoModalVideo.muted = false;
+                            
+                            // Try to play video
+                            const playPromise = videoModalVideo.play();
+                            if (playPromise !== undefined) {
+                                playPromise.then(() => {
+                                    console.log('Video playing successfully at time:', currentTime);
+                                }).catch(error => {
+                                    console.log('Video play error:', error);
+                                    // If autoplay fails, ensure video is ready for user interaction
+                                    videoModalVideo.load();
+                                });
+                            }
+                        } else {
+                            console.error('Video element not found', {
+                                videoModalVideo: !!videoModalVideo,
+                                headerPrimeVideo: !!headerPrimeVideo
+                            });
+                        }
+                    }, 100);
+                };
+                
+                whatIsBtn.addEventListener('click', openModal);
+                whatIsBtn.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                });
+                
+                // Also try to attach to the button's parent if needed
+                const playBtnContainer = whatIsBtn.closest('.vr-header-prime-actions');
+                if (playBtnContainer) {
+                    playBtnContainer.addEventListener('click', (e) => {
+                        if (e.target === whatIsBtn || whatIsBtn.contains(e.target)) {
+                            openModal(e);
+                        }
+                    });
+                }
+                
+                const closeModal = () => {
+                    videoModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
+                    if (videoModalVideo) {
+                        videoModalVideo.pause();
+                        videoModalVideo.currentTime = 0;
+                    }
+                };
+                
+                if (videoModalClose) {
+                    videoModalClose.addEventListener('click', closeModal);
+                }
+                
+                videoModal.addEventListener('click', (e) => {
+                    if (e.target === videoModal || e.target.classList.contains('vr-video-modal-overlay')) {
+                        closeModal();
+                    }
+                });
+                
+                // Close on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                        closeModal();
+                    }
+                });
+            }
+
+            // Community Section Animation with 3D Scroll Effect
+            const communitySection = document.querySelector('.vr-community-section');
+            const communityIcon = document.querySelector('.vr-community-icon-wrapper');
+            const communityContent = document.querySelector('.vr-community-content');
+            const communityImageWrapper = document.querySelector('.vr-community-image-wrapper');
+            const discord3DItems = document.querySelectorAll('.vr-discord-3d-item');
+            const discord3DContainer = document.querySelector('.vr-discord-3d-container');
+            
+            // Make 3D items visible immediately on page load
+            if (discord3DItems.length > 0) {
+                discord3DItems.forEach((item, index) => {
+                    item.classList.add('visible');
+                    item.style.opacity = '1';
+                    item.style.visibility = 'visible';
+                    item.style.display = 'block';
+                    item.style.zIndex = (10 + index).toString();
+                });
+            }
+            
+            if (communitySection && communityIcon && communityContent) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Show 3D items immediately
+                            discord3DItems.forEach((item, index) => {
+                                item.classList.add('visible');
+                                item.style.opacity = '1';
+                                item.style.visibility = 'visible';
+                                item.style.display = 'block';
+                                item.style.zIndex = (10 + index).toString();
+                            });
+                            
+                            if (communityImageWrapper) {
+                                setTimeout(() => {
+                                    communityImageWrapper.style.opacity = '1';
+                                    communityImageWrapper.style.transform = 'translateX(0)';
+                                }, 100);
+                            }
+                            setTimeout(() => {
+                                communityIcon.style.opacity = '1';
+                                communityIcon.style.transform = 'translateY(0) scale(1)';
+                            }, 200);
+                            setTimeout(() => {
+                                communityContent.style.opacity = '1';
+                                communityContent.style.transform = 'translateY(0)';
+                            }, 400);
+                            
+                            // Animate text elements with smoke effect (faster)
+                            const title = document.querySelector('.vr-community-title');
+                            const description = document.querySelector('.vr-community-description');
+                            const benefitItems = document.querySelectorAll('.vr-community-benefit-item');
+                            
+                            if (title) {
+                                setTimeout(() => {
+                                    title.classList.add('visible');
+                                }, 100);
+                            }
+                            
+                            if (description) {
+                                setTimeout(() => {
+                                    description.classList.add('visible');
+                                }, 150);
+                            }
+                            
+                            benefitItems.forEach((item, index) => {
+                                setTimeout(() => {
+                                    item.classList.add('visible');
+                                }, 200 + (index * 50));
+                            });
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                observer.observe(communitySection);
+            }
+            
+            // Scroll-based smoke animation for text
+            const textElements = document.querySelectorAll('.vr-community-title, .vr-community-description, .vr-community-benefit-item');
+            
+            const animateTextOnScroll = () => {
+                textElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    const elementTop = rect.top;
+                    const elementCenter = elementTop + rect.height / 2;
+                    
+                    // Calculate scroll progress (0 to 1)
+                    const scrollProgress = Math.max(0, Math.min(1, (windowHeight - elementCenter) / (windowHeight * 0.5)));
+                    
+                    if (scrollProgress > 0 && scrollProgress < 1) {
+                        // Apply smoke effect based on scroll
+                        const blurAmount = 10 * (1 - scrollProgress);
+                        const opacity = scrollProgress;
+                        const translateY = 20 * (1 - scrollProgress);
+                        
+                        element.style.filter = `blur(${blurAmount}px)`;
+                        element.style.opacity = opacity;
+                        element.style.transform = `translateY(${translateY}px)`;
+                    } else if (scrollProgress >= 1) {
+                        // Fully visible
+                        element.style.filter = 'blur(0)';
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                        element.classList.add('visible');
+                    }
+                });
+            };
+            
+            let scrollTicking = false;
+            const onTextScroll = () => {
+                if (!scrollTicking) {
+                    window.requestAnimationFrame(() => {
+                        animateTextOnScroll();
+                        scrollTicking = false;
+                    });
+                    scrollTicking = true;
+                }
+            };
+            
+            window.addEventListener('scroll', onTextScroll, { passive: true });
+            animateTextOnScroll(); // Initial check
+            
+            // 3D Scroll Animation
+            if (discord3DContainer && discord3DItems.length > 0) {
+                let ticking = false;
+                let mouseEvent = null;
+                
+                const update3DTransform = () => {
+                    const containerRect = discord3DContainer.getBoundingClientRect();
+                    const containerCenterY = containerRect.top + containerRect.height / 2;
+                    const viewportCenterY = window.innerHeight / 2;
+                    const scrollOffset = containerCenterY - viewportCenterY;
+                    const scrollProgress = Math.max(-1, Math.min(1, scrollOffset / (window.innerHeight / 2)));
+                    
+                    const zoomProgress = 1 - Math.min(1, Math.abs(scrollProgress));
+                    const containerScale = 0.92 + zoomProgress * 0.14;
+                    discord3DContainer.style.transform = `scale(${containerScale})`;
+ 
+                    discord3DItems.forEach((item, index) => {
+                        if (!item.classList.contains('visible')) return;
+                        
+                        const speed = parseFloat(item.dataset.speed) || 0.3;
+                        const rotation = item.dataset.rotation || 'y';
+                        const baseRotation = scrollProgress * 20 * speed;
+                        const translateZ = scrollProgress * 80 * speed;
+                        
+                        // Base transforms from CSS
+                        let baseTransform = '';
+                        let baseTranslateX = 0;
+                        let baseTranslateY = 0;
+                        let baseRotateX = 0;
+                        let baseRotateY = 0;
+                        let baseScale = 1;
+                        let baseZ = 0;
+                        
+                        if (index === 0) {
+                            baseTranslateX = -15;
+                            baseTranslateY = -70;
+                            baseRotateX = 8;
+                            baseRotateY = -12;
+                            baseScale = 0.75;
+                            baseZ = -80;
+                        } else if (index === 1) {
+                            baseTranslateX = 0;
+                            baseTranslateY = 40;
+                            baseRotateX = -5;
+                            baseRotateY = 5;
+                            baseScale = 1;
+                            baseZ = 0;
+                        } else if (index === 2) {
+                            baseTranslateX = 15;
+                            baseTranslateY = 10;
+                            baseRotateX = 10;
+                            baseRotateY = 12;
+                            baseScale = 0.85;
+                            baseZ = -40;
+                        }
+                        
+                        let rotateX = baseRotateX;
+                        let rotateY = baseRotateY;
+                        
+                        if (rotation === 'x') {
+                            rotateX += baseRotation;
+                        } else if (rotation === 'y') {
+                            rotateY += baseRotation;
+                        } else if (rotation === 'xy') {
+                            rotateX += baseRotation * 0.6;
+                            rotateY += baseRotation * 0.8;
+                        }
+                        
+                        // Add mouse parallax effect
+                        const mouseX = (mouseEvent?.clientX || window.innerWidth / 2) - window.innerWidth / 2;
+                        const mouseY = (mouseEvent?.clientY || window.innerHeight / 2) - window.innerHeight / 2;
+                        const mouseRotateX = (mouseY / window.innerHeight) * 8 * speed;
+                        const mouseRotateY = (mouseX / window.innerWidth) * 8 * speed;
+                        
+                        const finalRotateX = rotateX + mouseRotateX;
+                        const finalRotateY = rotateY + mouseRotateY;
+                        const finalTranslateZ = baseZ + translateZ;
+                        
+                        item.style.transform = `
+                            translate(-50%, -50%) 
+                            translateZ(${finalTranslateZ}px) 
+                            translateX(${baseTranslateX}%) 
+                            translateY(${baseTranslateY}%) 
+                            rotateY(${finalRotateY}deg) 
+                            rotateX(${finalRotateX}deg) 
+                            scale(${baseScale})
+                        `;
+                    });
+                    
+                    ticking = false;
+                };
+                
+                const onScroll = () => {
+                    if (!ticking) {
+                        window.requestAnimationFrame(update3DTransform);
+                        ticking = true;
+                    }
+                };
+                
+                const onMouseMove = (e) => {
+                    mouseEvent = e;
+                    if (!ticking) {
+                        window.requestAnimationFrame(update3DTransform);
+                        ticking = true;
+                    }
+                };
+                
+                window.addEventListener('scroll', onScroll, { passive: true });
+                discord3DContainer.addEventListener('mousemove', onMouseMove, { passive: true });
+                
+                // Initial update
+                setTimeout(() => {
+                    update3DTransform();
+                }, 100);
+            }
+
+            // Testimonials Auto-scroll
+            const testimonialsTrack = document.querySelector('.vr-testimonials-track');
+            if (testimonialsTrack) {
+                let scrollPos = 0;
+                const scrollSpeed = 0.5;
+                
+                const scrollTestimonials = () => {
+                    scrollPos += scrollSpeed;
+                    testimonialsTrack.style.transform = `translateX(-${scrollPos}px)`;
+                    
+                    if (scrollPos >= testimonialsTrack.scrollWidth / 2) {
+                        scrollPos = 0;
+                    }
+                };
+                
+                setInterval(scrollTestimonials, 50);
+            }
+
+            // Netflix Header Scroll Effect
+            const netflixHeader = document.querySelector('.vr-nav-header-netflix');
+            if (netflixHeader) {
+                const handleHeaderScroll = () => {
+                    if (window.scrollY > 50) {
+                        netflixHeader.classList.add('scrolled');
+                    } else {
+                        netflixHeader.classList.remove('scrolled');
+                    }
+                };
+                
+                window.addEventListener('scroll', handleHeaderScroll);
+                handleHeaderScroll(); // Initial check
+            }
+
+
+            // Portfolio 2 Carousel
+            const portfolio2Carousel = document.querySelector('.vr-portfolio-2-carousel-track');
+            if (portfolio2Carousel) {
+                let scrollPosition2 = 0;
+                setInterval(() => {
+                    scrollPosition2 += 1;
+                    portfolio2Carousel.style.transform = `translateX(-${scrollPosition2}px)`;
+                    if (scrollPosition2 >= portfolio2Carousel.scrollWidth / 2) {
+                        scrollPosition2 = 0;
+                    }
+                }, 50);
+            }
+
+            // Students Carousels
+            const studentsCarousels = document.querySelectorAll('.vr-students-carousel-track');
+            studentsCarousels.forEach((carousel, index) => {
+                let scrollPos = 0;
+                const speed = 1 + (index * 0.2);
+                setInterval(() => {
+                    scrollPos += speed;
+                    carousel.style.transform = `translateX(-${scrollPos}px)`;
+                    if (scrollPos >= carousel.scrollWidth / 2) {
+                        scrollPos = 0;
+                    }
+                }, 50);
+            });
+        });
+    </script>
+
+    <!-- Header - Prime Video Style with Video Background -->
+    <header class="vr-header-prime">
+        <div class="vr-header-prime-video-wrapper">
+            <video class="vr-header-prime-video" poster="http://carolinemoschei.com/wp-content/uploads/2024/11/hero.webp" autoplay muted loop playsinline>
+                <source src="http://carolinemoschei.com/wp-content/uploads/2024/01/Manifesto-wide.mp4" type="video/mp4">
+                Seu navegador não suporta vídeo HTML5.
+            </video>
+            <div class="vr-header-prime-video-overlay"></div>
+            <div class="vr-header-prime-video-shadow"></div>
+        </div>
+        
+        <!-- Top Navigation Bar -->
+        <nav class="vr-header-prime-nav">
+            <div class="vr-header-prime-nav-container">
+                <div class="vr-header-prime-nav-left">
+                    <a href="./links.html" class="vr-header-prime-back">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </a>
+                    <div class="vr-header-prime-logo">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/Logo.svg" alt="Caroline Moschei" class="vr-header-prime-logo-img">
+                        <span class="vr-header-prime-academy">Academy</span>
+                    </div>
+                </div>
+                <div class="vr-header-prime-nav-right">
+                    <a href="#entrar" class="vr-header-prime-login-btn">
+                        <span class="vr-header-prime-login-text">Entrar</span>
+                    </a>
+                    <a href="https://pay.hotmart.com/E64464708W?checkoutMode=10" class="vr-header-prime-cta" target="_blank" rel="noopener noreferrer">
+                        <span class="vr-header-prime-cta-text">Assinar agora</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Content Panel Overlay -->
+        <div class="vr-header-prime-content">
+            <div class="vr-header-prime-content-container">
+                <div class="vr-header-prime-info-panel">
+                    <div class="vr-header-prime-info">
+                        <div class="vr-header-prime-title-wrapper">
+                            <h1 class="vr-header-prime-title">Verso & Reverso</h1>
+                            <button class="vr-header-prime-academy-label">
+                                <div class="vr-header-prime-profile-wrapper">
+                                    <img src="http://carolinemoschei.com/wp-content/uploads/2024/09/frame_8113577.webp" alt="Caroline Moschei" class="vr-header-prime-profile-img">
+                                </div>
+                                <span class="vr-header-prime-academy-text">Caroline Moschei Academy</span>
+                                <div class="vr-header-prime-verified-badge">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="12" r="10" fill="url(#instagram-verified-gradient)"/>
+                                        <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <defs>
+                                            <linearGradient id="instagram-verified-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" style="stop-color:#0095F6;stop-opacity:1" />
+                                                <stop offset="100%" style="stop-color:#5851DB;stop-opacity:1" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                        <p class="vr-header-prime-subtitle">Curso Completo de Fotografia</p>
+                        <p class="vr-header-prime-description"><strong>Conheça e explore todas as versões que a sua fotografia pode ter.</strong> <strong>Mais de 150 aulas práticas</strong> que cobrem desde técnicas fundamentais até estratégias avançadas de edição e marketing.</p>
+                        <div class="vr-header-prime-badges-wrapper">
+                            <div class="vr-header-prime-badges-fade-left"></div>
+                            <div class="vr-header-prime-badges-container">
+                                <div class="vr-header-prime-badges vr-header-prime-badges-scroll">
+                                    <span class="vr-header-prime-badge">Fotografia de Gestantes</span>
+                                    <span class="vr-header-prime-badge">Fotografia de Família</span>
+                                    <span class="vr-header-prime-badge">Iluminação</span>
+                                    <span class="vr-header-prime-badge">Photoshop</span>
+                                    <span class="vr-header-prime-badge">Lightroom</span>
+                                    <span class="vr-header-prime-badge">Inteligência Artificial</span>
+                                    <span class="vr-header-prime-badge">Marketing</span>
+                                    <span class="vr-header-prime-badge">Vendas</span>
+                                    <!-- Duplicado para animação infinita -->
+                                    <span class="vr-header-prime-badge">Fotografia de Gestantes</span>
+                                    <span class="vr-header-prime-badge">Fotografia de Família</span>
+                                    <span class="vr-header-prime-badge">Iluminação</span>
+                                    <span class="vr-header-prime-badge">Photoshop</span>
+                                    <span class="vr-header-prime-badge">Lightroom</span>
+                                    <span class="vr-header-prime-badge">Inteligência Artificial</span>
+                                    <span class="vr-header-prime-badge">Marketing</span>
+                                    <span class="vr-header-prime-badge">Vendas</span>
+                                </div>
+                            </div>
+                            <div class="vr-header-prime-badges-fade-right"></div>
+                        </div>
+                        <div class="vr-header-prime-actions">
+                            <button class="vr-header-prime-play-btn" id="vr-what-is-btn">
+                                <svg class="vr-header-prime-play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="5 3 19 12 5 21 5 3"/>
+                                </svg>
+                                <span class="vr-header-prime-play-text">O que é o Verso & Reverso?</span>
+                            </button>
+                            <a href="#modulos" class="vr-header-prime-explore-btn">
+                                <span class="vr-header-prime-explore-text">Explorar módulos</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Modules Section - Carousel Style with Background Images -->
+    <section class="modules-section" id="modulos">
+        <div class="modules-header">
+            <h2 class="modules-title">
+                <svg class="modules-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                O que você vai aprender
+            </h2>
+            <p class="modules-subtitle">Explore os 23 módulos do curso Verso & Reverso e descubra todo o conteúdo</p>
+        </div>
+        <div class="modules-carousel-container">
+            <div class="modules-carousel-wrapper">
+                <div class="modules-carousel-track">
+                    <!-- Módulo 01 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_01_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 01</span>
+                                <span class="module-badge-modern">MÓDULO 01</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Fundamentos da Fotografia</h3>
+                            <p class="module-card-description-modern">Aprenda os conceitos básicos de exposição, composição, enquadramento e os princípios fundamentais para criar fotografias profissionais.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Exposição</span>
+                                <span class="module-feature-modern">Composição</span>
+                                <span class="module-feature-modern">Enquadramento</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 02 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_2_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 02</span>
+                                <span class="module-badge-modern">MÓDULO 02</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Iluminação Profissional</h3>
+                            <p class="module-card-description-modern">Domine técnicas de iluminação natural e artificial, aprenda a criar diferentes atmosferas e trabalhar com luzes em estúdio e externas.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Luz Natural</span>
+                                <span class="module-feature-modern">Estúdio</span>
+                                <span class="module-feature-modern">Técnicas</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 03 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_3_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 03</span>
+                                <span class="module-badge-modern">MÓDULO 03</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Planejamento e Pré-Produção</h3>
+                            <p class="module-card-description-modern">Domine o planejamento e organização do seu ensaio fotográfico antes do clique. Aprenda a criar moodboards, escolher locações e preparar tudo para o ensaio.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Moodboard</span>
+                                <span class="module-feature-modern">Locação</span>
+                                <span class="module-feature-modern">Produção</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 04 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_4_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 04</span>
+                                <span class="module-badge-modern">MÓDULO 04</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Direção de Modelo</h3>
+                            <p class="module-card-description-modern">Aprenda técnicas para deixar o seu cliente confortável e fazer fotos que realmente valorizam o seu trabalho. Direção profissional e poses naturais.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Poses</span>
+                                <span class="module-feature-modern">Direção</span>
+                                <span class="module-feature-modern">Comunicação</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 05 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_5_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 05</span>
+                                <span class="module-badge-modern">MÓDULO 05</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Edição no Photoshop</h3>
+                            <p class="module-card-description-modern">Técnicas avançadas de edição, tratamento de pele, correção de cores, composição e uso de inteligência artificial para otimizar seu fluxo de trabalho.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Photoshop</span>
+                                <span class="module-feature-modern">I.A</span>
+                                <span class="module-feature-modern">Retoque</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 06 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_6_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 06</span>
+                                <span class="module-badge-modern">MÓDULO 06</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Lightroom e Fluxo de Trabalho</h3>
+                            <p class="module-card-description-modern">Organize e edite suas fotos com eficiência, aprenda a criar presets personalizados e desenvolver um fluxo de trabalho profissional.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Lightroom</span>
+                                <span class="module-feature-modern">Presets</span>
+                                <span class="module-feature-modern">Organização</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 07 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_7_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 07</span>
+                                <span class="module-badge-modern">MÓDULO 07</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Tratamento de Pele Profissional</h3>
+                            <p class="module-card-description-modern">Aprenda técnicas profissionais de tratamento de pele, mantendo a naturalidade e realçando a beleza natural do seu cliente.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Retoque</span>
+                                <span class="module-feature-modern">Naturalidade</span>
+                                <span class="module-feature-modern">Técnicas</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 08 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_8_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 08</span>
+                                <span class="module-badge-modern">MÓDULO 08</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Correção de Cores e Gradientes</h3>
+                            <p class="module-card-description-modern">Domine a correção de cores, criação de gradientes e harmonização cromática para criar imagens impactantes e profissionais.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Cores</span>
+                                <span class="module-feature-modern">Gradientes</span>
+                                <span class="module-feature-modern">Harmonia</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 09 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_2.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 09</span>
+                                <span class="module-badge-modern">MÓDULO 09</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Dupla Exposição e Efeitos</h3>
+                            <p class="module-card-description-modern">Aprenda a criar dupla exposição, desfoque de movimento e outros efeitos criativos no Photoshop para elevar suas fotografias.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Efeitos</span>
+                                <span class="module-feature-modern">Criatividade</span>
+                                <span class="module-feature-modern">Composição</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 10 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_4.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 10</span>
+                                <span class="module-badge-modern">MÓDULO 10</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Nitidez e Detalhes</h3>
+                            <p class="module-card-description-modern">Técnicas avançadas de aplicação de nitidez nas suas fotos com Lightroom e Photoshop, realçando detalhes sem perder naturalidade.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Nitidez</span>
+                                <span class="module-feature-modern">Detalhes</span>
+                                <span class="module-feature-modern">Qualidade</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 11 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_6.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 11</span>
+                                <span class="module-badge-modern">MÓDULO 11</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Fotografia de Estúdio</h3>
+                            <p class="module-card-description-modern">Domine a fotografia em estúdio, aprenda a montar um estúdio com até R$10 mil e trabalhar com diferentes setups de iluminação.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Estúdio</span>
+                                <span class="module-feature-modern">Equipamentos</span>
+                                <span class="module-feature-modern">Setup</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 12 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_9_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 12</span>
+                                <span class="module-badge-modern">MÓDULO 12</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Fotografia Externa</h3>
+                            <p class="module-card-description-modern">Técnicas para fotografar em locações externas, aproveitando a luz natural e criando imagens impactantes em diferentes ambientes.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Externa</span>
+                                <span class="module-feature-modern">Luz Natural</span>
+                                <span class="module-feature-modern">Locações</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 13 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_10_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 13</span>
+                                <span class="module-badge-modern">MÓDULO 13</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Fotografia de Moda</h3>
+                            <p class="module-card-description-modern">Aprenda técnicas específicas para ensaios de moda, direção de modelo, composição e criação de imagens editoriais profissionais.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Moda</span>
+                                <span class="module-feature-modern">Editorial</span>
+                                <span class="module-feature-modern">Estilo</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 14 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_11_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 14</span>
+                                <span class="module-badge-modern">MÓDULO 14</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Fotografia de Casamento</h3>
+                            <p class="module-card-description-modern">Técnicas para capturar momentos únicos de casamentos, trabalhar com luz natural e artificial, e criar álbuns memoráveis.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Casamento</span>
+                                <span class="module-feature-modern">Momentos</span>
+                                <span class="module-feature-modern">Emoção</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 15 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_12_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 15</span>
+                                <span class="module-badge-modern">MÓDULO 15</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Fotografia de Gestantes</h3>
+                            <p class="module-card-description-modern">Técnicas específicas para ensaios de gestantes, poses profissionais, direção de modelo e criação de imagens emocionantes e memoráveis.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Gestantes</span>
+                                <span class="module-feature-modern">Poses</span>
+                                <span class="module-feature-modern">Sensibilidade</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 16 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_7.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 16</span>
+                                <span class="module-badge-modern">MÓDULO 16</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Precificação e Orçamentos</h3>
+                            <p class="module-card-description-modern">Aprenda a criar orçamentos atrativos para vender mais a sua fotografia. Estratégias de precificação e propostas que convertem.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Precificação</span>
+                                <span class="module-feature-modern">Orçamentos</span>
+                                <span class="module-feature-modern">Vendas</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 17 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_9.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 17</span>
+                                <span class="module-badge-modern">MÓDULO 17</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Marketing e Redes Sociais</h3>
+                            <p class="module-card-description-modern">Aprenda a se posicionar nas redes sociais de forma autêntica e profissional, atraindo os clientes ideais para seu negócio.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Marketing</span>
+                                <span class="module-feature-modern">Instagram</span>
+                                <span class="module-feature-modern">Feed</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 18 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_10.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 18</span>
+                                <span class="module-badge-modern">MÓDULO 18</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Tráfego Pago e Prospecção</h3>
+                            <p class="module-card-description-modern">Como prospectar clientes na fotografia através do tráfego pago. Estratégias para atrair clientes ideais e aumentar suas vendas.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Tráfego Pago</span>
+                                <span class="module-feature-modern">Prospecção</span>
+                                <span class="module-feature-modern">Conversão</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 19 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_11.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 19</span>
+                                <span class="module-badge-modern">MÓDULO 19</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Identidade Fotográfica</h3>
+                            <p class="module-card-description-modern">Criando uma identidade fotográfica forte. Desenvolva seu estilo único e crie uma marca reconhecível no mercado.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Identidade</span>
+                                <span class="module-feature-modern">Estilo</span>
+                                <span class="module-feature-modern">Marca</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 20 -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_5.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 20</span>
+                                <span class="module-badge-modern">MÓDULO 20</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Estratégias de Vendas</h3>
+                            <p class="module-card-description-modern">Estratégias para aumentar suas vendas na fotografia. Técnicas de negociação, fechamento de contratos e relacionamento com clientes.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Vendas</span>
+                                <span class="module-feature-modern">Negociação</span>
+                                <span class="module-feature-modern">Relacionamento</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">125+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">150+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 21 - I.A Photoshop -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_2.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 21</span>
+                                <span class="module-badge-modern module-badge-updated">CONTEÚDO ATUALIZADO</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Inteligência Artificial no Photoshop</h3>
+                            <p class="module-card-description-modern">Módulo completo e atualizado sobre I.A no Photoshop. Aprenda a usar ferramentas de IA para otimizar seu fluxo de trabalho, criar elementos, remover objetos e muito mais.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">I.A Photoshop</span>
+                                <span class="module-feature-modern">Generative Fill</span>
+                                <span class="module-feature-modern">Atualizado 2024</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">30+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">8+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 22 - I.A Lightroom -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_4.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 22</span>
+                                <span class="module-badge-modern module-badge-updated">CONTEÚDO ATUALIZADO</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Inteligência Artificial no Lightroom</h3>
+                            <p class="module-card-description-modern">Módulo completo e atualizado sobre I.A no Lightroom. Domine as ferramentas de IA para correção automática, seleção inteligente e otimização do seu fluxo de trabalho.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">I.A Lightroom</span>
+                                <span class="module-feature-modern">Seleção Automática</span>
+                                <span class="module-feature-modern">Atualizado 2024</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">25+</span>
+                                    <span class="module-stat-label">Aulas</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">6+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 23 - Fotografia de Gestantes Completa -->
+                    <div class="module-card-modern">
+                        <div class="module-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/card_12_1x.webp');"></div>
+                        <div class="module-card-glass">
+                            <div class="module-card-header-modern">
+                                <span class="module-episode">EP 23</span>
+                                <span class="module-badge-modern">MÓDULO COMPLETO</span>
+                            </div>
+                            <h3 class="module-card-title-modern">Fotografia de Gestantes: Do Início ao Fim</h3>
+                            <p class="module-card-description-modern">Aula completa mostrando todo o processo de um ensaio de gestantes, desde o planejamento até a entrega final. Veja na prática como conduzir o ensaio do início ao fim.</p>
+                            <div class="module-features-modern">
+                                <span class="module-feature-modern">Ensaio Completo</span>
+                                <span class="module-feature-modern">Do Início ao Fim</span>
+                                <span class="module-feature-modern">Prática Real</span>
+                            </div>
+                            <div class="module-stats">
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">1</span>
+                                    <span class="module-stat-label">Ensaio Completo</span>
+                                </div>
+                                <div class="module-stat-item">
+                                    <span class="module-stat-value">2+</span>
+                                    <span class="module-stat-label">Horas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="modules-carousel-btn modules-carousel-btn-prev" aria-label="Anterior">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="modules-carousel-btn modules-carousel-btn-next" aria-label="Próximo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="vr-video-modal" id="vr-video-modal">
+        <div class="vr-video-modal-overlay"></div>
+        <div class="vr-video-modal-container">
+            <button class="vr-video-modal-close" aria-label="Fechar vídeo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="vr-video-modal-content">
+                <video class="vr-video-modal-video" controls autoplay>
+                    <source src="http://carolinemoschei.com/wp-content/uploads/2024/01/Manifesto-wide.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeo HTML5.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community Section -->
+    <section class="vr-community-section">
+        <div class="vr-community-container">
+            <div class="vr-community-image-wrapper">
+                <div class="vr-discord-3d-container">
+                    <div class="vr-discord-3d-item" data-speed="0.3" data-rotation="y">
+                        <img src="assets/images/discord/discord-community-mockup.svg" alt="Mockup Comunidade Discord Verso & Reverso - Parte Superior" class="vr-discord-svg-3d">
+                    </div>
+                    <div class="vr-discord-3d-item" data-speed="0.5" data-rotation="x">
+                        <img src="assets/images/discord/discord-community-full.svg" alt="Mockup Completo Comunidade Discord Verso & Reverso - Caroline Moschei Academy" class="vr-discord-svg-3d">
+                    </div>
+                    <div class="vr-discord-3d-item" data-speed="0.4" data-rotation="xy">
+                        <img src="assets/images/discord/discord-community-alternative.svg" alt="Mockup Alternativo Comunidade Discord Verso & Reverso - Caroline Moschei Academy" class="vr-discord-svg-3d">
+                    </div>
+                </div>
+            </div>
+            <div class="vr-community-content">
+                <div class="vr-community-icon-wrapper">
+                    <svg class="vr-community-discord-icon" width="64" height="64" viewBox="0 0 24 24" fill="#5865F2" xmlns="http://www.w3.org/2000/svg">
+                    </svg>
+                </div>
+                <h2 class="vr-community-title">Comunidade Exclusiva Verso & Reverso</h2>
+                <p class="vr-community-description">Uma comunidade onde você tem acesso direto à Caroline Moschei e pode interagir com outros fotógrafos, tirar suas dúvidas e receber acompanhamento completo.</p>
+                <div class="vr-community-benefits">
+                    <div class="vr-community-benefit-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                        <span>Networking com outros fotógrafos</span>
+                    </div>
+                    <div class="vr-community-benefit-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span>Tire suas dúvidas comigo</span>
+                    </div>
+                    <div class="vr-community-benefit-item">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>Acompanhamento e suporte completo</span>
+                    </div>
+                </div>
+                <div class="vr-community-profile-bubble">
+                    <img src="http://carolinemoschei.com/wp-content/uploads/2024/09/frame_8113577.webp" alt="Caroline Moschei" class="vr-community-profile-img">
+                    <div class="vr-community-profile-badge">ACESSO DIRETO À CAROL</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="vr-testimonials-section">
+        <div class="vr-testimonials-container">
+            <h2 class="vr-testimonials-title">O que nossos alunos dizem</h2>
+            <div class="vr-testimonials-carousel">
+                <div class="vr-testimonials-track">
+                    <div class="vr-testimonial-card">
+                        <div class="vr-testimonial-stars">★★★★★</div>
+                        <p class="vr-testimonial-text">"O Verso & Reverso transformou completamente minha fotografia. As aulas são práticas e diretas ao ponto. Recomendo muito!"</p>
+                        <div class="vr-testimonial-author">
+                            <div class="vr-testimonial-avatar">M</div>
+                            <div class="vr-testimonial-info">
+                                <div class="vr-testimonial-name">Maria Silva</div>
+                                <div class="vr-testimonial-role">Fotógrafa Profissional</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vr-testimonial-card">
+                        <div class="vr-testimonial-stars">★★★★★</div>
+                        <p class="vr-testimonial-text">"A melhor decisão que tomei foi investir neste curso. A Caroline explica tudo de forma clara e prática. Vale cada centavo!"</p>
+                        <div class="vr-testimonial-author">
+                            <div class="vr-testimonial-avatar">J</div>
+                            <div class="vr-testimonial-info">
+                                <div class="vr-testimonial-name">João Santos</div>
+                                <div class="vr-testimonial-role">Fotógrafo de Casamentos</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vr-testimonial-card">
+                        <div class="vr-testimonial-stars">★★★★★</div>
+                        <p class="vr-testimonial-text">"As aulas de I.A são incríveis! Consegui otimizar meu fluxo de trabalho em 70%. O curso está sempre atualizado."</p>
+                        <div class="vr-testimonial-author">
+                            <div class="vr-testimonial-avatar">A</div>
+                            <div class="vr-testimonial-info">
+                                <div class="vr-testimonial-name">Ana Costa</div>
+                                <div class="vr-testimonial-role">Fotógrafa de Estúdio</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vr-testimonial-card">
+                        <div class="vr-testimonial-stars">★★★★★</div>
+                        <p class="vr-testimonial-text">"A comunidade é um diferencial incrível. Ter acesso direto à Caroline e outros fotógrafos mudou tudo para mim."</p>
+                        <div class="vr-testimonial-author">
+                            <div class="vr-testimonial-avatar">P</div>
+                            <div class="vr-testimonial-info">
+                                <div class="vr-testimonial-name">Pedro Lima</div>
+                                <div class="vr-testimonial-role">Fotógrafo de Gestantes</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vr-testimonial-card">
+                        <div class="vr-testimonial-stars">★★★★★</div>
+                        <p class="vr-testimonial-text">"O módulo de gestantes é completo demais! Mostra tudo do início ao fim. Aprendi técnicas que nunca tinha visto antes."</p>
+                        <div class="vr-testimonial-author">
+                            <div class="vr-testimonial-avatar">C</div>
+                            <div class="vr-testimonial-info">
+                                <div class="vr-testimonial-name">Carla Oliveira</div>
+                                <div class="vr-testimonial-role">Fotógrafa de Família</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Todos os Conteúdos (Bônus Lives) -->
+    <section class="vr-lives-section">
+        <div class="vr-lives-container">
+            <div class="vr-lives-header">
+                <h2 class="vr-lives-title">
+                    <svg class="vr-lives-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Bônus Exclusivos - Lives Gravadas
+                </h2>
+                <p class="vr-lives-subtitle">Acesso a 12 lives completas com conteúdo adicional e técnicas avançadas</p>
+            </div>
+            <div class="vr-lives-carousel-container">
+                <div class="vr-lives-carousel-wrapper">
+                    <div class="vr-lives-carousel-track">
+                        <!-- Live 1 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_1.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">1 hora e 2 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 01
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Planejamento de Ensaios Criativos: Como valorizar e vender seu trabalho</h3>
+                                <p class="vr-live-card-description">Aprenda a planejar ensaios criativos do início ao fim. Técnicas de criação de moodboards, escolha de locações, direção de modelo e como apresentar seu trabalho de forma que valorize e gere desejo nos clientes.</p>
+                            </div>
+                        </div>
+                        <!-- Live 2 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_2.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">46 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 02
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Como criar dupla exposição e desfoque de movimento no Photoshop</h3>
+                                <p class="vr-live-card-description">Técnicas avançadas de composição no Photoshop. Aprenda a criar efeitos de dupla exposição artísticos e desfoque de movimento profissional, elevando suas fotografias a um nível editorial.</p>
+                            </div>
+                        </div>
+                        <!-- Live 3 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_3.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">48 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 03
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Como criar um tratamento de pele profissional</h3>
+                                <p class="vr-live-card-description">Processo completo de tratamento de pele mantendo naturalidade. Técnicas de retoque profissional, correção de imperfeições e realce de beleza natural sem exageros.</p>
+                            </div>
+                        </div>
+                        <!-- Live 4 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_4.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">27 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 04
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Como aplicar nitidez nas suas fotos com Lightroom e Photoshop</h3>
+                                <p class="vr-live-card-description">Técnicas avançadas de aplicação de nitidez. Aprenda a realçar detalhes, melhorar a qualidade da imagem e criar fotos nítidas e profissionais usando Lightroom e Photoshop.</p>
+                            </div>
+                        </div>
+                        <!-- Live 5 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_5.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">58 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 05
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Estratégias para aumentar suas vendas na fotografia</h3>
+                                <p class="vr-live-card-description">Estratégias práticas para aumentar suas vendas. Aprenda técnicas de negociação, fechamento de contratos, relacionamento com clientes e como criar propostas irresistíveis.</p>
+                            </div>
+                        </div>
+                        <!-- Live 6 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_6.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">52 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 06
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Como montar um Estúdio Fotográfico com até R$10 Mil</h3>
+                                <p class="vr-live-card-description">Guia completo para montar um estúdio profissional com orçamento limitado. Lista de equipamentos essenciais, setup de iluminação e dicas para começar sem investir muito.</p>
+                            </div>
+                        </div>
+                        <!-- Live 7 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_7.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">33 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 07
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Como criar orçamentos atrativos para vender mais a sua fotografia</h3>
+                                <p class="vr-live-card-description">Aprenda a criar orçamentos profissionais que demonstram valor e aumentam suas chances de aprovação. Templates, estratégias de apresentação e técnicas de precificação.</p>
+                            </div>
+                        </div>
+                        <!-- Live 8 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_8.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">43 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 08
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Como escolher as lentes ideais para cada segmento na fotografia</h3>
+                                <p class="vr-live-card-description">Guia completo sobre lentes fotográficas. Aprenda a escolher as lentes ideais para moda, casamento, gestantes e outros segmentos, otimizando seus resultados.</p>
+                            </div>
+                        </div>
+                        <!-- Live 9 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_9.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">44 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 09
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Como ter um feed atrativo para vender mais na fotografia</h3>
+                                <p class="vr-live-card-description">Estratégias para criar um feed Instagram profissional e atrativo. Planejamento visual, paleta de cores, frequência de posts e técnicas para atrair clientes ideais.</p>
+                            </div>
+                        </div>
+                        <!-- Live 10 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_10.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">40 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 10
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Como prospectar clientes na fotografia através do tráfego pago</h3>
+                                <p class="vr-live-card-description">Estratégias de tráfego pago para fotógrafos. Aprenda a criar campanhas eficientes, segmentar público-alvo e converter visitantes em clientes pagantes.</p>
+                            </div>
+                        </div>
+                        <!-- Live 11 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_11.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">56 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 11
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Criando uma identidade fotográfica forte</h3>
+                                <p class="vr-live-card-description">Desenvolva seu estilo único e crie uma identidade fotográfica reconhecível. Técnicas para encontrar sua voz visual, manter consistência e se destacar no mercado.</p>
+                            </div>
+                        </div>
+                        <!-- Live 12 -->
+                        <div class="vr-live-card">
+                            <div class="vr-live-card-background" style="background-image: url('http://carolinemoschei.com/wp-content/uploads/2024/11/img_bonus_carol_12.webp');"></div>
+                            <div class="vr-live-card-glass">
+                                <div class="vr-live-card-header">
+                                    <span class="vr-live-card-duration">56 minutos</span>
+                                    <span class="vr-live-card-badge">
+                                        <svg class="vr-live-card-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                                            <rect x="2" y="7" width="20" height="5"></rect>
+                                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                                        </svg>
+                                        BÔNUS 12
+                                    </span>
+                                </div>
+                                <h3 class="vr-live-card-title">Técnicas de direção fotográfica</h3>
+                                <p class="vr-live-card-description">Domine a arte de dirigir modelos e clientes. Técnicas de comunicação, criação de poses naturais, trabalho com diferentes personalidades e como extrair o melhor de cada pessoa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="vr-lives-carousel-btn vr-lives-carousel-btn-prev" aria-label="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <button class="vr-lives-carousel-btn vr-lives-carousel-btn-next" aria-label="Próximo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conheça sua mentora -->
+    <section class="vr-mentor-section">
+        <div class="vr-mentor-container">
+            <div class="vr-mentor-left">
+                <h2 class="vr-mentor-title">Conheça sua mentora!</h2>
+                <div class="vr-mentor-text">
+                    <p>Caroline Moschei é uma fotógrafa especializada em ensaios fashion, estúdio e casamento, além de ser uma viajante apaixonada.</p>
+                    <p>Com projetos pessoais e profissionais, já trabalhou em mais de 10 países, Estados Unidos, França, Reino Unido, Itália, República Dominicana, México, Grécia, Polônia, Chile e Argentina, absorvendo inspirações de diferentes culturas para aprimorar o seu trabalho.</p>
+                    <p>Agora vai compartilhar a sua paixão e conhecimento com lives e cursos online, ajudando você a encontrar sua melhor versão na fotografia.</p>
+                </div>
+            </div>
+            <div class="vr-mentor-right">
+                <div class="vr-mentor-image-wrapper">
+                    <img src="http://carolinemoschei.com/wp-content/uploads/2025/08/Caroline-Moschei.png" alt="Caroline Moschei" class="vr-mentor-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio 2 -->
+    <section class="vr-portfolio-2-section">
+        <div class="vr-portfolio-2-carousel-wrapper">
+            <div class="vr-portfolio-2-carousel-track">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_2-1.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_3.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_4-1.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_5.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_6.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_7.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_8.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_9.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_10.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_11.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_12.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_25.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_26.webp" alt="Portfolio">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_1-1.webp" alt="Portfolio">
+            </div>
+        </div>
+    </section>
+
+    <!-- Preço -->
+    <section class="vr-price-masterclass" id="preco">
+        <div class="vr-price-masterclass-container">
+            <div class="vr-price-left-col">
+                <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/Logo-Carol.svg" alt="Caroline Moschei" class="vr-price-logo">
+                <div class="vr-price-spacer"></div>
+                <p class="vr-price-description-masterclass">Vou te ensinar a explorar a sua fotografia por completo. Do planejamento ao ensaio finalizado, passando por fotografia, iluminação, cores e tratamento de imagens.</p>
+                <div class="vr-price-spacer"></div>
+                <div class="vr-price-author-masterclass">
+                    <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/frame_8113577.webp" alt="Caroline Moschei" class="vr-price-author-img">
+                    <span class="vr-price-author-name">caroline<br>moschei</span>
+                </div>
+            </div>
+            <div class="vr-price-center-col">
+                <div class="vr-price-card-masterclass">
+                    <div class="vr-price-card-top">
+                        <h3 class="vr-price-old-price">DE <s>R$ 249,00</s></h3>
+                        <h4 class="vr-price-label-masterclass">POR 12x de</h4>
+                        <h2 class="vr-price-value-masterclass">R$12,43*</h2>
+                        <h4 class="vr-price-cash-masterclass">ou R$97,00 à vista</h4>
+                    </div>
+                    <div class="vr-price-card-bottom">
+                        <a href="https://pay.hotmart.com/E64464708W?checkoutMode=10" class="vr-price-button-masterclass" target="_blank" rel="noopener noreferrer">
+                            Inscreva-se
+                        </a>
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/bandeiras.svg" alt="Formas de pagamento" class="vr-price-payment-methods">
+                    </div>
+                </div>
+            </div>
+            <div class="vr-price-right-col">
+                <ul class="vr-price-features-masterclass">
+                    <li>
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/VR-icon.svg" alt="Direção">
+                        <span>Direção na Prática</span>
+                    </li>
+                    <li>
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/Nitidez-icon-1.svg" alt="Vendas">
+                        <span>Como vender melhor o seu trabalho</span>
+                    </li>
+                    <li>
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/Lr-icon.svg" alt="Lightroom">
+                        <span>Lightroom Profissional</span>
+                    </li>
+                    <li>
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/PS-icone.svg" alt="Photoshop">
+                        <span>Photoshop Profissional</span>
+                    </li>
+                    <li>
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/Me-icon.svg" alt="Materiais">
+                        <span>Materiais exclusivos</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Alunas -->
+    <section class="vr-students-section">
+        <div class="vr-students-container">
+            <div class="vr-students-left">
+                <h2 class="vr-students-title">Veja o resultado de alguns alunos</h2>
+                <p class="vr-students-description">Dê uma olhada nos resultados incríveis dos meus alunos! Eles estão criando trabalhos maravilhosos e dando passos importantes nas suas carreiras na fotografia. Cada imagem mostra o potencial que você também pode atingir após a MasterClass.</p>
+            </div>
+            <div class="vr-students-right">
+                <div class="vr-students-carousel-wrapper">
+                    <div class="vr-students-carousel-track vr-students-carousel-1">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_01.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_03.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_02.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_06.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_04.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagem_05.webp" alt="Aluna">
+                    </div>
+                    <div class="vr-students-carousel-track vr-students-carousel-2">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imgem_01.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imgem_2.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imgem_3.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imgem_4.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imgem_5.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imgem_6.webp" alt="Aluna">
+                    </div>
+                    <div class="vr-students-carousel-track vr-students-carousel-3">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagm_2.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagm_3.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagm_4.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagm_01.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagm_5.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imagm_6.webp" alt="Aluna">
+                    </div>
+                    <div class="vr-students-carousel-track vr-students-carousel-4">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imaem_01.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imaem_2.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imaem_3.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imaem_4.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imaem_5.webp" alt="Aluna">
+                        <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/imaem_6.webp" alt="Aluna">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="vr-footer-masterclass">
+        <div class="vr-footer-container">
+            <img src="http://carolinemoschei.com/wp-content/uploads/2024/11/Logo-Carol.svg" alt="Caroline Moschei" class="vr-footer-logo-masterclass">
+            <div class="vr-footer-links-masterclass">
+                <p class="vr-footer-copyright-masterclass">2025 © Todos os direitos reservados</p>
+                <p class="vr-footer-privacy-masterclass">Políticas de privacidade</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

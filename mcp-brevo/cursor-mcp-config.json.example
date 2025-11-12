@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "brevo": {
+      "command": "node",
+      "args": ["/Users/nbuenobrg/carolinemoschei/mcp-brevo/index.js"],
+      "env": {
+        "BREVO_API_KEY": "sua_api_key_aqui"
+      }
+    }
+  }
+}
