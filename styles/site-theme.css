@@ -6473,3 +6473,9 @@ body.nav-open {
   }
 }
 
+.bio-banner--orcamentos .bio-banner__visual {
+  aspect-ratio: 920 / 620;
+  min-height: auto;
+  max-height: none;
+}
+
