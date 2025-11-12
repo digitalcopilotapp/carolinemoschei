@@ -6514,3 +6514,7 @@ body.nav-open {
   max-height: none;
 }
 
+.bio-banner__visual--lighting img {
+  object-position: 50% 35%;
+}
+
