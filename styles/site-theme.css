@@ -3,7 +3,7 @@
   src:
     local('Monik Light'),
     local('Monik-Light'),
-    url('../assets/fonts/Monik-Light.ttf') format('truetype');
+    url('/assets/fonts/Monik-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -15,7 +15,7 @@
     local('Monik'),
     local('Monik Regular'),
     local('Monik-Regular'),
-    url('../assets/fonts/Monik-Regular.ttf') format('truetype');
+    url('/assets/fonts/Monik-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -26,7 +26,7 @@
   src:
     local('Monik Medium'),
     local('Monik-Medium'),
-    url('../assets/fonts/Monik-Regular.ttf') format('truetype');
+    url('/assets/fonts/Monik-Regular.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -37,7 +37,7 @@
   src:
     local('Monik SemiBold'),
     local('Monik-SemiBold'),
-    url('../assets/fonts/Monik-Bold.ttf') format('truetype');
+    url('/assets/fonts/Monik-Bold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -48,7 +48,7 @@
   src:
     local('Monik Bold'),
     local('Monik-Bold'),
-    url('../assets/fonts/Monik-Bold.ttf') format('truetype');
+    url('/assets/fonts/Monik-Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -59,7 +59,7 @@
   src:
     local('Monik Black'),
     local('Monik-Black'),
-    url('../assets/fonts/Monik-Black.ttf') format('truetype');
+    url('/assets/fonts/Monik-Black.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
