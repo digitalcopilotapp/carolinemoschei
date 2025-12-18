@@ -100,6 +100,44 @@
   --font-body: 'Inter', system-ui, sans-serif;
 }
 
+/* Christmas Gift banner */
+.xmas-banner {
+  margin: 0 auto clamp(0.75rem, 2vw, 1.1rem);
+  padding: 0.45rem 1.6rem;
+  max-width: min(720px, 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border-radius: 999px;
+  background: linear-gradient(118deg, #b3122b, #7a0e1e);
+  border: 1px solid rgba(255, 245, 228, 0.7);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.55);
+  color: #fff7ee;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.xmas-banner__label {
+  font-weight: 700;
+}
+
+.xmas-banner__offer {
+  font-weight: 600;
+  padding-left: 0.75rem;
+  border-left: 1px solid rgba(255, 245, 228, 0.55);
+}
+
+@media (max-width: 640px) {
+  .xmas-banner {
+    width: 100%;
+    max-width: none;
+    padding-inline: 1.2rem;
+  }
+}
+
 @media (max-width: 1279px) {
   :root {
     --spacing-xl: 3.25rem;
@@ -6385,6 +6423,37 @@ body.nav-open {
   object-fit: cover;
   filter: saturate(0.95) brightness(0.97);
   transition: transform 480ms ease;
+}
+
+.bio-banner__visual--lighting img {
+  object-position: 50% 40%;
+}
+
+.snow-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10vh;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+  animation-name: snow-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes snow-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0);
+  }
+  100% {
+    transform: translate3d(0, 110vh, 0);
+  }
 }
 
 .bio-banner:hover .bio-banner__visual img {

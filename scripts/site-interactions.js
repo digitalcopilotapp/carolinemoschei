@@ -1425,8 +1425,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startAuto();
   }
+
+  const initSnow = () => {
+    const layer = document.querySelector('.snow-layer');
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!layer || prefersReducedMotion) return;
+
+    const flakeCount = 40;
+    for (let index = 0; index < flakeCount; index += 1) {
+      const flake = document.createElement('span');
+      flake.className = 'snowflake';
+      flake.textContent = '•';
+      flake.style.left = `${Math.random() * 100}%`;
+      flake.style.fontSize = `${8 + Math.random() * 6}px`;
+      flake.style.animationDelay = `${Math.random() * 10}s`;
+      flake.style.animationDuration = `${10 + Math.random() * 10}s`;
+      flake.style.opacity = `${0.18 + Math.random() * 0.32}`;
+      layer.appendChild(flake);
+    }
+  };
+
   renderRelatedProducts();
   decorateRelatedLinks();
   propagateOriginToLinks();
   createCouponExperience();
+  initSnow();
 });
