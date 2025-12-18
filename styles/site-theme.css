@@ -4052,7 +4052,8 @@ main {
 }
 
 .hero-full--workshop .hero-scroll {
-  bottom: clamp(1.2rem, 5vw, 2.6rem);
+  position: static;
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 @media (max-width: 1023px) {
