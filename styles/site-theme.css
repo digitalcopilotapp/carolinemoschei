@@ -1161,7 +1161,7 @@ main {
   grid-template-columns: auto 1fr;
   align-items: stretch;
   gap: var(--spacing-md);
-  padding: calc(var(--spacing-sm) * 1.1) var(--spacing-md);
+  padding: calc(var(--spacing-sm) * 0.7) calc(var(--spacing-md) * 0.75);
   border-radius: var(--radius-lg);
   background: linear-gradient(150deg, rgba(6, 6, 8, 0.78), rgba(12, 12, 18, 0.52));
   border: 1px solid rgba(248, 245, 239, 0.16);
@@ -1196,7 +1196,7 @@ main {
 
 .hero-event-date__day {
   font-family: var(--font-heading);
-  font-size: clamp(3.5rem, 8vw, 4.75rem);
+  font-size: clamp(2.1rem, 4.8vw, 2.9rem);
   line-height: 0.9;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1214,13 +1214,13 @@ main {
 }
 
 .hero-event-date__month {
-  font-size: clamp(1.1rem, 3vw, 1.55rem);
+  font-size: clamp(0.9rem, 2.2vw, 1.2rem);
   letter-spacing: 0.32em;
   text-transform: uppercase;
 }
 
 .hero-event-date__year {
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   letter-spacing: 0.48em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
@@ -1230,11 +1230,11 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.5rem 0.9rem;
+  padding: 0.4rem 0.8rem;
   border-radius: var(--radius-pill);
   border: 1px solid rgba(248, 245, 239, 0.16);
   background: rgba(12, 12, 16, 0.55);
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   width: fit-content;
