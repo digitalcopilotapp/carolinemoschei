@@ -1207,6 +1207,7 @@ main {
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
+  text-align: center;
 }
 
 .hero-event-date__col--details {
@@ -1238,6 +1239,7 @@ main {
   letter-spacing: 0.28em;
   text-transform: uppercase;
   width: fit-content;
+  text-align: center;
 }
 
 .hero-floating-card {
@@ -1266,7 +1268,7 @@ main {
 .hero-floating-title {
   margin: 0;
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 20px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1299,7 +1301,7 @@ main {
 
 .hero-heading {
   font-family: var(--font-heading);
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: 35px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   line-height: 1.05;
@@ -2274,6 +2276,7 @@ main {
 
 .hero-full--workshop .hero-heading {
   max-width: 600px;
+  font-size: 2.1875rem;
 }
 
 .hero-full--guide .hero-heading {
@@ -2873,7 +2876,7 @@ main {
   font-family: var(--font-heading);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  font-size: 20px;
 }
 
 .hero-floating-list {
