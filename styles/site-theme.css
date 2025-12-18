@@ -1250,7 +1250,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  align-self: stretch;
+  justify-content: center;
+  align-self: center;
   justify-self: center;
   width: min(100%, 360px);
 }
@@ -1265,7 +1266,7 @@ main {
 .hero-floating-title {
   margin: 0;
   font-family: var(--font-heading);
-  font-size: clamp(1.6rem, 3.2vw, 2rem);
+  font-size: 1.25rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -5550,7 +5551,7 @@ body.modal-open .coupon-banner {
 
 .coupon-banner__cta {
   align-self: center;
-  padding: 0.75rem 1.6rem;
+  padding: 0.8125rem 1.6rem;
   border-radius: var(--radius-pill);
   border: 0;
   background: linear-gradient(135deg, rgba(208, 161, 107, 0.95), rgba(208, 161, 107, 0.75));
