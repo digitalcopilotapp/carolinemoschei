@@ -2832,23 +2832,6 @@ main {
   to { transform: translateX(-50%); }
 }
 
-.hero-floating-card {
-  position: absolute;
-  right: var(--spacing-lg);
-  bottom: var(--spacing-lg);
-  width: clamp(260px, 28vw, 360px);
-  padding: var(--spacing-lg);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(6, 6, 8, 0.7);
-  box-shadow: var(--shadow-crisp);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-  backdrop-filter: blur(14px);
-  z-index: 1;
-}
-
 .hero-floating-cta {
   margin-top: var(--spacing-sm);
   align-self: flex-start;
