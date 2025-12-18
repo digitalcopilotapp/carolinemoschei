@@ -4051,6 +4051,10 @@ main {
   z-index: 2;
 }
 
+.hero-full--workshop .hero-scroll {
+  bottom: clamp(1.2rem, 5vw, 2.6rem);
+}
+
 @media (max-width: 1023px) {
   .hero-photoshop__inner {
     grid-template-columns: minmax(0, 1fr);
