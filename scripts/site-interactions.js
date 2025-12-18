@@ -928,7 +928,7 @@ document.addEventListener('DOMContentLoaded', () => {
       benefit: 'Construa fotos premium usando apenas seu smartphone.',
       href: '/pages/curso-de-fotografia-de-celular.html',
       thumbnail: '/assets/raw-site/Foto3.jpg',
-      checkout: '/redirect/whatsapp?cta=curso-mobile'
+      checkout: '/redirect/whatsapp.html?cta=curso-mobile'
     },
     'curso-photoshop': {
       id: 'curso-photoshop',
@@ -960,7 +960,7 @@ document.addEventListener('DOMContentLoaded', () => {
       benefit: 'Packs Lightroom com estética editorial para qualquer luz.',
       href: '/pages/presets.html',
       thumbnail: '/assets/raw-site/Foto6.jpg',
-      checkout: '/redirect/whatsapp?cta=presets-pack'
+      checkout: '/redirect/whatsapp.html?cta=presets-pack'
     },
     workshop: {
       id: 'workshop',
@@ -1384,7 +1384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const status = document.querySelector('[data-orcamentos-status]');
     if (!cta) return;
 
-    const whatsappUrl = '/redirect/whatsapp?cta=links-orcamentos';
+    const whatsappUrl = '/redirect/whatsapp.html?cta=links-orcamentos';
     const defaultStatusMessage = 'Você será redirecionado para o time de atendimento enquanto registramos os dados da sua campanha.';
     if (status && !status.textContent.trim()) {
       status.textContent = defaultStatusMessage;
