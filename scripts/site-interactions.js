@@ -1034,8 +1034,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="/assets/images/link-bio/foto-caroline-moschei-link-na-bio.png" alt="Caroline Moschei sorrindo" loading="lazy">
       </div>
       <div class="coupon-banner__content">
-        <p class="coupon-banner__headline">Garanta seu cupom de 50% OFF</p>
-        <p class="coupon-banner__copy">Oferta válida por tempo limitado para <strong>${product.title}</strong>.</p>
+        <p class="coupon-banner__headline">Christmas Gift · 10% OFF</p>
+        <p class="coupon-banner__copy">Oferta extra de fim de ano por tempo limitado para <strong>${product.title}</strong>.</p>
       </div>
       <button type="button" class="coupon-banner__cta" data-open-coupon>
         Quero meu desconto
@@ -1054,9 +1054,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </button>
         <div class="coupon-modal__content">
           <header class="coupon-modal__header">
-            <span class="coupon-modal__badge">Cupom 50% OFF</span>
+            <span class="coupon-modal__badge">Christmas Gift 10% OFF</span>
             <h2 class="coupon-modal__title" id="couponModalTitle">Resgate exclusivo para ${product.title}</h2>
-            <p class="coupon-modal__subtitle">Complete as etapas e finalize sua inscrição com desconto.</p>
+            <p class="coupon-modal__subtitle">Complete as etapas para liberar seu presente de 10% OFF.</p>
           </header>
           <form class="coupon-form" data-coupon-form novalidate>
             <section class="coupon-step is-active" data-step="1">
