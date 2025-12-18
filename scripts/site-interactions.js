@@ -814,6 +814,20 @@ document.addEventListener('DOMContentLoaded', () => {
     return header;
   };
 
+  const collectAttributionData = () => {
+    const params = new URLSearchParams(window.location.search);
+    const attribution = {};
+    TRACKED_PARAMS.forEach((param) => {
+      if (params.has(param)) {
+        attribution[param] = params.get(param);
+      }
+    });
+    attribution.origin = params.get('origin') || (hasBioOrigin() ? 'bio' : 'direct');
+    attribution.landing_path = window.location.pathname;
+    attribution.landing_query = window.location.search || '';
+    return attribution;
+  };
+
   const bindNavigationInteractions = (header) => {
     if (!header) return;
     const toggle = header.querySelector('[data-nav-toggle]');
@@ -1364,6 +1378,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  const initOrcamentosPage = () => {
+    if (!document.body.classList.contains('page-orcamentos')) return;
+    const cta = document.querySelector('[data-orcamentos-cta]');
+    const status = document.querySelector('[data-orcamentos-status]');
+    if (!cta) return;
+
+    const whatsappUrl = '/redirect/whatsapp?cta=links-orcamentos';
+    const defaultStatusMessage = 'Você será redirecionado para o time de atendimento enquanto registramos os dados da sua campanha.';
+    if (status && !status.textContent.trim()) {
+      status.textContent = defaultStatusMessage;
+    }
+
+    const setLoadingState = (isLoading) => {
+      cta.classList.toggle('is-loading', isLoading);
+      cta.setAttribute('aria-busy', String(isLoading));
+      cta.setAttribute('aria-disabled', String(isLoading));
+    };
+
+    const sendMetaEvent = async () => {
+      const attribution = collectAttributionData();
+      const eventId = (window.crypto && typeof window.crypto.randomUUID === 'function')
+        ? window.crypto.randomUUID()
+        : `orc-${Date.now()}-${Math.floor(Math.random() * 1e6)}`;
+
+      const payload = {
+        event_id: eventId,
+        event_name: 'Lead',
+        event_source_url: window.location.href,
+        attribution
+      };
+
+      try {
+        await fetch('/api/meta-orcamentos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        });
+      } catch (error) {
+        // Falha silenciosa: não bloqueia o redirecionamento
+      }
+    };
+
+    cta.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (cta.classList.contains('is-loading')) return;
+      setLoadingState(true);
+      if (status) {
+        status.textContent = 'Conectando você com o time de atendimento no WhatsApp...';
+      }
+
+      // Dispara o envio e, em paralelo, redireciona após um pequeno delay de segurança
+      sendMetaEvent();
+      window.setTimeout(() => {
+        window.location.href = whatsappUrl;
+      }, 400);
+    });
+  };
+
   setBioOriginFromUrl();
   const header = renderGlobalHeader();
   bindNavigationInteractions(header);
@@ -1448,6 +1521,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderRelatedProducts();
   decorateRelatedLinks();
   propagateOriginToLinks();
+  initOrcamentosPage();
   createCouponExperience();
   initSnow();
 });

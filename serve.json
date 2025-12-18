@@ -6,6 +6,7 @@
     { "source": "/guia-fotografia-corporativa", "destination": "/pages/guia-fotografia-corporativa.html" },
     { "source": "/links", "destination": "/pages/links.html" },
     { "source": "/presets", "destination": "/pages/presets.html" },
+    { "source": "/orcamentos", "destination": "/pages/orcamentos.html" },
     { "source": "/verso-reverso", "destination": "/pages/verso-reverso.html" },
     { "source": "/wsp-2026", "destination": "/pages/wsp-2026.html" }
   ]
