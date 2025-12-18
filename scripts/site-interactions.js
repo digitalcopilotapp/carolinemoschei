@@ -1385,10 +1385,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!cta) return;
 
     const whatsappUrl = '/redirect/whatsapp.html?cta=links-orcamentos';
-    const defaultStatusMessage = 'Você será redirecionado para o time de atendimento enquanto registramos os dados da sua campanha.';
-    if (status && !status.textContent.trim()) {
-      status.textContent = defaultStatusMessage;
-    }
 
     const setLoadingState = (isLoading) => {
       cta.classList.toggle('is-loading', isLoading);
@@ -1421,19 +1417,35 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
+    const startCountdownRedirect = () => {
+      const totalSeconds = 3;
+      let remaining = totalSeconds;
+
+      const updateStatus = () => {
+        if (!status) return;
+        status.textContent = `Redirecionando para o WhatsApp em ${remaining}s...`;
+      };
+
+      updateStatus();
+      const intervalId = window.setInterval(() => {
+        remaining -= 1;
+        if (remaining <= 0) {
+          window.clearInterval(intervalId);
+          window.location.href = whatsappUrl;
+        } else {
+          updateStatus();
+        }
+      }, 1000);
+    };
+
     cta.addEventListener('click', (event) => {
       event.preventDefault();
       if (cta.classList.contains('is-loading')) return;
       setLoadingState(true);
-      if (status) {
-        status.textContent = 'Conectando você com o time de atendimento no WhatsApp...';
-      }
 
-      // Dispara o envio e, em paralelo, redireciona após um pequeno delay de segurança
+      // Dispara o envio e inicia a contagem antes do redirecionamento
       sendMetaEvent();
-      window.setTimeout(() => {
-        window.location.href = whatsappUrl;
-      }, 400);
+      startCountdownRedirect();
     });
   };
 
