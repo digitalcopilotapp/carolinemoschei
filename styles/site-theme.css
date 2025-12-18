@@ -6496,6 +6496,12 @@ body.nav-open {
   box-shadow: 0 8px 26px rgba(241, 197, 138, 0.28);
 }
 
+.bio-banner__badge::before {
+  content: '🎁';
+  margin-right: 0.4rem;
+  font-size: 0.9em;
+}
+
 .bio-banner__visual picture {
   display: block;
   width: 100%;
