@@ -1031,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
     banner.dataset.couponBanner = '';
     banner.innerHTML = `
       <div class="coupon-banner__media">
-        <img src="/assets/raw-site/Foto1.jpg" alt="Caroline Moschei sorrindo" loading="lazy">
+        <img src="/assets/images/link-bio/foto-caroline-moschei-link-na-bio.png" alt="Caroline Moschei sorrindo" loading="lazy">
       </div>
       <div class="coupon-banner__content">
         <p class="coupon-banner__headline">Garanta seu cupom de 50% OFF</p>
