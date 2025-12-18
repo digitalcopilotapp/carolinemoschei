@@ -1604,9 +1604,6 @@ main {
   .hero-full-content {
     width: 100%;
   }
-  .hero-inner {
-    grid-template-columns: 1fr;
-  }
   .hero-floating-card {
     max-width: 520px;
   }
@@ -1619,6 +1616,9 @@ main {
 @media (max-width: 767px) {
   .hero-full {
     padding: var(--spacing-xl) var(--spacing-md);
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
   }
   .hero-event-date {
     grid-template-columns: 1fr;
