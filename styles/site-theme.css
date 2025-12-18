@@ -239,59 +239,6 @@ main {
   box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
 }
 
-.black-november-banner {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 calc(-1 * clamp(1.25rem, 5vw, 3rem));
-  padding: clamp(0.8rem, 2.6vw, 1.2rem) 0;
-  width: calc(100% + 2 * clamp(1.25rem, 5vw, 3rem));
-  z-index: 2;
-  background: linear-gradient(90deg, rgba(12, 12, 18, 0.96), rgba(30, 22, 18, 0.96));
-  border-bottom: 1px solid rgba(255, 200, 150, 0.18);
-  border-top: 1px solid rgba(255, 200, 150, 0.18);
-}
-
-.black-november-banner::before,
-.black-november-banner::after {
-  content: none;
-}
-
-.black-november-banner__inner {
-  width: min(94%, 1280px);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.6rem, 2vw, 1.2rem);
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  font-size: clamp(0.7rem, 2.2vw, 0.9rem);
-  color: rgba(248, 245, 239, 0.92);
-  font-family: 'Monik', 'Outfit', 'Inter', sans-serif;
-  font-weight: 600;
-  font-synthesis: none;
-}
-
-.black-november-banner__inner strong {
-  color: rgba(208, 161, 107, 0.95);
-  font-weight: 600;
-}
-
-.black-november-banner__spark,
-.black-november-banner__spark--right {
-  display: none;
-}
-
-@keyframes black-november-border {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 @keyframes spark-blink {
   0%, 100% {
@@ -968,16 +915,6 @@ main {
 }
 
 @media (max-width: 767px) {
-  .black-november-banner {
-    padding: clamp(0.85rem, 5vw, 1.2rem) 0;
-  }
-
-  .black-november-banner__inner {
-    width: calc(100% - clamp(1.2rem, 6vw, 2rem));
-    letter-spacing: 0.24em;
-    font-size: 0.72rem;
-  }
-
   .bio-links {
     padding: clamp(1rem, 4vw, 1.6rem);
   }
