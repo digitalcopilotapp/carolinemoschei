@@ -1558,6 +1558,17 @@ main {
   cursor: pointer;
 }
 
+.hero-cta-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.hero-full--workshop .hero-cta-group .hero-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .hero-cta-primary {
   background: linear-gradient(120deg, rgba(208, 161, 107, 0.35), rgba(208, 161, 107, 0.15));
   border-color: transparent;
