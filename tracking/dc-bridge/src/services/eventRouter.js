@@ -118,6 +118,8 @@ async function routeEvent(eventType, payload, tenant = null) {
     zipcode: data.buyer.zipcode,
     productId: data.product.id,
     subscriptionId: data.subscription.id,
+    fbc: lead.fbc || undefined,
+    fbp: lead.fbp || undefined,
   };
 
   // Resolve WhatsApp templates: per-tenant overrides or global defaults

@@ -814,6 +814,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return header;
   };
 
+  const getCookie = (name) => {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  };
+
   const collectAttributionData = () => {
     const params = new URLSearchParams(window.location.search);
     const attribution = {};
@@ -1402,11 +1407,13 @@ document.addEventListener('DOMContentLoaded', () => {
         event_id: eventId,
         event_name: 'Lead',
         event_source_url: window.location.href,
-        attribution
+        attribution,
+        fbc: getCookie('_fbc') || undefined,
+        fbp: getCookie('_fbp') || undefined
       };
 
       try {
-        await fetch('/api/meta-orcamentos', {
+        await fetch('https://webhook.digitalcopilot.app/track/event', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),

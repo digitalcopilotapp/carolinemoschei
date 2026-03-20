@@ -28,7 +28,9 @@ export default async function handler(req, res) {
     event_id: eventId,
     event_name: eventName = 'Lead',
     event_source_url: eventSourceUrl,
-    attribution = {}
+    attribution = {},
+    fbc,
+    fbp
   } = body || {};
 
   const eventTime = Math.floor(Date.now() / 1000);
@@ -48,7 +50,9 @@ export default async function handler(req, res) {
         action_source: 'website',
         user_data: {
           client_user_agent: clientUserAgent,
-          client_ip_address: clientIpAddress || undefined
+          client_ip_address: clientIpAddress || undefined,
+          fbc: fbc || undefined,
+          fbp: fbp || undefined
         },
         custom_data: {
           ...attribution

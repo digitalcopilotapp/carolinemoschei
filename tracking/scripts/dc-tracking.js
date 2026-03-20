@@ -25,11 +25,18 @@
     return eventName + '_' + ts + '_' + rand;
   };
 
+  DC.getCookie = function (name) {
+    var match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : undefined;
+  };
+
   DC.getStoredUserData = function () {
     return {
       email: localStorage.getItem('dc_lead_email') || undefined,
       phone: localStorage.getItem('dc_lead_phone') || undefined,
-      first_name: localStorage.getItem('dc_lead_name') || undefined
+      first_name: localStorage.getItem('dc_lead_name') || undefined,
+      fbc: DC.getCookie('_fbc'),
+      fbp: DC.getCookie('_fbp')
     };
   };
 
@@ -77,7 +84,9 @@
       user_data: {
         email: data.email,
         phone: data.phone || undefined,
-        first_name: data.name || undefined
+        first_name: data.name || undefined,
+        fbc: DC.getCookie('_fbc'),
+        fbp: DC.getCookie('_fbp')
       }
     });
   };

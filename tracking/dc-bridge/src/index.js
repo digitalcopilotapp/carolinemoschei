@@ -3,6 +3,7 @@ const logger = require("./utils/logger");
 const healthRouter = require("./routes/health");
 const hotmartRouter = require("./routes/hotmart");
 const adminRouter = require("./routes/admin");
+const trackingRouter = require("./routes/tracking");
 const { processDueMessages } = require("./services/scheduler");
 const { processRetryQueue } = require("./services/retryQueue");
 const { runAgentForAllTenants } = require("./services/chatwootAgent");
@@ -80,6 +81,7 @@ app.use(
 app.use(healthRouter);
 app.use(hotmartRouter);
 app.use(adminRouter);
+app.use(trackingRouter);
 
 // 404 handler
 app.use((_req, res) => {
