@@ -1,0 +1,24 @@
+{
+  "name": "dc-bridge",
+  "version": "1.0.0",
+  "description": "Hotmart webhook bridge → PostgreSQL → Meta CAPI → Chatwoot → Listmonk",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "migrate": "node src/db/migrate.js",
+    "lint": "biome check src/",
+    "lint:fix": "biome check --write src/"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

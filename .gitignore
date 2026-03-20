@@ -29,3 +29,11 @@ Thumbs.db
 dist/
 build/
 .vercel
+
+# Data & logs
+hotmart-webhook/data/
+hotmart-webhook/logs/
+tracking/dc-bridge/data/
+
+# Temp
+tmp/

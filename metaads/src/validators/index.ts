@@ -1,0 +1,1 @@
+// Ad content policy validation

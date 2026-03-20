@@ -1,0 +1,274 @@
+# =============================================================================
+# Digital Copilot Infrastructure — Docker Compose
+# All services on a single Hostinger KVM 2 (2 vCPU | 8GB RAM | 100GB NVMe)
+# =============================================================================
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # PostgreSQL 15 — Shared database for Listmonk, Chatwoot, dc-bridge
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: postgres:15-alpine
+    container_name: dc-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_LISTMONK_DB: ${POSTGRES_LISTMONK_DB}
+      POSTGRES_LISTMONK_USER: ${POSTGRES_LISTMONK_USER}
+      POSTGRES_LISTMONK_PASSWORD: ${POSTGRES_LISTMONK_PASSWORD}
+      POSTGRES_CHATWOOT_DB: ${POSTGRES_CHATWOOT_DB}
+      POSTGRES_CHATWOOT_USER: ${POSTGRES_CHATWOOT_USER}
+      POSTGRES_CHATWOOT_PASSWORD: ${POSTGRES_CHATWOOT_PASSWORD}
+      POSTGRES_DCBRIDGE_DB: ${POSTGRES_DCBRIDGE_DB}
+      POSTGRES_DCBRIDGE_USER: ${POSTGRES_DCBRIDGE_USER}
+      POSTGRES_DCBRIDGE_PASSWORD: ${POSTGRES_DCBRIDGE_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres-init/init-databases.sh:/docker-entrypoint-initdb.d/01-init-databases.sh
+      - ./postgres-init/tune-postgres.sql:/docker-entrypoint-initdb.d/02-tune-postgres.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - dc-network
+
+  # ---------------------------------------------------------------------------
+  # Redis — Cache and job queue for Chatwoot
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: dc-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --requirepass ${REDIS_PASSWORD}
+      --save 900 1
+      --save 300 10
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - dc-network
+
+  # ---------------------------------------------------------------------------
+  # Caddy — Reverse proxy with automatic HTTPS
+  # ---------------------------------------------------------------------------
+  caddy:
+    image: caddy:2-alpine
+    container_name: dc-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks:
+      - dc-network
+    depends_on:
+      - listmonk
+      - snappymail
+      - chatwoot-web
+      - dc-bridge
+      - uptime-kuma
+
+  # ---------------------------------------------------------------------------
+  # Stalwart Mail — SMTP, IMAP, JMAP, antispam, DKIM/SPF/DMARC
+  # ---------------------------------------------------------------------------
+  stalwart:
+    image: stalwartlabs/mail-server:latest
+    container_name: dc-stalwart
+    restart: unless-stopped
+    ports:
+      - "25:25"
+      - "587:587"
+      - "465:465"
+      - "993:993"
+      - "4190:4190"
+      - "8443:443"
+    volumes:
+      - stalwart-data:/opt/stalwart-mail
+    environment:
+      - STALWART_ADMIN_USER=${STALWART_ADMIN_USER}
+      - STALWART_ADMIN_PASSWORD=${STALWART_ADMIN_PASSWORD}
+    networks:
+      - dc-network
+
+  # ---------------------------------------------------------------------------
+  # SnappyMail — Modern webmail client
+  # ---------------------------------------------------------------------------
+  snappymail:
+    image: djmaze/snappymail:latest
+    container_name: dc-snappymail
+    restart: unless-stopped
+    volumes:
+      - snappymail-data:/var/lib/snappymail
+    networks:
+      - dc-network
+    depends_on:
+      - stalwart
+
+  # ---------------------------------------------------------------------------
+  # Listmonk — Newsletter and campaign manager
+  # ---------------------------------------------------------------------------
+  listmonk:
+    image: listmonk/listmonk:latest
+    container_name: dc-listmonk
+    restart: unless-stopped
+    environment:
+      - TZ=UTC
+    volumes:
+      - ./listmonk-config.toml:/listmonk/config.toml:ro
+    networks:
+      - dc-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ---------------------------------------------------------------------------
+  # Chatwoot — CRM + WhatsApp omnichannel
+  # ---------------------------------------------------------------------------
+  chatwoot-web:
+    image: chatwoot/chatwoot:latest
+    container_name: dc-chatwoot-web
+    restart: unless-stopped
+    command: bundle exec rails s -p 3000 -b 0.0.0.0
+    environment:
+      RAILS_ENV: production
+      NODE_ENV: production
+      SECRET_KEY_BASE: ${CHATWOOT_SECRET_KEY_BASE}
+      FRONTEND_URL: ${CHATWOOT_FRONTEND_URL}
+      DEFAULT_LOCALE: ${CHATWOOT_DEFAULT_LOCALE}
+      DATABASE_URL: postgres://${POSTGRES_CHATWOOT_USER}:${POSTGRES_CHATWOOT_PASSWORD}@postgres:5432/${POSTGRES_CHATWOOT_DB}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+      RAILS_LOG_TO_STDOUT: "true"
+      MAILER_SENDER_EMAIL: ${CHATWOOT_MAILER_SENDER_EMAIL}
+      SMTP_ADDRESS: stalwart
+      SMTP_PORT: 587
+      SMTP_AUTHENTICATION: plain
+      SMTP_ENABLE_STARTTLS_AUTO: "true"
+      SMTP_USERNAME: ${LISTMONK_SMTP_USER}
+      SMTP_PASSWORD: ${LISTMONK_SMTP_PASSWORD}
+    networks:
+      - dc-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  chatwoot-sidekiq:
+    image: chatwoot/chatwoot:latest
+    container_name: dc-chatwoot-sidekiq
+    restart: unless-stopped
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    environment:
+      RAILS_ENV: production
+      NODE_ENV: production
+      SECRET_KEY_BASE: ${CHATWOOT_SECRET_KEY_BASE}
+      FRONTEND_URL: ${CHATWOOT_FRONTEND_URL}
+      DEFAULT_LOCALE: ${CHATWOOT_DEFAULT_LOCALE}
+      DATABASE_URL: postgres://${POSTGRES_CHATWOOT_USER}:${POSTGRES_CHATWOOT_PASSWORD}@postgres:5432/${POSTGRES_CHATWOOT_DB}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+      RAILS_LOG_TO_STDOUT: "true"
+      SIDEKIQ_CONCURRENCY: 2
+    networks:
+      - dc-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ---------------------------------------------------------------------------
+  # dc-bridge — Hotmart webhook → DB → Meta CAPI → Chatwoot → Listmonk
+  # ---------------------------------------------------------------------------
+  dc-bridge:
+    build:
+      context: ./dc-bridge
+      dockerfile: Dockerfile
+    container_name: dc-bridge
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: ${DCBRIDGE_PORT:-3100}
+      DATABASE_URL: postgres://${POSTGRES_DCBRIDGE_USER}:${POSTGRES_DCBRIDGE_PASSWORD}@postgres:5432/${POSTGRES_DCBRIDGE_DB}
+      HOTMART_WEBHOOK_SECRET: ${HOTMART_WEBHOOK_SECRET}
+      META_PIXEL_ID: ${META_PIXEL_ID}
+      META_ACCESS_TOKEN: ${META_ACCESS_TOKEN}
+      CHATWOOT_API_TOKEN: ${CHATWOOT_API_TOKEN}
+      CHATWOOT_ACCOUNT_ID: ${CHATWOOT_ACCOUNT_ID}
+      CHATWOOT_WHATSAPP_INBOX_ID: ${CHATWOOT_WHATSAPP_INBOX_ID}
+      CHATWOOT_BASE_URL: ${CHATWOOT_BASE_URL}
+      LISTMONK_API_URL: ${LISTMONK_API_URL}
+      LISTMONK_API_USER: ${LISTMONK_API_USER}
+      LISTMONK_API_PASSWORD: ${LISTMONK_API_PASSWORD}
+      LISTMONK_POSVENDA_LIST_ID: ${LISTMONK_POSVENDA_LIST_ID}
+      TENANT_ADMIN_SECRET: ${TENANT_ADMIN_SECRET}
+      SES_SMTP_HOST: ${SES_SMTP_HOST:-email-smtp.us-east-1.amazonaws.com}
+      SES_SMTP_PORT: ${SES_SMTP_PORT:-587}
+      SES_SMTP_USER: ${SES_SMTP_USER:-}
+      SES_SMTP_PASS: ${SES_SMTP_PASS:-}
+      STALWART_SMTP_HOST: stalwart
+      STALWART_SMTP_PORT: "587"
+      STALWART_SMTP_USER: ${STALWART_SMTP_USER:-noreply@digitalcopilot.app}
+      STALWART_SMTP_PASS: ${STALWART_SMTP_PASS:-}
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 64M
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:3100/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - dc-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ---------------------------------------------------------------------------
+  # Uptime Kuma — Monitoring dashboard
+  # ---------------------------------------------------------------------------
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    container_name: dc-uptime-kuma
+    restart: unless-stopped
+    volumes:
+      - uptime-kuma-data:/app/data
+    networks:
+      - dc-network
+
+# =============================================================================
+# Volumes
+# =============================================================================
+volumes:
+  postgres-data:
+  redis-data:
+  caddy-data:
+  caddy-config:
+  stalwart-data:
+  snappymail-data:
+  uptime-kuma-data:
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  dc-network:
+    driver: bridge

@@ -1,0 +1,23 @@
+# =============================================================================
+# Caddy Reverse Proxy — Digital Copilot Infrastructure
+# =============================================================================
+
+campaigns.digitalcopilot.app {
+	reverse_proxy listmonk:9000
+}
+
+webmail.digitalcopilot.app {
+	reverse_proxy snappymail:8888
+}
+
+crm.digitalcopilot.app {
+	reverse_proxy chatwoot-web:3000
+}
+
+webhook.digitalcopilot.app {
+	reverse_proxy dc-bridge:3100
+}
+
+status.digitalcopilot.app {
+	reverse_proxy uptime-kuma:3001
+}

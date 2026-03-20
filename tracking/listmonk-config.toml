@@ -1,0 +1,50 @@
+[app]
+address = "0.0.0.0:9000"
+admin_username = "admin"
+admin_password = "CHANGE_ME_ON_FIRST_LOGIN"
+
+[db]
+host = "postgres"
+port = 5432
+user = "listmonk_user"
+password = "CHANGE_ME"
+database = "listmonk"
+ssl_mode = "disable"
+max_open = 25
+max_idle = 25
+max_lifetime = "300s"
+
+# =============================================================================
+# SMTP Providers — Listmonk tries in order. If primary fails, uses fallback.
+# =============================================================================
+
+# Primary: Stalwart Mail (self-hosted)
+[smtp]
+  [smtp.stalwart]
+  enabled = true
+  host = "stalwart"
+  port = 587
+  auth_protocol = "plain"
+  username = "noreply@digitalcopilot.app"
+  password = "CHANGE_ME"
+  tls_type = "STARTTLS"
+  max_conns = 8
+  idle_timeout = "15s"
+  wait_timeout = "5s"
+  max_msg_retries = 2
+  hello_hostname = "campaigns.digitalcopilot.app"
+
+  # Fallback: Amazon SES (if Stalwart is down or rate-limited)
+  [smtp.ses]
+  enabled = true
+  host = "email-smtp.us-east-1.amazonaws.com"
+  port = 587
+  auth_protocol = "plain"
+  username = "CHANGE_ME_SES_SMTP_USER"
+  password = "CHANGE_ME_SES_SMTP_PASS"
+  tls_type = "STARTTLS"
+  max_conns = 5
+  idle_timeout = "15s"
+  wait_timeout = "5s"
+  max_msg_retries = 3
+  hello_hostname = "campaigns.digitalcopilot.app"

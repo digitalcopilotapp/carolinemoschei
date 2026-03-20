@@ -1,0 +1,28 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Node
+dc-bridge/node_modules/
+dc-bridge/dist/
+
+# Backups (local)
+backups/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Docker volumes (if local)
+volumes/
+
+# Claude
+.claude/
