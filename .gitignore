@@ -37,3 +37,10 @@ tracking/dc-bridge/data/
 
 # Temp
 tmp/
+
+# Hermes worker outputs — raw artifacts não vão pro repo
+vps-snapshot/wp-content/
+incoming/*.zip
+incoming/*.tar*
+tmp/
+*.zip
