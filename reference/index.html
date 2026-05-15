@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caroline Moschei — Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #000000;
+            --dark-bg: #0a0a0a;
+            --dark-brown: #2A2520;
+            --cream: #FAF4ED;
+            --caramel: #C8956C;
+            --caramel-dark: #a87650;
+            --white: #FFFFFF;
+            --mauve: rgb(128, 81, 77);
+            --warm-gray: #7A756F;
+            --gold: #D2AF78;
+            --red-dot: #dc503c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #0a0a0a;
+            font-family: 'Inter', sans-serif;
+            color: var(--white);
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 40px 16px 60px;
+        }
+
+        /* === HEADER / PROFILE === */
+        .profile {
+            text-align: center;
+            margin-bottom: 36px;
+        }
+
+        .profile__photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--caramel);
+            margin-bottom: 16px;
+        }
+
+        .profile__name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            font-size: 1.4rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .profile__bio {
+            font-size: 0.78rem;
+            color: var(--warm-gray);
+            line-height: 1.6;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* === SECTION DIVIDERS === */
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 36px 0 20px;
+        }
+
+        .section-divider__line {
+            flex: 1;
+            height: 1px;
+            background: rgba(200, 149, 108, 0.25);
+        }
+
+        .section-divider__text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--caramel);
+            white-space: nowrap;
+        }
+
+        /* === BANNER CARDS (clickable) === */
+        .banner-card {
+            display: block;
+            text-decoration: none;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .banner-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 40px rgba(200, 149, 108, 0.2);
+        }
+
+        .banner-card:active {
+            transform: translateY(0) scale(0.99);
+            transition-duration: 0.15s;
+        }
+
+        /* === BANNER INNER LAYOUTS === */
+        .banner {
+            position: relative;
+            width: 100%;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .banner--dark {
+            background: linear-gradient(135deg, #0f0f0f 0%, #000 50%, #080808 100%);
+        }
+
+        .banner--dark::before {
+            content: '';
+            position: absolute;
+            top: 12px; left: 12px;
+            width: 50px; height: 50px;
+            border-left: 1.5px solid var(--caramel);
+            border-top: 1.5px solid var(--caramel);
+            border-radius: 25px 0 0 0;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .banner--dark::after {
+            content: '';
+            position: absolute;
+            bottom: 12px; right: 12px;
+            width: 50px; height: 50px;
+            border-right: 1.5px solid var(--caramel);
+            border-bottom: 1.5px solid var(--caramel);
+            border-radius: 0 0 25px 0;
+            opacity: 0.5;
+            z-index: 1;
+        }
+
+        .banner--warm {
+            background: linear-gradient(160deg, #2A2520 0%, #3d2e28 40%, #4a3530 100%);
+        }
+
+        .banner--warm::before {
+            content: '';
+            position: absolute; inset: 8px;
+            border: 1px solid var(--caramel);
+            border-radius: 2px; opacity: 0.3;
+            pointer-events: none; z-index: 1;
+        }
+
+        .banner--warm::after { display: none; }
+
+        .banner--verso {
+            background: linear-gradient(135deg, #FAF4ED 0%, #f0e8dd 100%);
+        }
+
+        .banner--verso::before, .banner--verso::after { display: none; }
+
+        .banner__left {
+            position: relative; z-index: 2;
+            padding: 24px 20px 24px 28px;
+            display: flex; flex-direction: column; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .banner__right {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        /* Tag */
+        .tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 3px;
+            padding: 2px 10px;
+            font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--white); width: fit-content; margin-bottom: 12px;
+        }
+
+        .tag__dot {
+            width: 6px; height: 6px; border-radius: 50%; background: var(--red-dot);
+        }
+
+        /* Title */
+        .banner__title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300; line-height: 1.08;
+            text-transform: uppercase; color: var(--white);
+            letter-spacing: 0.02em; margin-bottom: 10px;
+        }
+
+        .banner__title span { font-weight: 500; color: var(--gold); }
+        .banner__title em { font-style: italic; font-weight: 300; color: var(--gold); }
+
+        .banner__subtitle {
+            font-size: 0.68rem; color: var(--cream); font-weight: 300;
+            line-height: 1.45; margin-bottom: 12px; opacity: 0.8;
+        }
+
+        /* Separator */
+        .separator {
+            display: flex; align-items: center; margin-bottom: 12px; width: 80%;
+        }
+
+        .separator__dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            border: 1px solid var(--caramel); flex-shrink: 0;
+        }
+
+        .separator__line { flex: 1; height: 1px; background: var(--caramel); }
+
+        /* CTA row */
+        .cta-row { display: flex; align-items: center; gap: 10px; }
+
+        .cta-icon {
+            width: 28px; height: 28px; background: var(--caramel);
+            border-radius: 6px; display: flex; align-items: center;
+            justify-content: center; font-size: 0.85rem; flex-shrink: 0;
+        }
+
+        .cta-text { font-size: 0.75rem; color: var(--white); font-style: italic; font-weight: 300; }
+
+        /* CTA button */
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            border: 1.5px solid var(--caramel); border-radius: 50px;
+            padding: 6px 14px; font-size: 0.6rem; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--white);
+            background: transparent; font-family: 'Inter', sans-serif;
+            cursor: pointer; transition: all 0.3s;
+        }
+
+        .cta-btn:hover { background: var(--caramel); }
+
+        .cta-btn__arrow {
+            width: 16px; height: 16px; background: var(--caramel);
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 0.5rem;
+        }
+
+        /* Tag pills */
+        .tags-row { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+
+        .tag-pill {
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 3px 10px; font-size: 0.5rem;
+            letter-spacing: 0.1em; text-transform: uppercase; color: var(--white);
+        }
+
+        /* Photo mosaic */
+        .mosaic {
+            position: absolute; inset: 0;
+            display: grid; gap: 4px; padding: 10px;
+        }
+
+        .mosaic--overlap {
+            grid-template-columns: 1fr 1.3fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+
+        .mosaic__photo { border-radius: 6px; overflow: hidden; }
+        .mosaic__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: brightness(0.82); }
+        .mosaic__photo--large { grid-row: span 2; }
+
+        .mosaic-overlay {
+            position: absolute; left: 0; top: 0;
+            width: 25%; height: 100%;
+            background: linear-gradient(to right, #000 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+            z-index: 1; pointer-events: none;
+        }
+
+        .banner--warm .mosaic-overlay {
+            background: linear-gradient(to right, #2A2520 0%, rgba(42,37,32,0.6) 50%, transparent 100%);
+        }
+
+        /* Photo grid */
+        .photo-grid {
+            position: absolute; inset: 0;
+            display: grid; gap: 3px; padding: 10px;
+        }
+
+        .photo-grid--3x2 {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+        }
+
+        .photo-grid__item { border-radius: 6px; overflow: hidden; }
+        .photo-grid__item img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.78); }
+
+        /* Phone mockup */
+        .phone-mockup {
+            width: 100px; height: 200px; background: #000;
+            border-radius: 16px; border: 2px solid #333;
+            overflow: hidden; box-shadow: -10px 5px 25px rgba(0,0,0,0.5);
+        }
+
+        .phone-mockup img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* === RESPONSIVE BANNER HEIGHTS === */
+        .banner--h-sm { height: 160px; }
+        .banner--h-md { height: 200px; }
+        .banner--h-lg { height: 240px; }
+        .banner--h-auto { height: auto; }
+
+        .banner--h-sm .banner__title { font-size: 1.3rem; }
+        .banner--h-md .banner__title { font-size: 1.5rem; }
+        .banner--h-lg .banner__title { font-size: 1.7rem; }
+
+        .banner--h-sm .banner__left { width: 52%; }
+        .banner--h-md .banner__left { width: 50%; }
+        .banner--h-lg .banner__left { width: 48%; }
+
+        /* === DIGITAL PRODUCTS (same layout as top banners) === */
+        .products-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .products-grid .banner-card {
+            margin-bottom: 0;
+        }
+
+        .products-grid .banner {
+            height: 180px;
+        }
+
+        .products-grid .banner__left {
+            width: 50%;
+        }
+
+        .products-grid .banner__title {
+            font-size: 1.3rem;
+        }
+
+
+        /* === VIAGEM BANNER (Postcard style - unique) === */
+        .banner--viagem {
+            position: relative;
+        }
+        .banner--viagem::before {
+            content: '';
+            position: absolute;
+            top: 8px; left: 8px; right: 8px; bottom: 8px;
+            border: 1px solid rgba(183,110,121,0.2);
+            border-radius: 2px;
+            pointer-events: none;
+            z-index: 6;
+        }
+        .banner--viagem::after { display: none; }
+        .banner-card:has(.banner--viagem):hover {
+            box-shadow: 0 8px 30px rgba(183,110,121,0.18);
+        }
+        .banner-card:has(.banner--viagem):hover div[style*="padding:4px"] {
+            transition: transform 0.3s;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(200, 149, 108, 0.15);
+        }
+
+        .footer__logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-bottom: 6px;
+        }
+
+        .footer__copy {
+            font-size: 0.6rem;
+            color: rgba(255,255,255,0.25);
+        }
+
+        /* === ENTRANCE ANIMATIONS === */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes profilePop {
+            0% { opacity: 0; transform: scale(0.7); }
+            60% { opacity: 1; transform: scale(1.06); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes spreadLeft {
+            from { opacity: 0; transform: rotate(0deg) translateX(30px) scale(0.8); }
+            to { opacity: 1; transform: rotate(-4deg) translateX(0) scale(1); }
+        }
+
+        @keyframes spreadCenter {
+            from { opacity: 0; transform: rotate(0deg) translateY(20px) scale(0.85); }
+            to { opacity: 1; transform: rotate(1deg) translateY(0) scale(1); }
+        }
+
+        @keyframes spreadRight {
+            from { opacity: 0; transform: rotate(0deg) translateX(-30px) scale(0.8); }
+            to { opacity: 1; transform: rotate(5deg) translateX(0) scale(1); }
+        }
+
+        @keyframes shimmerLine {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        .profile,
+        .section-divider,
+        .banner-card,
+        .footer {
+            opacity: 0;
+            animation: fadeSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .profile__photo {
+            animation: profilePop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
+            opacity: 0;
+        }
+
+        /* Portfolio spread animation */
+        .portfolio-spread .photo-left {
+            animation: spreadLeft 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.85s forwards;
+            opacity: 0;
+        }
+        .portfolio-spread .photo-center {
+            animation: spreadCenter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.7s forwards;
+            opacity: 0;
+        }
+        .portfolio-spread .photo-right {
+            animation: spreadRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.0s forwards;
+            opacity: 0;
+        }
+
+        /* Shimmer on banner hover */
+        .banner-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+            z-index: 10;
+            pointer-events: none;
+            transition: none;
+        }
+        .banner-card:hover::after {
+            animation: shimmerLine 0.8s ease forwards;
+        }
+
+        .profile { animation-delay: 0.1s; }
+
+        .section-divider:nth-of-type(1) { animation-delay: 0.25s; }
+        .section-divider:nth-of-type(2) { animation-delay: 1.5s; }
+
+        /* Section 1 banners (5 items: orcamentos, workshop, portfolio, mentorias, mentoria online) */
+        .page > .banner-card:nth-of-type(1) { animation-delay: 0.4s; }
+        .page > .banner-card:nth-of-type(2) { animation-delay: 0.55s; }
+        .page > .banner-card:nth-of-type(3) { animation-delay: 0.7s; }
+        .page > .banner-card:nth-of-type(4) { animation-delay: 0.85s; }
+        .page > .banner-card:nth-of-type(5) { animation-delay: 1.0s; }
+
+        /* Section 2 banners (inside products-grid, 8 items) */
+        .products-grid .banner-card:nth-child(1) { animation-delay: 1.65s; }
+        .products-grid .banner-card:nth-child(2) { animation-delay: 1.8s; }
+        .products-grid .banner-card:nth-child(3) { animation-delay: 1.95s; }
+        .products-grid .banner-card:nth-child(4) { animation-delay: 2.1s; }
+        .products-grid .banner-card:nth-child(5) { animation-delay: 2.25s; }
+        .products-grid .banner-card:nth-child(6) { animation-delay: 2.4s; }
+        .products-grid .banner-card:nth-child(7) { animation-delay: 2.55s; }
+        .products-grid .banner-card:nth-child(8) { animation-delay: 2.7s; }
+
+        .footer { animation-delay: 2.85s; }
+
+        /* === MOBILE === */
+        @media (max-width: 480px) {
+            .banner--h-sm { height: 140px; }
+            .banner--h-md { height: 170px; }
+            .banner--h-sm .banner__title { font-size: 1.1rem; }
+            .banner--h-md .banner__title { font-size: 1.2rem; }
+            .products-grid .banner { height: 170px; }
+            .products-grid .banner__title { font-size: 1.1rem; }
+            .banner--viagem .polaroid { transform: scale(0.85); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- === PROFILE HEADER === -->
+    <div class="profile">
+        <img class="profile__photo" src="./site/assets/profile-ig.jpg" alt="Caroline Moschei">
+        <h1 class="profile__name">Caroline Moschei</h1>
+        <p class="profile__bio">
+            Brazilian Photographer<br>
+            Wedding, Fashion &amp; Studio Photography<br>
+            Lifestyle &amp; Travel Content
+        </p>
+    </div>
+
+    <!-- ================================================
+         SECTION 1: MENTORIAS E WORKSHOPS PRESENCIAIS
+         ================================================ -->
+    <div class="section-divider">
+        <span class="section-divider__line"></span>
+        <span class="section-divider__text">Mentorias e Workshops Presenciais</span>
+        <span class="section-divider__line"></span>
+    </div>
+
+    <!-- 1. ORCAMENTOS (Var B - Warm, fotos a esquerda) -->
+    <a class="banner-card" href="https://api.whatsapp.com/send?phone=5511913718989&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20os%20ensaios" target="_blank">
+        <div class="banner banner--warm banner--h-sm">
+            <div style="position:absolute; left:0; top:0; width:42%; height:100%; display:flex; gap:3px; z-index:0;">
+                <div style="flex:1; overflow:hidden; border-radius:0;"><img src="./fotos-optimized/Guia de Poses corporativo/Fotos do guia/Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_130.webp" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.7);"></div>
+                <div style="flex:1; overflow:hidden;"><img src="./fotos-optimized/Guia de Poses corporativo/Fotos do guia/Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_131.webp" style="width:100%;height:100%;object-fit:cover;filter:brightness(0.7);"></div>
+            </div>
+            <div style="position:absolute; left:0; top:0; width:48%; height:100%; background:linear-gradient(to left, rgba(42,37,32,1) 0%, rgba(42,37,32,0.5) 70%, transparent 100%); pointer-events:none; z-index:1;"></div>
+            <div class="banner__left" style="width:42%;"></div>
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:20px 28px; position:relative; z-index:2;">
+                <h2 class="banner__title" style="font-size:1.8rem; font-weight:400;">Orcamentos</h2>
+                <p style="font-family:'Cormorant Garamond',serif; font-size:0.8rem; color:var(--cream); letter-spacing:0.08em;">Ensaios &bull; Casamentos &bull; Campanhas</p>
+            </div>
+        </div>
+    </a>
+
+    <!-- 2. WORKSHOP PRESENCIAL (Var A - Strip + date) -->
+    <a class="banner-card" href="https://api.whatsapp.com/send?phone=5511913718989&text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20o%20workshop%20presencial" target="_blank">
+        <div class="banner banner--dark banner--h-auto" style="flex-direction:column;">
+            <div style="background:var(--cream); color:var(--dark-brown); text-align:center; padding:8px; font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:500;">
+                Maio 2026 | Sao Paulo
+            </div>
+            <div style="display:flex; gap:3px; height:100px; overflow:hidden;">
+                <div style="flex:1;overflow:hidden;"><img src="./fotos-optimized/workshop presencial/alunos/Fotos_Caroline_Moschei_120 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                <div style="flex:1;overflow:hidden;"><img src="./fotos-optimized/workshop presencial/alunos/Fotos_Caroline_Moschei_121 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                <div style="flex:1;overflow:hidden;"><img src="./fotos-optimized/workshop presencial/alunos/Fotos_Caroline_Moschei_15 2.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                <div style="flex:1;overflow:hidden;"><img src="./fotos-optimized/workshop presencial/alunos/Fotos_Caroline_Moschei_16 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                <div style="flex:1;overflow:hidden;"><img src="./fotos-optimized/workshop presencial/alunos/Fotos_Caroline_Moschei_18 2.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                <div style="flex:1;overflow:hidden;"><img src="./fotos-optimized/workshop presencial/alunos/Fotos_Caroline_Moschei_21 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+            </div>
+            <div style="text-align:center; padding:16px 20px; background:linear-gradient(180deg, #1a1a1a, #0a0a0a);">
+                <h2 style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.6rem; color:white;">
+                    Workshop <em style="font-weight:300; color:var(--gold);">Presencial</em>
+                </h2>
+                <div class="tags-row" style="justify-content:center; margin-top:8px; margin-bottom:0;">
+                    <span class="tag-pill">Estudio</span>
+                    <span class="tag-pill">Iluminacao</span>
+                    <span class="tag-pill">Direcao</span>
+                    <span class="tag-pill">Tratamento</span>
+                    <span class="tag-pill">Vendas</span>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- PORTFOLIO (spread de 3 fotos + texto) -->
+    <a class="banner-card" href="./site/portfolio.html">
+        <div class="banner banner--dark banner--h-sm" style="justify-content:center; align-items:center;">
+            <div class="portfolio-spread" style="position:absolute; inset:0; display:flex; gap:6px; padding:12px 20px; align-items:center; justify-content:center;">
+                <div class="photo-left" style="flex:0 0 90px; height:130px; border-radius:6px; overflow:hidden; transform:rotate(-4deg); box-shadow:0 4px 15px rgba(0,0,0,0.4);">
+                    <img src="./site/portfolio/Guia_de_Poses_Pessoal_e_Criativo_4.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.85);">
+                </div>
+                <div class="photo-center" style="flex:0 0 100px; height:140px; border-radius:6px; overflow:hidden; transform:rotate(1deg); box-shadow:0 6px 20px rgba(0,0,0,0.5); z-index:2;">
+                    <img src="./site/portfolio/Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_11.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.85);">
+                </div>
+                <div class="photo-right" style="flex:0 0 90px; height:130px; border-radius:6px; overflow:hidden; transform:rotate(5deg); box-shadow:0 4px 15px rgba(0,0,0,0.4);">
+                    <img src="./site/portfolio/Guia_de_Poses_Pessoal_e_Criativo_190.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.85);">
+                </div>
+            </div>
+            <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.65) 100%); z-index:3; pointer-events:none;"></div>
+            <div style="position:relative; z-index:4; text-align:center; padding:0 20px;">
+                <h2 style="font-family:'Cormorant Garamond',serif; font-weight:400; font-size:1.5rem; color:white; text-transform:uppercase; letter-spacing:0.05em;">
+                    Ver Portf&oacute;lio <em style="font-weight:300; color:var(--gold);">Completo</em>
+                </h2>
+                <p style="font-size:0.55rem; color:var(--cream); letter-spacing:0.12em; text-transform:uppercase; opacity:0.8; margin-top:4px;">
+                    Fashion &middot; Corporativo &middot; Gestantes &middot; Workshop
+                </p>
+            </div>
+        </div>
+    </a>
+
+    <!-- 3. MENTORIAS PARTICULARES (Var A - Dark) -->
+    <a class="banner-card" href="https://api.whatsapp.com/send?phone=5511913718989&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20mentoria%20particular" target="_blank">
+        <div class="banner banner--dark banner--h-md">
+            <div class="banner__left" style="width:52%;">
+                <h2 class="banner__title" style="font-size:1.4rem;">
+                    Mentorias<br><span style="font-weight:700;">Particulares</span>
+                </h2>
+                <p class="banner__subtitle">Aprenda na pratica comigo no meu estudio em Sao Paulo como transformar a sua fotografia</p>
+            </div>
+            <div class="banner__right">
+                <div class="mosaic-overlay"></div>
+                <div style="position:absolute; inset:0; display:flex; gap:4px; padding:8px;">
+                    <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                        <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./site/portfolio/Aluna-Samanta-Pistori-3-3-11zon-scaled.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);"></div>
+                        <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./site/portfolio/Aluna-Samanta-Pistori-4-4-11zon-scaled.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);"></div>
+                        <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./site/portfolio/Aluna-Samanta-Pistori-7-6-11zon-scaled.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);"></div>
+                    </div>
+                    <div style="flex:1.6; border-radius:6px; overflow:hidden;">
+                        <img src="./site/portfolio/Aluna-Samanta-Pistori-5-5-11zon-scaled.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- 4. MENTORIA ONLINE (Var A - Dark classic) -->
+    <a class="banner-card" href="https://api.whatsapp.com/send?phone=5511913718989&text=Ol%C3%A1%2C%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20a%20mentoria%20online" target="_blank">
+        <div class="banner banner--dark banner--h-md">
+            <div class="banner__left" style="width:50%;">
+                <div class="tag"><span class="tag__dot"></span> MENTORIA ONLINE</div>
+                <h2 class="banner__title" style="font-size:1.4rem;">
+                    Posicionamento e<br>Vendas na<br>Fotografia
+                </h2>
+                <div class="cta-row">
+                    <div class="cta-icon">&darr;</div>
+                    <span class="cta-text"><em>Fale com nossa equipe</em></span>
+                </div>
+            </div>
+            <div class="banner__right">
+                <div class="mosaic-overlay"></div>
+                <div class="mosaic mosaic--overlap">
+                    <div class="mosaic__photo"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_237.webp"></div>
+                    <div class="mosaic__photo mosaic__photo--large"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_239.webp"></div>
+                    <div class="mosaic__photo"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_24.webp"></div>
+                    <div class="mosaic__photo"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_244.webp"></div>
+                    <div class="mosaic__photo"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_249.webp"></div>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- ================================================
+         SECTION 2: PRODUTOS ONLINE
+         ================================================ -->
+    <div class="section-divider">
+        <span class="section-divider__line"></span>
+        <span class="section-divider__text">Produtos Online</span>
+        <span class="section-divider__line"></span>
+    </div>
+
+    <div class="products-grid">
+
+        <!-- LIVES GRAVADAS (grid 4-col de fotos + vinheta + texto central) -->
+        <a class="banner-card" href="./site/lives.html">
+            <div class="banner banner--dark" style="position:relative; height:200px;">
+                <!-- Background photo grid: 4 colunas, 2 linhas, centrais span 2 -->
+                <div style="position:absolute; inset:0; overflow:hidden;">
+                    <div style="display:grid; grid-template-columns:0.8fr 1.4fr 1.4fr 0.8fr; grid-template-rows:1fr 1fr; gap:3px; padding:8px; height:100%; width:100%;">
+                        <div style="border-radius:5px; overflow:hidden;"><img src="./site/portfolio/Guia_de_Poses_Pessoal_e_Criativo_181.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.4) saturate(0.85);"></div>
+                        <div style="border-radius:5px; overflow:hidden; grid-row:span 2;"><img src="./site/portfolio/Guia_de_Poses_Pessoal_e_Criativo_105.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.4) saturate(0.85);"></div>
+                        <div style="border-radius:5px; overflow:hidden; grid-row:span 2;"><img src="./site/portfolio/Guia_de_Poses_Pessoal_e_Criativo_224.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.4) saturate(0.85);"></div>
+                        <div style="border-radius:5px; overflow:hidden;"><img src="./site/portfolio/Fotos_Caroline_Moschei_21 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.4) saturate(0.85);"></div>
+                        <div style="border-radius:5px; overflow:hidden;"><img src="./site/portfolio/Guia_de_Poses_Pessoal_e_Criativo_329.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.4) saturate(0.85);"></div>
+                        <div style="border-radius:5px; overflow:hidden;"><img src="./site/portfolio/Fotos_Caroline_Moschei_22 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.4) saturate(0.85);"></div>
+                    </div>
+                    <!-- Vinheta radial (identica ao original) -->
+                    <div style="position:absolute; inset:0; background:radial-gradient(ellipse 70% 80% at 50% 50%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.8) 100%); pointer-events:none; z-index:1;"></div>
+                </div>
+                <!-- Texto centralizado -->
+                <div style="position:relative; z-index:2; width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:20px 16px;">
+                    <span style="display:inline-block; font-size:0.5rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#fff; background:var(--caramel); padding:3px 14px; border-radius:20px; margin-bottom:12px;">Exclusivo</span>
+                    <h2 style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.8rem; color:white; text-transform:uppercase; letter-spacing:0.03em; line-height:1.08;">
+                        Lives <em style="font-weight:300; color:var(--gold);">Gravadas</em>
+                    </h2>
+                    <p style="font-size:0.65rem; color:var(--cream); opacity:0.8; margin:8px 0 14px;">Assista aulas ao vivo gratuitamente</p>
+                    <div class="cta-row">
+                        <div class="cta-icon">&#x25B6;&#xFE0E;</div>
+                        <span class="cta-text"><em>Assistir agora</em></span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- COLLAB: GUIA PESSOAL DE VIAGEM (Polaroid style - UNIQUE) -->
+        <a class="banner-card" href="./site/collab-guia-viagem/index.html">
+            <div class="banner banner--viagem" style="height:200px; background:linear-gradient(160deg, #f5ede6 0%, #efe4d8 50%, #e8daca 100%); position:relative; overflow:hidden;">
+
+                <!-- Text side -->
+                <div class="banner__left" style="width:42%; padding:20px 12px 20px 24px; z-index:3;">
+                    <div style="display:inline-flex; align-items:center; gap:5px; background:rgba(183,110,121,0.12); border:1px solid rgba(183,110,121,0.3); border-radius:20px; padding:3px 10px; width:fit-content; margin-bottom:8px;">
+                        <span style="width:5px; height:5px; border-radius:50%; background:#B76E79;"></span>
+                        <span style="font-size:0.5rem; letter-spacing:0.12em; text-transform:uppercase; color:#B76E79; font-weight:500;">COLLAB</span>
+                    </div>
+                    <h2 class="banner__title" style="color:#2A2520; font-size:1.4rem;">
+                        Guia de<br><em style="font-weight:600; color:#B76E79;">Viagem</em>
+                    </h2>
+                    <p class="banner__subtitle" style="color:#7A756F; font-size:0.62rem;">Poses, looks e dicas para fotos incriveis</p>
+                    <div style="display:flex; gap:6px; align-items:center;">
+                        <div style="display:flex;">
+                            <img src="./site/assets/profile-ig.jpg" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(183,110,121,0.4);object-fit:cover;">
+                            <img src="./fotos-optimized/guia de viagem/output/090_tulum-praia_6_730x1095.webp" style="width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(183,110,121,0.4);object-fit:cover;margin-left:-6px;">
+                        </div>
+                        <span style="font-size:0.48rem; color:#B76E79; letter-spacing:0.08em; font-weight:600;">R$ 79,90</span>
+                    </div>
+                </div>
+
+                <!-- Polaroid photos - compact, overlapping -->
+                <div class="banner__right" style="position:relative; width:58%;">
+                    <!-- Gradient fade from text to photos -->
+                    <div style="position:absolute; left:0; top:0; width:30%; height:100%; background:linear-gradient(to right, #efe4d8 0%, transparent 100%); z-index:2; pointer-events:none;"></div>
+
+                    <!-- Photo 1: Santorini -->
+                    <div class="polaroid" style="position:absolute; top:10px; left:8%; width:95px; height:125px; background:#fff; padding:4px 4px 16px; box-shadow:0 3px 12px rgba(0,0,0,0.12); transform:rotate(-5deg); z-index:1;">
+                        <img src="./fotos-optimized/guia de viagem/output/007_santorini_0_576x720.webp" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <!-- Photo 2: Paris (center, biggest) -->
+                    <div class="polaroid" style="position:absolute; top:8px; left:30%; width:110px; height:145px; background:#fff; padding:5px 5px 18px; box-shadow:0 5px 18px rgba(0,0,0,0.18); transform:rotate(2deg); z-index:3;">
+                        <img src="./fotos-optimized/guia de viagem/output/026_paris_0_983x1229.webp" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <!-- Photo 3: Hollywood -->
+                    <div class="polaroid" style="position:absolute; top:20px; right:3%; width:100px; height:130px; background:#fff; padding:4px 4px 16px; box-shadow:0 3px 12px rgba(0,0,0,0.14); transform:rotate(6deg); z-index:2;">
+                        <img src="./fotos-optimized/guia de viagem/output/040_california_0_819x1229.webp" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                    <!-- Photo 4: NYC (peeking bottom) -->
+                    <div class="polaroid" style="position:absolute; bottom:-5px; left:18%; width:85px; height:110px; background:#fff; padding:4px 4px 16px; box-shadow:0 3px 10px rgba(0,0,0,0.1); transform:rotate(4deg); z-index:0;">
+                        <img src="./fotos-optimized/guia de viagem/output/150_nyc-urbano_8_950x1425.webp" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                </div>
+
+                <!-- Bottom rose-gold accent line -->
+                <div style="position:absolute; bottom:0; left:0; width:100%; height:3px; background:linear-gradient(90deg, transparent, #B76E79, transparent); opacity:0.4; z-index:4;"></div>
+            </div>
+        </a>
+
+        <!-- 5. GUIA ILUMINACAO (mosaic 5 fotos) -->
+        <a class="banner-card" href="./site/guia-iluminacao.html">
+            <div class="banner banner--dark banner--h-md">
+                <div class="banner__left" style="width:45%;">
+                    <div class="tag"><span class="tag__dot"></span> GUIA DIGITAL</div>
+                    <h2 class="banner__title" style="font-size:1.4rem;">Guia de<br>Iluminacao<br><span>+ 90 fotos</span></h2>
+                    <div class="cta-row"><div class="cta-icon">&darr;</div><span class="cta-text"><em>Baixe o seu</em></span></div>
+                </div>
+                <div class="banner__right">
+                    <div class="mosaic-overlay"></div>
+                    <div class="mosaic mosaic--overlap">
+                        <div class="mosaic__photo"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_105.webp"></div>
+                        <div class="mosaic__photo mosaic__photo--large"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_108.webp"></div>
+                        <div class="mosaic__photo"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_110.webp"></div>
+                        <div class="mosaic__photo"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_114.webp"></div>
+                        <div class="mosaic__photo"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_137.webp"></div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- 6. GUIA GESTANTES (foto grande + coluna de 3) -->
+        <a class="banner-card" href="./site/guia-gestantes.html">
+            <div class="banner banner--dark banner--h-md">
+                <div class="banner__left" style="width:42%;">
+                    <div class="tag"><span class="tag__dot"></span> GUIA DIGITAL</div>
+                    <h2 class="banner__title" style="font-size:1.4rem;">Guia de Poses<br>Gestantes<br><span>+ 150 poses</span></h2>
+                    <div class="cta-row"><div class="cta-icon">&darr;</div><span class="cta-text"><em>Baixe o seu</em></span></div>
+                </div>
+                <div class="banner__right">
+                    <div class="mosaic-overlay"></div>
+                    <div style="position:absolute; inset:0; display:flex; gap:4px; padding:8px;">
+                        <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                            <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./fotos-optimized/Guia de Poses Gestantes_/Fotos do guia/Fotos_Caroline_Moschei_61 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);"></div>
+                            <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./fotos-optimized/Guia de Poses Gestantes_/Fotos do guia/Fotos_Caroline_Moschei_68 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);"></div>
+                            <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./fotos-optimized/Guia de Poses Gestantes_/Fotos do guia/Fotos_Caroline_Moschei_7 10.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);"></div>
+                        </div>
+                        <div style="flex:1.6; border-radius:6px; overflow:hidden;">
+                            <img src="./fotos-optimized/Guia de Poses Gestantes_/Fotos do guia/Fotos_Caroline_Moschei_62 1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.82);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- 7. GUIA CORPORATIVO (strip horizontal + texto embaixo) -->
+        <a class="banner-card" href="./site/guia-corporativo.html">
+            <div class="banner banner--dark banner--h-auto" style="flex-direction:column;">
+                <div style="display:flex; gap:3px; height:110px; overflow:hidden;">
+                    <div style="flex:1;overflow:hidden;"><img src="./site/portfolio/Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_1.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                    <div style="flex:1;overflow:hidden;"><img src="./site/portfolio/Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_109.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                    <div style="flex:1;overflow:hidden;"><img src="./site/portfolio/Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_11.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                    <div style="flex:1;overflow:hidden;"><img src="./site/portfolio/Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_115.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                    <div style="flex:1;overflow:hidden;"><img src="./site/portfolio/Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_120.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.75);"></div>
+                </div>
+                <div style="text-align:center; padding:14px 20px; background:linear-gradient(180deg, #1a1a1a, #0a0a0a);">
+                    <div class="tag" style="margin:0 auto 8px;"><span class="tag__dot"></span> GUIA DIGITAL</div>
+                    <h2 style="font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.5rem; color:white; line-height:1.1;">
+                        Guia de Poses <em style="font-weight:300; color:var(--gold);">Corporativas</em>
+                    </h2>
+                    <p style="font-size:0.6rem; color:var(--gold); margin-top:6px;">+ 200 poses profissionais</p>
+                </div>
+            </div>
+        </a>
+
+        <!-- 8. GUIA PESSOAL/CRIATIVO (Warm - foto destaque + grid lateral) -->
+        <a class="banner-card" href="./site/guia-pessoal-criativo.html">
+            <div class="banner banner--warm banner--h-md">
+                <div class="banner__left" style="width:40%;">
+                    <div class="tag"><span class="tag__dot"></span> GUIA DIGITAL</div>
+                    <h2 class="banner__title" style="font-size:1.3rem;">Guia de Poses<br><em>Pessoal e Criativo</em></h2>
+                    <p class="banner__subtitle" style="font-size:0.6rem;">+ 156 variacoes de poses lifestyle e criativas</p>
+                </div>
+                <div class="banner__right">
+                    <div class="mosaic-overlay"></div>
+                    <div style="position:absolute; inset:0; display:flex; gap:4px; padding:8px;">
+                        <div style="flex:1.5; border-radius:6px; overflow:hidden;">
+                            <img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_125.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.8);">
+                        </div>
+                        <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                            <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_163.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.8);"></div>
+                            <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_145.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.8);"></div>
+                        </div>
+                        <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                            <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_167.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.8);"></div>
+                            <div style="flex:1; border-radius:6px; overflow:hidden;"><img src="./fotos-optimized/guia de poses pessoal e criativo_/fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_168.webp" style="width:100%;height:100%;object-fit:cover;object-position:center top;filter:brightness(0.8);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- 9. VERSO & REVERSO (Var A - Cream elegant, FULL WIDTH) -->
+        <a class="banner-card" href="./site/verso-e-reverso.html">
+            <div class="banner banner--verso" style="height:200px;">
+                <div class="banner__left" style="padding:20px 20px 20px 28px;">
+                    <div style="font-family:'Cormorant Garamond',serif; font-weight:300; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; color:#2A2520; margin-bottom:2px;">Verso &amp; Reverso</div>
+                    <div style="font-size:0.45rem; color:#7A756F; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:14px;">By Caroline Moschei</div>
+                    <h2 class="banner__title" style="color:#2A2520;">
+                        Aprenda <em style="color:#2A2520;">fotografia</em> do<br>basico ao avancado
+                    </h2>
+                    <p class="banner__subtitle" style="color:var(--warm-gray); font-size:0.62rem;">Um curso online completo que vai te ajudar a explorar todas as versoes que a sua fotografia pode ter</p>
+                    <button class="cta-btn" style="background:var(--caramel); color:white; border-color:var(--caramel); font-size:0.55rem;">
+                        INSCREVA-SE <span class="cta-btn__arrow" style="background:rgba(255,255,255,0.2);">&rarr;</span>
+                    </button>
+                </div>
+                <div class="banner__right" style="display:flex; align-items:center; justify-content:center;">
+                    <div style="width:85%;height:85%;border-radius:10px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.12);">
+                        <img src="./fotos-optimized/guia de poses pessoal e criativo_/Foto de portifolio/Guia_de_Poses_Pessoal_e_Criativo_181.webp" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- 10. TRATAMENTO DE IMAGEM (Var A - Dark, mosaic 4 fotos) -->
+        <a class="banner-card" href="./site/combo-tratamento.html">
+            <div class="banner banner--dark">
+                <div class="banner__left">
+                    <h2 class="banner__title">Tratamento de<br>Imagem<br><em>Profissional</em></h2>
+                    <p style="font-size:0.5rem; color:var(--gold); margin-bottom:4px;">Photoshop + Lightroom + IA</p>
+                    <p style="font-size:0.45rem; color:var(--warm-gray); text-transform:uppercase; letter-spacing:0.08em;">By Caroline Moschei</p>
+                </div>
+                <div class="banner__right">
+                    <div class="mosaic-overlay"></div>
+                    <div class="mosaic mosaic--overlap">
+                        <div class="mosaic__photo"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_229.webp"></div>
+                        <div class="mosaic__photo mosaic__photo--large"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_249.webp"></div>
+                        <div class="mosaic__photo"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_260.webp"></div>
+                        <div class="mosaic__photo"><img src="./fotos-optimized/Guia de iluminação_/Fotos do guia/Guia_de_Poses_Pessoal_e_Criativo_262.webp"></div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- 11. PRESETS (Var A - Dark com phone) -->
+        <a class="banner-card" href="./site/presets.html">
+            <div class="banner banner--dark" style="background:linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #111 100%);">
+                <div class="banner__left" style="width:55%; text-align:center; align-items:center;">
+                    <h2 class="banner__title" style="text-align:center;">Presets<br><span>Premium</span></h2>
+                    <p class="banner__subtitle" style="text-align:center;">Transforme suas fotos em imagens profissionais em poucos cliques</p>
+                </div>
+                <div class="banner__right" style="display:flex; align-items:center; justify-content:center;">
+                    <div class="phone-mockup">
+                        <img src="./fotos-optimized/guia de poses pessoal e criativo_/Foto de portifolio/Guia_de_Poses_Pessoal_e_Criativo_188.webp">
+                    </div>
+                </div>
+            </div>
+        </a>
+
+    </div><!-- /products-grid -->
+
+    <!-- === FOOTER === -->
+    <div class="footer">
+        <p class="footer__logo">Caroline Moschei</p>
+        <p class="footer__copy">&copy; 2026 Caroline Moschei. Todos os direitos reservados.</p>
+    </div>
+
+</div><!-- /page -->
+
+</body>
+</html>

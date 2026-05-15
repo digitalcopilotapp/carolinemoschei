@@ -1,0 +1,41 @@
+{% extends "admin/base.html" %}
+{% block title %}Leads{% endblock %}
+{% block content %}
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+  <h2 style="font-size:1.1rem; font-weight:400;">Leads ({{ leads|length }})</h2>
+  <a href="{{ url_for('admin.leads_export', live_id=current_filter or '') }}" class="btn btn--outline btn--small">Exportar CSV</a>
+</div>
+
+<div style="margin-bottom:16px;">
+  <form method="GET" style="display:flex; gap:8px; align-items:center;">
+    <select name="live_id" style="padding:8px 12px; background:var(--card); border:1px solid var(--border); border-radius:6px; color:var(--bone); font-size:0.8rem;">
+      <option value="">Todas as lives</option>
+      {% for l in lives %}
+      <option value="{{ l.id }}" {{ 'selected' if current_filter == l.id else '' }}>{{ l.title }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit" class="btn btn--outline btn--small">Filtrar</button>
+  </form>
+</div>
+
+<div class="card" style="padding:0; overflow:hidden;">
+{% if leads %}
+<table>
+  <thead><tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Live</th><th>Data</th></tr></thead>
+  <tbody>
+  {% for lead in leads %}
+  <tr>
+    <td>{{ lead.name }}</td>
+    <td>{{ lead.email }}</td>
+    <td>{{ lead.phone or '-' }}</td>
+    <td style="font-size:0.75rem;">{{ lead.live.title if lead.live else '-' }}</td>
+    <td style="color:var(--dim); font-size:0.75rem;">{{ lead.created_at.strftime('%d/%m/%Y %H:%M') }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p style="padding:24px; text-align:center; color:var(--dim);">Nenhum lead registrado ainda.</p>
+{% endif %}
+</div>
+{% endblock %}

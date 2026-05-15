@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./site:/app/site
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-dev-secret-key-trocar-em-producao}
+      - JWT_SECRET=${JWT_SECRET:-jwt-secret-trocar-em-producao}
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-caroline2026}
+    restart: unless-stopped

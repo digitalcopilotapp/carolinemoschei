@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — CM Admin</title>
+  <style>
+    :root { --bg: #0f0f0f; --card: #1a1a1a; --border: #2a2a2a; --caramel: #C8956C; --bone: #F0EBE3; --dim: #7A756F; --danger: #c0392b; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--bone); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px 36px; width: 100%; max-width: 380px; text-align: center; }
+    .login-card h1 { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--caramel); margin-bottom: 32px; }
+    .form-group { margin-bottom: 16px; text-align: left; }
+    .form-group label { display: block; font-size: 0.7rem; color: var(--dim); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .form-group input { width: 100%; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--bone); font-size: 0.85rem; }
+    .form-group input:focus { outline: none; border-color: var(--caramel); }
+    .btn { display: block; width: 100%; padding: 14px; background: var(--caramel); color: #080808; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+    .btn:hover { background: #D4A574; }
+    .flash { color: var(--danger); font-size: 0.78rem; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <h1>Caroline Moschei — Admin</h1>
+    {% with messages = get_flashed_messages() %}
+      {% for msg in messages %}
+        <p class="flash">{{ msg }}</p>
+      {% endfor %}
+    {% endwith %}
+    <form method="POST">
+      <div class="form-group">
+        <label>Usuario</label>
+        <input type="text" name="username" required autofocus>
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" name="password" required>
+      </div>
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+  </div>
+</body>
+</html>

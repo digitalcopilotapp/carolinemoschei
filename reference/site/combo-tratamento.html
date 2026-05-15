@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Combo Workshop Tratamento de Imagem — Caroline Moschei</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="./pages/combo-tratamento/assets/4x3_bve_3039_ps_v3_2.webp" sizes="32x32">
+  <style>
+    :root {
+      --ink: #080808;
+      --ink-light: #111;
+      --cream: #FAF4ED;
+      --bone: #F0EBE3;
+      --caramel: #C8956C;
+      --gold: #D4A574;
+      --warm-gray: #7A756F;
+      --text-dark: #2A2520;
+      --bg-light: #F5F0EB;
+      --card-cream: rgb(250, 244, 237);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --max-w: 1040px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--ink); color: var(--bone); line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+
+    /* ============================================================
+       ENTRANCE ANIMATIONS (Apple-style)
+       ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(200,149,108,0.3); }
+      50% { box-shadow: 0 0 30px 8px rgba(200,149,108,0.15); }
+    }
+
+    @keyframes icon-bounce {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.2); }
+      50% { transform: scale(0.95); }
+      70% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(200,149,108,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero__content { max-width: 720px; position: relative; z-index: 2; }
+
+    .hero__logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 32px;
+      opacity: 0.6;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(200,149,108,0.35);
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 24px;
+    }
+
+    .hero__tag-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--caramel);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero__desc {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--warm-gray);
+      max-width: 540px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    /* Video thumbnail */
+    .hero__video {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      cursor: pointer;
+      transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+    }
+
+    .hero__video:hover {
+      transform: scale(1.02);
+      box-shadow: 0 20px 60px rgba(200,149,108,0.2);
+    }
+
+    .hero__video img {
+      width: 100%;
+      display: block;
+      filter: brightness(0.85);
+      transition: filter 0.5s;
+    }
+
+    .hero__video:hover img { filter: brightness(0.95); }
+
+    .hero__video-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero__video-play span {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s var(--spring), background 0.3s;
+    }
+
+    .hero__video:hover .hero__video-play span {
+      transform: scale(1.1);
+      background: rgba(255,255,255,0.25);
+    }
+
+    .hero__video-play span::after {
+      content: '';
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent #fff;
+      margin-left: 4px;
+    }
+
+    .hero__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--caramel);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 16px 48px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.4s var(--spring), background 0.3s, box-shadow 0.3s;
+    }
+
+    .hero__cta:hover {
+      transform: scale(1.05);
+      background: var(--gold);
+      box-shadow: 0 12px 40px rgba(200,149,108,0.3);
+    }
+
+    .hero__badges {
+      margin-top: 20px;
+      opacity: 0.5;
+    }
+
+    .hero__badges img { height: 36px; margin: 0 auto; }
+
+    /* ============================================================
+       SECTION SHARED
+       ============================================================ */
+    .section { padding: 100px 24px; text-align: center; }
+    .section--dark { background: var(--ink); }
+    .section--light { background: var(--bg-light); color: var(--text-dark); }
+    .section--cream { background: var(--cream); color: var(--text-dark); }
+
+    .section__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 16px;
+    }
+
+    .section__tag::before,
+    .section__tag::after {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: rgba(200,149,108,0.4);
+    }
+
+    .section h2 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+    }
+
+    .section h2 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+    }
+
+    .section--light h2,
+    .section--cream h2 { color: var(--text-dark); }
+
+    .section__desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--warm-gray);
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       PRICING CARDS (Glassmorphism + Apple feel)
+       ============================================================ */
+    .pricing { padding: 100px 24px; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 1fr;
+      gap: 20px;
+      max-width: 960px;
+      margin: 48px auto 0;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 40px 28px 36px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease), border-color 0.3s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      border-color: rgba(200,149,108,0.2);
+    }
+
+    /* Highlighted card */
+    .pricing-card--featured {
+      background: linear-gradient(160deg, rgba(200,149,108,0.12) 0%, rgba(200,149,108,0.04) 100%);
+      border-color: rgba(200,149,108,0.3);
+      padding-top: 56px;
+    }
+
+    .pricing-card--featured::before {
+      content: 'MAIS POPULAR';
+      position: absolute;
+      top: -1px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--caramel);
+      color: #fff;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      padding: 6px 20px;
+      border-radius: 0 0 12px 12px;
+    }
+
+    .pricing-card__title {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      margin-bottom: 12px;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pricing-card__desc {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--warm-gray);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      min-height: 60px;
+    }
+
+    .pricing-card__features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 28px;
+    }
+
+    .pricing-card__features li {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: rgba(240,235,227,0.8);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pricing-card__features li:last-child { border-bottom: none; }
+
+    .pricing-card__features li::before {
+      content: '';
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(200,149,108,0.15);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' fill='none'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%23C8956C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .pricing-card__divider {
+      font-size: 0.65rem;
+      color: var(--warm-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .pricing-card__divider s {
+      color: rgba(122,117,111,0.5);
+    }
+
+    .pricing-card__price {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin: 4px 0;
+    }
+
+    .pricing-card__price small {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .pricing-card__avista {
+      font-size: 0.68rem;
+      color: var(--warm-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+
+    .pricing-card__btn {
+      display: block;
+      background: var(--caramel);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 50px;
+      transition: transform 0.4s var(--spring), background 0.3s, box-shadow 0.3s;
+    }
+
+    .pricing-card__btn:hover {
+      transform: scale(1.05);
+      background: var(--gold);
+      box-shadow: 0 8px 30px rgba(200,149,108,0.3);
+    }
+
+    /* ============================================================
+       MODULES (Apple-style icon cards)
+       ============================================================ */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 880px;
+      margin: 48px auto 0;
+      text-align: left;
+    }
+
+    .module-card {
+      background: var(--card-cream);
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+    }
+
+    .module-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+    }
+
+    .module-card__num {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(200,149,108,0.1);
+      position: absolute;
+      top: 4px; right: 16px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .module-card__icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(200,149,108,0.15) 0%, rgba(200,149,108,0.06) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      transition: transform 0.5s var(--spring);
+    }
+
+    .module-card:hover .module-card__icon {
+      animation: icon-bounce 0.6s var(--ease);
+    }
+
+    .module-card__icon svg {
+      width: 28px; height: 28px;
+      stroke: var(--caramel);
+      stroke-width: 1.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .module-card h3 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+      line-height: 1.3;
+      padding-right: 40px;
+    }
+
+    .module-card p {
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--warm-gray);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       ABOUT
+       ============================================================ */
+    .about {
+      padding: 100px 24px;
+      background: var(--ink);
+    }
+
+    .about__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about__photo {
+      display: flex;
+      justify-content: center;
+    }
+
+    .about__oval {
+      width: 300px;
+      height: 400px;
+      border-radius: 50% / 45%;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+      transition: transform 0.6s var(--ease);
+    }
+
+    .about__oval:hover {
+      transform: scale(1.03);
+    }
+
+    .about__oval img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about__text h2 {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .about__text h2 strong {
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .about__bio {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1rem;
+      color: var(--warm-gray);
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .about__btn {
+      display: inline-block;
+      background: var(--caramel);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 14px 40px;
+      border-radius: 50px;
+      transition: transform 0.4s var(--spring), background 0.3s;
+    }
+
+    .about__btn:hover {
+      transform: scale(1.05);
+      background: var(--gold);
+    }
+
+    /* ============================================================
+       GALLERY
+       ============================================================ */
+    .gallery {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .gallery__track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 180px;
+      grid-template-rows: 270px;
+      gap: 4px;
+      animation: gallery-scroll 40s linear infinite;
+    }
+
+    .gallery__track img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85);
+      transition: filter 0.3s;
+    }
+
+    .gallery__track img:hover { filter: brightness(1); }
+
+    @keyframes gallery-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      padding: 48px 24px 60px;
+      background: var(--ink);
+      border-top: 1px solid rgba(200,149,108,0.12);
+    }
+
+    .footer__inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer__copy {
+      font-size: 0.65rem;
+      color: var(--warm-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .footer__logo {
+      height: 56px;
+      opacity: 0.4;
+      transition: opacity 0.3s;
+      margin: 0 auto;
+    }
+
+    .footer__logo:hover { opacity: 0.7; }
+
+    .footer__privacy {
+      font-size: 0.65rem;
+      color: var(--warm-gray);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 768px) {
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+
+      .pricing-card--featured { order: -1; }
+
+      .modules-grid { grid-template-columns: 1fr; }
+
+      .about__inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .about__oval { width: 240px; height: 320px; }
+
+      .footer__inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer__privacy { text-align: center; }
+
+      .gallery__track {
+        grid-auto-columns: 130px;
+        grid-template-rows: 195px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 60px 16px 40px; }
+      .section { padding: 64px 16px; }
+      .pricing { padding: 64px 16px; }
+      .about { padding: 64px 16px; }
+      .module-card__num { font-size: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero">
+    <div class="hero__content">
+      <img class="hero__logo reveal" src="./pages/combo-tratamento/assets/footer-logo-selo-caroline-moschei.svg" alt="Caroline Moschei">
+
+      <div class="hero__tag reveal reveal-delay-1">
+        <span class="hero__tag-dot"></span>
+        COMBO EXCLUSIVO
+      </div>
+
+      <h1 class="reveal reveal-delay-2">
+        Tratamento de Imagem<br><em>Lightroom &amp; Photoshop</em>
+      </h1>
+
+      <p class="hero__desc reveal reveal-delay-3">Aprenda a criar identidades visuais unicas e tratamentos de pele profissionais, utilizando as mais avancadas tecnicas e ferramentas de edicao com os dois dos mais poderosos softwares de edicao.</p>
+
+      <div class="hero__video reveal reveal-delay-4">
+        <img src="./pages/combo-tratamento/assets/workshop-de-cores-lightroom-caroline-moschei-photoshop.png" alt="Video do Workshop">
+        <div class="hero__video-play"><span></span></div>
+      </div>
+
+      <a href="#preco" class="hero__cta reveal reveal-delay-5">INSCREVA-SE</a>
+
+      <div class="hero__badges reveal reveal-delay-5">
+        <img src="./pages/combo-tratamento/assets/logos-hotmartpng.webp" alt="Hotmart">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PRICING
+       ============================================================ -->
+  <section class="section section--dark pricing" id="preco">
+    <div class="section__tag reveal">ESCOLHA SEU PLANO</div>
+    <h2 class="reveal reveal-delay-1">Invista na sua <em>fotografia</em></h2>
+
+    <div class="pricing-grid">
+
+      <!-- Card 1: Lightroom -->
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-card__title">Curso de Tratamento no Lightroom</div>
+        <p class="pricing-card__desc">Aprenda a criar uma identidade visual unica atraves de cores vibrantes e tratamento profissional, aumentando o valor e a autoridade do seu trabalho.</p>
+        <ul class="pricing-card__features">
+          <li>Dominio Completo das Ferramentas</li>
+          <li>Criacao de Identidade de Cores</li>
+          <li>Tratamento de Cores em Estudio</li>
+          <li>Criacao de Presets Personalizados</li>
+          <li>+ Bonus Exclusivos</li>
+        </ul>
+        <div class="pricing-card__divider">de <s>R$197,00</s> por</div>
+        <div class="pricing-card__price"><small>R$</small> 98,50</div>
+        <div class="pricing-card__avista">&nbsp;</div>
+        <a href="https://pay.hotmart.com/J89248313E?checkoutMode=10&offDiscount=BLOQUINHODO50%25&split=12&hideBillet=1&hideTransf=1&hidePayPal=1&offDiscount=BLACK50" class="pricing-card__btn" target="_blank">ASSINAR AGORA</a>
+      </div>
+
+      <!-- Card 2: COMBO (featured) -->
+      <div class="pricing-card pricing-card--featured reveal reveal-delay-3">
+        <div class="pricing-card__title">Edicao Completa: Lightroom e Photoshop</div>
+        <p class="pricing-card__desc">Este curso e ideal para fotografos que desejam dominar a arte da edicao de imagem, dominando tratamento de pele e de cores de forma profissional.</p>
+        <ul class="pricing-card__features">
+          <li>Dominio Completo das Ferramentas</li>
+          <li>Criacao de Identidade de Cores</li>
+          <li>Tratamento de Cores em Estudio</li>
+          <li>Criacao de Presets Personalizados</li>
+          <li>Tres Tecnicas de Tratamento de Pele</li>
+          <li>Photoshop Profissional Passo a Passo</li>
+          <li>Tecnicas Avancadas e Criativas</li>
+          <li>Como usar Inteligencia Artificial</li>
+          <li>Atualizacoes do Photoshop Beta</li>
+        </ul>
+        <div class="pricing-card__divider">de <s>R$ 597,00</s> por 12x de</div>
+        <div class="pricing-card__price"><small>R$</small> 20,52</div>
+        <div class="pricing-card__avista">OU R$ 197,50 A VISTA</div>
+        <a href="https://pay.hotmart.com/V89309967Q?off=mhythx07&bid=1707409912082&split=12&hideBillet=1&hideTransf=1&hidePayPal=1&offDiscount=BLACK50" class="pricing-card__btn" target="_blank">ASSINAR AGORA</a>
+      </div>
+
+      <!-- Card 3: Photoshop -->
+      <div class="pricing-card reveal reveal-delay-4">
+        <div class="pricing-card__title">Curso de Tratamento de Pele no Photoshop</div>
+        <p class="pricing-card__desc">Este curso oferece tecnicas avancadas e uso de inteligencia artificial para preservar a naturalidade da pele, economizando tempo e elevando a qualidade do seu trabalho.</p>
+        <ul class="pricing-card__features">
+          <li>Tres Tecnicas de Tratamento de Pele</li>
+          <li>Photoshop Profissional Passo a Passo</li>
+          <li>Tecnicas Avancadas e Criativas</li>
+          <li>Como usar Inteligencia Artificial</li>
+          <li>Atualizacoes do Photoshop Beta</li>
+        </ul>
+        <div class="pricing-card__divider">12x de</div>
+        <div class="pricing-card__price"><small>R$</small> 15,36</div>
+        <div class="pricing-card__avista">OU R$ 148,50 A VISTA</div>
+        <a href="https://pay.hotmart.com/U87081319C?off=ssyv8cln&checkoutMode=10&&split=12&hideBillet=1&hideTransf=1&hidePayPal=1&offDiscount=BLACK50" class="pricing-card__btn" target="_blank">ASSINAR AGORA</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MODULES
+       ============================================================ -->
+  <section class="section section--light">
+    <div class="container">
+      <div class="section__tag reveal">CONTEUDO DO CURSO</div>
+      <h2 class="reveal reveal-delay-1">O que voce vai <em>aprender</em></h2>
+
+      <div class="modules-grid">
+
+        <div class="module-card reveal reveal-delay-1">
+          <span class="module-card__num">01</span>
+          <div class="module-card__icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          </div>
+          <h3>Entendendo todas as ferramentas</h3>
+          <p>Nesta aula eu vou ensinar voces sobre todas as ferramentas disponiveis dentro do Lightroom, dentre elas: Criar o seu catalogo, revelacao basica, mascaras e ajustes de corte, curva de tons, detalhes e correcoes de lentes, entre outras.</p>
+        </div>
+
+        <div class="module-card reveal reveal-delay-2">
+          <span class="module-card__num">02</span>
+          <div class="module-card__icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a4.5 4.5 0 0 0 0 9 4.5 4.5 0 0 1 0 9"/><path d="M12 3a4.5 4.5 0 0 1 0 9 4.5 4.5 0 0 0 0 9"/></svg>
+          </div>
+          <h3>Criando sua identidade de cores</h3>
+          <p>Nesse modulo ensino voce a fazer todo processo de tratamento profissional de cores. Atraves da curva de tons e color mixer damos vida a famosa pele bronzeada, cores externas unicas e marcantes.</p>
+        </div>
+
+        <div class="module-card reveal reveal-delay-1">
+          <span class="module-card__num">03</span>
+          <div class="module-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Criando suas cores em estudio</h3>
+          <p>Nesta aula voce vai aprender como eu faco todo o meu tratamento de cores para estudio. Classico, elegante e atemporal, um tratamento profissional de cores traz notoriedade ao seu trabalho.</p>
+        </div>
+
+        <div class="module-card reveal reveal-delay-2">
+          <span class="module-card__num">04</span>
+          <div class="module-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3>Criando seus presets de cores</h3>
+          <p>Pensando em agilizar ainda mais o seu trabalho, ensino voces a criar presets dos seus tratamentos de cores, podendo aplicar eles em todos os segmentos do seu trabalho. Voce tambem leva de bonus alguns dos meus presets favoritos.</p>
+        </div>
+
+        <div class="module-card reveal reveal-delay-1">
+          <span class="module-card__num">05</span>
+          <div class="module-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>3 tecnicas de tratamento de pele profissional</h3>
+          <p>Na aula de abertura eu vou auxiliar voce no entendimento de 3 formas de fazer um tratamento de pele mantendo a textura natural. Desde tecnicas basicas ate plugins que vao agilizar todas as suas demandas e te entregar um tratamento perfeito em minutos.</p>
+        </div>
+
+        <div class="module-card reveal reveal-delay-2">
+          <span class="module-card__num">06</span>
+          <div class="module-card__icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Photoshop Profissional Passo a Passo</h3>
+          <p>Voce aprendera tecnicas de limpeza de pele no Photoshop, incluindo remocao de manchas e espinhas, realce de volumes, suavizacao preservando texturas, e melhoria da maquiagem e tracos faciais. Inclui acesso a actions para acelerar o tratamento.</p>
+        </div>
+
+        <div class="module-card reveal reveal-delay-1">
+          <span class="module-card__num">07</span>
+          <div class="module-card__icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Tecnicas avancadas para o processo criativo</h3>
+          <p>Limpeza profissional de fundo em estudio, aplicacao de flares em fotos externas e criacao de dupla exposicao — tecnica muito utilizada na fotografia de moda para trazer um diferencial fashionista ao seu trabalho.</p>
+        </div>
+
+        <div class="module-card reveal reveal-delay-2">
+          <span class="module-card__num">08</span>
+          <div class="module-card__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><line x1="9" y1="21" x2="15" y2="21"/></svg>
+          </div>
+          <h3>Tratamento profissional com Inteligencia Artificial</h3>
+          <p>Aprenda a fazer todo o tratamento com Plugins de IA: limpeza de pele, suavizacao, volumes, realces e limpeza de fundo. Tambem vai aprender a utilizar as atualizacoes do Photoshop Beta com IA para melhorar todas as suas fotografias.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section class="about">
+    <div class="about__inner">
+      <div class="about__photo reveal">
+        <div class="about__oval">
+          <img src="./pages/verso-e-reverso/assets/carol_profile.webp" alt="Caroline Moschei">
+        </div>
+      </div>
+      <div class="about__text">
+        <div class="section__tag reveal">SOBRE</div>
+        <h2 class="reveal reveal-delay-1">Conheca <strong>Caroline Moschei</strong></h2>
+        <p class="about__bio reveal reveal-delay-2">Caroline Moschei e uma fotografa especializada em ensaios fashion, estudio e casamento, alem de ser uma viajante apaixonada. Com projetos pessoais e profissionais, ja trabalhou em mais de 10 paises, absorvendo inspiracoes de diferentes culturas para aprimorar o seu trabalho.</p>
+        <p class="about__bio reveal reveal-delay-3">Agora vai compartilhar a sua paixao e conhecimento, ajudando voce a encontrar sua melhor versao na fotografia.</p>
+        <a href="#preco" class="about__btn reveal reveal-delay-4">INSCREVA-SE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GALLERY
+       ============================================================ -->
+  <section class="gallery">
+    <div class="gallery__track">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-2-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-4-768x1152.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/Portfolio-Carol-10-1-scaledjpg-768x1152.webp" alt="">
+      <img src="./pages/combo-tratamento/assets/Portfolio-Carol-7-scaledjpg-768x1152.webp" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-7-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-8-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-1-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-3-768x1152.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-5-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-6-768x1152.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-9-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-11-768x1151.jpg" alt="">
+      <!-- duplicated for seamless loop -->
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-2-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-4-768x1152.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/Portfolio-Carol-10-1-scaledjpg-768x1152.webp" alt="">
+      <img src="./pages/combo-tratamento/assets/Portfolio-Carol-7-scaledjpg-768x1152.webp" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-7-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-8-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-1-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-3-768x1152.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-5-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-6-768x1152.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-9-768x1151.jpg" alt="">
+      <img src="./pages/combo-tratamento/assets/fotos-caroline-moschei-curso-tratamento-de-pele-photoshop-11-768x1151.jpg" alt="">
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <a href="../index.html"><img src="./pages/combo-tratamento/assets/footer-logo-selo-caroline-moschei.svg" alt="Caroline Moschei" class="footer__logo"></a>
+      <p class="footer__copy">2026 &copy; Todos os direitos reservados</p>
+      <a href="#" class="footer__privacy">Politicas de Privacidade</a>
+    </div>
+  </footer>
+
+  <!-- Scroll reveal observer -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

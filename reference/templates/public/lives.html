@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Lives Gravadas — Caroline Moschei</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/lives.css">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/" class="nav__back">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </a>
+    <span class="nav__brand">Caroline Moschei</span>
+    <div class="nav__spacer"></div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__bg">
+      <div class="hero__gradient"></div>
+    </div>
+    <div class="hero__content">
+      <span class="hero__badge">Gratuito</span>
+      <h1>Lives Gravadas</h1>
+      <p class="hero__desc">Assista aulas exclusivas sobre fotografia, ilumina&ccedil;&atilde;o, dire&ccedil;&atilde;o e p&oacute;s-produ&ccedil;&atilde;o. Aprenda na pr&aacute;tica com Caroline Moschei.</p>
+      <div class="hero__meta">
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg> Aulas ao vivo gravadas</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg> Chat da live em tempo real</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Conte&uacute;do exclusivo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOGO -->
+  <section class="catalog">
+
+    {% if lives %}
+    <!-- LIVES REAIS DO BANCO -->
+    <div class="catalog__section">
+      <h2 class="catalog__title">Dispon&iacute;veis agora</h2>
+      <div class="catalog__row">
+        {% for live in lives %}
+        <article class="card" data-live-id="{{ live.id }}" data-title="{{ live.title }}">
+          <div class="card__thumb">
+            <img src="{{ live.thumbnail_url }}" alt="{{ live.title }}" loading="lazy">
+            <div class="card__overlay">
+              <div class="card__play">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <circle cx="20" cy="20" r="19" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"/>
+                  <polygon points="16,11 30,20 16,29" fill="rgba(255,255,255,0.9)"/>
+                </svg>
+              </div>
+              <span class="card__cta">Assistir agora</span>
+            </div>
+            <span class="card__duration">Live</span>
+          </div>
+          <div class="card__info">
+            <h3>{{ live.title }}</h3>
+            {% if live.description %}<p>{{ live.description|truncate(80) }}</p>{% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- PLACEHOLDERS — Em breve -->
+    <div class="catalog__section">
+      <h2 class="catalog__title">{% if lives %}Em breve{% else %}Conte&uacute;do em prepara&ccedil;&atilde;o{% endif %}</h2>
+      <div class="catalog__row">
+
+        <article class="card card--placeholder">
+          <div class="card__thumb card__thumb--placeholder">
+            <div class="card__placeholder-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,149,108,0.4)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,12 10,16"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            </div>
+            <span class="card__coming">Em breve</span>
+          </div>
+          <div class="card__info">
+            <h3>Ilumina&ccedil;&atilde;o de Est&uacute;dio na Pr&aacute;tica</h3>
+            <p>Como montar setups profissionais do zero</p>
+          </div>
+        </article>
+
+        <article class="card card--placeholder">
+          <div class="card__thumb card__thumb--placeholder">
+            <div class="card__placeholder-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,149,108,0.4)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,12 10,16"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            </div>
+            <span class="card__coming">Em breve</span>
+          </div>
+          <div class="card__info">
+            <h3>Dire&ccedil;&atilde;o de Modelos</h3>
+            <p>T&eacute;cnicas para ensaios mais naturais</p>
+          </div>
+        </article>
+
+        <article class="card card--placeholder">
+          <div class="card__thumb card__thumb--placeholder">
+            <div class="card__placeholder-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,149,108,0.4)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,12 10,16"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            </div>
+            <span class="card__coming">Em breve</span>
+          </div>
+          <div class="card__info">
+            <h3>P&oacute;s-Produ&ccedil;&atilde;o Avan&ccedil;ada</h3>
+            <p>Tratamento e cores no Lightroom</p>
+          </div>
+        </article>
+
+        <article class="card card--placeholder">
+          <div class="card__thumb card__thumb--placeholder">
+            <div class="card__placeholder-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(200,149,108,0.4)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><polygon points="10,8 16,12 10,16"/><line x1="2" y1="20" x2="22" y2="20"/></svg>
+            </div>
+            <span class="card__coming">Em breve</span>
+          </div>
+          <div class="card__info">
+            <h3>Fotografia de Casamento</h3>
+            <p>Bastidores de um casamento completo</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- O QUE VOCE VAI APRENDER -->
+    <div class="learn-section">
+      <h2>O que voc&ecirc; vai aprender</h2>
+      <div class="learn-grid">
+        <div class="learn-item">
+          <div class="learn-item__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3>Fotografia</h3>
+          <p>Composi&ccedil;&atilde;o, enquadramento e t&eacute;cnicas de captura</p>
+        </div>
+        <div class="learn-item">
+          <div class="learn-item__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>Ilumina&ccedil;&atilde;o</h3>
+          <p>Setups de flash e luz cont&iacute;nua para est&uacute;dio</p>
+        </div>
+        <div class="learn-item">
+          <div class="learn-item__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <h3>Cores</h3>
+          <p>Teoria das cores e harmonia crom&aacute;tica</p>
+        </div>
+        <div class="learn-item">
+          <div class="learn-item__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Tratamento</h3>
+          <p>P&oacute;s-produ&ccedil;&atilde;o profissional no Lightroom e Photoshop</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- MODAL — Cadastro para assistir -->
+  <div class="modal" id="leadModal" hidden>
+    <div class="modal__backdrop"></div>
+    <div class="modal__content">
+      <button class="modal__close" id="modalClose">&times;</button>
+
+      <div class="modal__header">
+        <div class="modal__live-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <span class="modal__tag">Acesso gratuito</span>
+      </div>
+
+      <h2 id="modalTitle">Assistir Live</h2>
+      <p class="modal__subtitle">Preencha seus dados para liberar o acesso &agrave; aula</p>
+
+      <form id="leadForm">
+        <input type="hidden" name="live_id" id="formLiveId">
+
+        <div class="modal__field">
+          <label>Nome completo</label>
+          <input type="text" name="name" placeholder="Caroline Moschei" required>
+        </div>
+
+        <div class="modal__field">
+          <label>Seu melhor e-mail</label>
+          <input type="email" name="email" placeholder="seu@email.com" required>
+        </div>
+
+        <div class="modal__field">
+          <label>WhatsApp <span class="modal__optional">(opcional)</span></label>
+          <input type="tel" name="phone" placeholder="(11) 99999-9999">
+        </div>
+
+        <button type="submit" class="modal__btn" id="submitBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+          Assistir Agora
+        </button>
+      </form>
+
+      <div class="modal__trust">
+        <div class="modal__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Dados seguros
+        </div>
+        <div class="modal__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          100% gratuito
+        </div>
+        <div class="modal__trust-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          Sem spam
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <a href="/"><img src="/assets/logo-selo.svg" alt="Caroline Moschei" class="footer__logo"></a>
+    <p>&copy; 2026 Caroline Moschei</p>
+  </footer>
+
+  <script>
+  const modal = document.getElementById('leadModal');
+  const form = document.getElementById('leadForm');
+  const liveIdInput = document.getElementById('formLiveId');
+  const modalTitle = document.getElementById('modalTitle');
+  const submitBtn = document.getElementById('submitBtn');
+
+  // Abrir modal — apenas cards com lives reais (nao placeholders)
+  document.querySelectorAll('.card:not(.card--placeholder)').forEach(card => {
+    card.addEventListener('click', () => {
+      liveIdInput.value = card.dataset.liveId;
+      modalTitle.textContent = card.dataset.title;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => form.querySelector('input[name="name"]').focus(), 100);
+    });
+  });
+
+  // Fechar modal
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  modal.querySelector('.modal__backdrop').addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  function closeModal() {
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  // Submit
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const originalHTML = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<span class="spinner"></span> Liberando acesso...';
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name.value,
+          email: form.email.value,
+          phone: form.phone.value,
+          live_id: parseInt(liveIdInput.value)
+        })
+      });
+      const data = await res.json();
+      if (data.redirect) {
+        window.location.href = data.redirect;
+      } else {
+        alert(data.error || 'Erro ao cadastrar. Tente novamente.');
+        submitBtn.innerHTML = originalHTML;
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      alert('Erro de conexao. Verifique sua internet.');
+      submitBtn.innerHTML = originalHTML;
+      submitBtn.disabled = false;
+    }
+  });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+{% extends "admin/base.html" %}
+{% block title %}Chat — {{ live.title }}{% endblock %}
+{% block content %}
+<h2 style="font-size:1.1rem; font-weight:400; margin-bottom:6px;">Chat replay: {{ live.title }}</h2>
+<p style="font-size:0.75rem; color:var(--dim); margin-bottom:20px;">{{ comments|length }} comentarios cadastrados</p>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+  <!-- FORMULARIO -->
+  <div style="flex:1; min-width:280px;">
+    <div class="card">
+      <h3 style="font-size:0.85rem; margin-bottom:16px;">Adicionar comentario</h3>
+      <form method="POST">
+        <div class="form-group">
+          <label>Autor (@nome)</label>
+          <input type="text" name="author_name" placeholder="@maria_foto" required>
+        </div>
+        <div class="form-group">
+          <label>Mensagem</label>
+          <input type="text" name="message" placeholder="Que legal! Amei essa tecnica" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Minuto</label>
+            <input type="number" name="ts_min" value="0" min="0">
+          </div>
+          <div class="form-group">
+            <label>Segundo</label>
+            <input type="number" name="ts_sec" value="0" min="0" max="59">
+          </div>
+        </div>
+        <button type="submit" class="btn btn--primary btn--small">Adicionar</button>
+      </form>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <h3 style="font-size:0.85rem; margin-bottom:12px;">Importar CSV</h3>
+      <p style="font-size:0.72rem; color:var(--dim); margin-bottom:12px;">Formato: <code>segundos,@autor,mensagem</code></p>
+      <form method="POST" action="{{ url_for('admin.comments_import', live_id=live.id) }}" enctype="multipart/form-data">
+        <input type="file" name="csv_file" accept=".csv" style="font-size:0.78rem; color:var(--bone);">
+        <button type="submit" class="btn btn--outline btn--small" style="margin-top:8px;">Importar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LISTA DE COMENTARIOS -->
+  <div style="flex:1.5; min-width:300px;">
+    <div class="card" style="padding:0; overflow:hidden; max-height:600px; overflow-y:auto;">
+      {% if comments %}
+      <table>
+        <thead><tr><th>Tempo</th><th>Autor</th><th>Mensagem</th><th></th></tr></thead>
+        <tbody>
+        {% for c in comments %}
+        <tr>
+          <td style="white-space:nowrap; color:var(--caramel);">{{ '%02d:%02d' | format(c.timestamp // 60, c.timestamp % 60) }}</td>
+          <td style="white-space:nowrap;">{{ c.author_name }}</td>
+          <td>{{ c.message }}</td>
+          <td>
+            <form method="POST" action="{{ url_for('admin.comment_delete', comment_id=c.id) }}" style="display:inline">
+              <button type="submit" class="btn btn--danger btn--small" style="padding:3px 8px;">x</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p style="padding:24px; text-align:center; color:var(--dim);">Nenhum comentario ainda. Adicione manualmente ou importe um CSV.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
