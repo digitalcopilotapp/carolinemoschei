@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia de Produtos | Caroline Moschei</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/site-theme.css">
+  <script defer src="/scripts/site-interactions.js"></script>
+  <style>
+    .guide-hero {
+      background: var(--color-bg-body, #060608);
+      color: var(--color-ink-primary, #f8f5ef);
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+    .guide-hero h1 {
+      font-family: 'Monik', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 400;
+      margin: 0 0 16px;
+    }
+    .guide-hero p {
+      font-family: 'Outfit', -apple-system, sans-serif;
+      font-size: 1.125rem;
+      color: rgba(248,245,239,0.72);
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .guide-hero__cta {
+      display: inline-block;
+      background: var(--color-accent, #d0a16b);
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    .guide-hero__cta:hover { opacity: 0.88; }
+
+    .products-section {
+      background: var(--color-bg-body, #060608);
+      padding: 80px 24px 100px;
+    }
+    .products-section__inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .products-section__eyebrow {
+      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent, #d0a16b);
+      margin-bottom: 8px;
+    }
+    .products-section__title {
+      font-family: 'Monik', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--color-ink-primary, #f8f5ef);
+      margin: 0 0 12px;
+    }
+    .products-section__subtitle {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.0625rem;
+      color: rgba(248,245,239,0.6);
+      margin: 0 0 56px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .product-card {
+      background: var(--color-bg-alt, #101014);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s;
+    }
+    .product-card:hover { border-color: rgba(208,161,107,0.35); }
+    .product-card__body {
+      padding: 28px 28px 20px;
+      flex: 1;
+    }
+    .product-card__eyebrow {
+      display: inline-block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-accent, #d0a16b);
+      background: rgba(208,161,107,0.1);
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 14px;
+    }
+    .product-card__title {
+      font-family: 'Monik', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--color-ink-primary, #f8f5ef);
+      margin: 0 0 10px;
+    }
+    .product-card__desc {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      color: rgba(248,245,239,0.6);
+      margin: 0;
+    }
+    .product-card__price {
+      font-family: 'Monik', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--color-ink-primary, #f8f5ef);
+      padding: 0 28px 8px;
+    }
+    .product-card__footer {
+      padding: 16px 28px 28px;
+    }
+    .product-card__cta {
+      display: block;
+      width: 100%;
+      background: var(--color-accent, #d0a16b);
+      color: #fff;
+      padding: 14px 24px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      transition: opacity 0.2s;
+    }
+    .product-card__cta:hover { opacity: 0.88; }
+    .product-card--featured {
+      border-color: rgba(208,161,107,0.4);
+      background: linear-gradient(135deg, #101014 0%, rgba(208,161,107,0.06) 100%);
+    }
+
+    .discord-section {
+      background: #0d0d10;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .discord-section__inner { max-width: 640px; margin: 0 auto; }
+    .discord-badge {
+      display: inline-block;
+      background: rgba(88,101,242,0.15);
+      border: 1px solid rgba(88,101,242,0.3);
+      color: #7289da;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    .discord-section h2 {
+      font-family: 'Monik', serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 400;
+      color: var(--color-ink-primary, #f8f5ef);
+      margin: 0 0 16px;
+    }
+    .discord-section p {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.0625rem;
+      color: rgba(248,245,239,0.6);
+      margin: 0 0 32px;
+      line-height: 1.65;
+    }
+    .discord-cta {
+      display: inline-block;
+      background: var(--color-accent, #d0a16b);
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    .discord-cta:hover { opacity: 0.88; }
+
+    @media (max-width: 600px) {
+      .guide-hero { padding: 80px 20px 60px; }
+      .products-section { padding: 60px 20px 80px; }
+      .product-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="page page-guide">
+  <div data-site-header></div>
+  <main>
+
+    <section class="guide-hero smoke-reveal">
+      <span class="section-eyebrow">Todos os produtos</span>
+      <h1>Guia de Produtos</h1>
+      <p>Escolha seu caminho no mundo da fotografia profissional.</p>
+      <a class="guide-hero__cta" href="#produtos">Ver todos os produtos</a>
+    </section>
+
+    <section id="produtos" class="products-section">
+      <div class="products-section__inner">
+        <span class="products-section__eyebrow">Produtos &amp; Combos</span>
+        <h2 class="products-section__title">Todos os infoprodutos</h2>
+        <p class="products-section__subtitle">Todos os infoprodutos da Caroline Moschei em um só lugar.</p>
+
+        <div class="product-grid">
+
+          <article class="product-card product-card--featured smoke-reveal">
+            <div class="product-card__body">
+              <span class="product-card__eyebrow">Workshop completo</span>
+              <h3 class="product-card__title">Verso e Reverso 2026</h3>
+              <p class="product-card__desc">O workshop de fotografia mais completo da Caroline. 150+ aulas, comunidade ativa e encontros ao vivo para transformar técnica, visão e negócios.</p>
+            </div>
+            <div class="product-card__price">R$ 1.997</div>
+            <div class="product-card__footer">
+              <a class="product-card__cta" href="https://pay.hotmart.com/E64464708W?checkoutMode=10" target="_blank" rel="noopener">Quero o Workshop</a>
+            </div>
+          </article>
+
+          <article class="product-card smoke-reveal">
+            <div class="product-card__body">
+              <span class="product-card__eyebrow">Coleção Lightroom</span>
+              <h3 class="product-card__title">Presets — Coleção Completa</h3>
+              <p class="product-card__desc">Presets Lightroom para todos os estilos. Desenvolvidos em produções editoriais globais com tutoriais exclusivos.</p>
+            </div>
+            <div class="product-card__footer">
+              <a class="product-card__cta" href="/presets">Ver Presets</a>
+            </div>
+          </article>
+
+          <article class="product-card smoke-reveal">
+            <div class="product-card__body">
+              <span class="product-card__eyebrow">E-book + Vídeo aulas</span>
+              <h3 class="product-card__title">Guia de Iluminação de Estúdio</h3>
+              <p class="product-card__desc">O guia definitivo para dominar a luz no estúdio. Setups, equipamentos e técnicas com assinatura autoral.</p>
+            </div>
+            <div class="product-card__footer">
+              <a class="product-card__cta" href="https://pay.hotmart.com/D102526427D?checkoutMode=10" target="_blank" rel="noopener">Quero meu exemplar</a>
+            </div>
+          </article>
+
+          <article class="product-card smoke-reveal">
+            <div class="product-card__body">
+              <span class="product-card__eyebrow">Guia Digital</span>
+              <h3 class="product-card__title">Guia de Fotografia Corporativa</h3>
+              <p class="product-card__desc">200+ variações de poses para ensaios corporativos com scripts de direção para autoridade e elegância.</p>
+            </div>
+            <div class="product-card__footer">
+              <a class="product-card__cta" href="https://pay.hotmart.com/D101774174K?checkoutMode=10" target="_blank" rel="noopener">Baixar agora</a>
+            </div>
+          </article>
+
+          <article class="product-card smoke-reveal">
+            <div class="product-card__body">
+              <span class="product-card__eyebrow">Curso online</span>
+              <h3 class="product-card__title">Curso de Fotografia de Celular</h3>
+              <p class="product-card__desc">Fotografe como profissional usando apenas o celular. Metodologia prática para criar fotos profissionais em viagens e estúdio portátil.</p>
+            </div>
+            <div class="product-card__footer">
+              <a class="product-card__cta" href="https://pay.hotmart.com/Y88502626D?checkoutMode=10" target="_blank" rel="noopener">Começar agora</a>
+            </div>
+          </article>
+
+          <article class="product-card smoke-reveal">
+            <div class="product-card__body">
+              <span class="product-card__eyebrow">Imersão presencial</span>
+              <h3 class="product-card__title">Workshop Presencial 2026</h3>
+              <p class="product-card__desc">Experiência presencial com a Caroline Moschei em São Paulo. Portfólio, iluminação e direção autoral em dois dias intensivos.</p>
+            </div>
+            <div class="product-card__footer">
+              <a class="product-card__cta" href="/wsp-2026">Garantir minha vaga</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="discord-section smoke-reveal">
+      <div class="discord-section__inner">
+        <span class="discord-badge">Discord VIP</span>
+        <h2>Comunidade Discord VIP</h2>
+        <p>Ao adquirir o Verso e Reverso 2026, você garante acesso exclusivo ao Discord VIP com a Caroline — lives, feedbacks e networking com fotógrafos de alto nível.</p>
+        <a class="discord-cta" href="https://pay.hotmart.com/E64464708W?checkoutMode=10" target="_blank" rel="noopener">Quero o Verso e Reverso</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bio-links-footer">
+    <div class="bio-links-footer__content">
+      <div class="bio-links-footer__section">
+        <h3 class="bio-links-footer__title">Cursos</h3>
+        <nav class="bio-links-footer__nav">
+          <a href="/verso-e-reverso">Verso &amp; Reverso</a>
+          <a href="/curso-photoshop">Tratamento de Pele</a>
+          <a href="/curso-de-fotografia-de-celular">Fotografia com Celular</a>
+        </nav>
+      </div>
+      <div class="bio-links-footer__section">
+        <h3 class="bio-links-footer__title">Guias</h3>
+        <nav class="bio-links-footer__nav">
+          <a href="/guia-iluminacao">Blueprints de Iluminação</a>
+          <a href="/guia-fotografia-corporativa">Direção Corporativa</a>
+        </nav>
+      </div>
+      <div class="bio-links-footer__section">
+        <h3 class="bio-links-footer__title">Eventos</h3>
+        <nav class="bio-links-footer__nav">
+          <a href="/wsp-2026">Workshop WSP 2026</a>
+        </nav>
+      </div>
+      <div class="bio-links-footer__section">
+        <h3 class="bio-links-footer__title">Produtos</h3>
+        <nav class="bio-links-footer__nav">
+          <a href="/presets">Presets Profissionais</a>
+        </nav>
+      </div>
+    </div>
+    <div class="bio-links-footer__bottom">
+      <p class="bio-links-footer__copyright">© 2026 Caroline Moschei. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
