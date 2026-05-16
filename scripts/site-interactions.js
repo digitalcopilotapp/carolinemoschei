@@ -1541,6 +1541,6 @@ document.addEventListener('DOMContentLoaded', () => {
   decorateRelatedLinks();
   propagateOriginToLinks();
   initOrcamentosPage();
-  createCouponExperience();
-  initSnow();
+  // createCouponExperience(); // seasonal — disabled
+  // initSnow(); // seasonal — disabled
 });
