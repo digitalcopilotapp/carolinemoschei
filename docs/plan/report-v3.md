@@ -2,7 +2,7 @@
 
 **Data:** 2026-05-16  
 **Responsável:** Hermes (Caroline Moschei Discovery)  
-**Status:** Pronto para revisão da Caroline
+**Status:** ✅ Verificado com Playwright — todas as 9 páginas renderizando
 
 ---
 
@@ -155,3 +155,12 @@ Nenhum link quebrado crítico identificado. Os CTAs Hotmart com parâmetro `offD
 - **Noindex ativo:** todas as páginas v3 têm `X-Robots-Tag: noindex, nofollow`
 - **Páginas originais intactas:** zero modificações nas páginas publicadas
 - **Elementor data transformer:** `inventory/elementor_v3_transform.py` para referência futura
+- **Verificação visual:** screenshots Playwright confirmados em desktop 1440px e mobile 390px
+
+## ⚠️ Ponto de Atenção — Workshop Photoshop (ws-photoshop-v3)
+
+A página `ws-photoshop-v3` exibe títulos em azul claro (`#6EC1E4`). Causa: o Elementor Kit global (pós-ID 6) usa essa cor como `--e-global-color-primary` padrão, e o original desta página não tinha cores explícitas nos headings — eles herdam o kit. As outras 8 páginas têm cores explícitas e renderizam corretamente.
+
+**Opções para corrigir:**
+1. Abrir `ws-photoshop-v3` no Elementor e definir cor dos headings explicitamente (`#1e1917` ou `#b8967a`)
+2. Atualizar o Elementor Kit global para usar `#1e1917` como primary (afeta todas as páginas)

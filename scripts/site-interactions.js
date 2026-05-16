@@ -737,12 +737,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const COUPON_STORAGE_KEY = 'cm_coupon_profile';
   const initialParams = new URLSearchParams(window.location.search);
   const navLinks = [
-    { label: 'Home', href: '/index.html' },
-    { label: 'Link da Bio', href: '/pages/links.html' },
-    { label: 'Cursos', href: '/pages/curso-de-fotografia-de-celular.html' },
+    { label: 'Links', href: '/pages/links.html' },
+    { label: 'Verso & Reverso', href: '/pages/verso-reverso.html' },
+    { label: 'Fotografia Celular', href: '/pages/curso-de-fotografia-de-celular.html' },
     { label: 'Photoshop', href: '/pages/curso-photoshop.html' },
     { label: 'Presets', href: '/pages/presets.html' },
-    { label: 'Workshop', href: '/pages/wsp-2026.html' }
+    { label: 'Workshop', href: '/pages/wsp-2026.html' },
+    { label: 'Guias de Poses', href: '/pages/guia-de-poses/' },
+    { label: 'Orçamentos', href: '/pages/orcamentos.html' }
   ];
 
   const hasBioOrigin = () => window.sessionStorage.getItem(ORIGIN_STORAGE_KEY) === 'bio';
@@ -812,6 +814,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     placeholder.replaceWith(header);
     return header;
+  };
+
+  const renderGlobalFooter = () => {
+    const placeholder = document.querySelector('[data-site-footer]');
+    if (!placeholder) return;
+
+    const footer = document.createElement('footer');
+    footer.className = 'site-global-footer';
+    footer.innerHTML = `
+      <div class="site-global-footer__inner">
+        <div class="site-global-footer__brand">
+          <span class="site-global-footer__logo">Caroline Moschei</span>
+          <p class="site-global-footer__tagline">Fotografia · Cursos · Mentorias</p>
+          <div class="site-global-footer__social">
+            <a href="https://www.instagram.com/carolinemoschei" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M8 3h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8a5 5 0 0 1 5-5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.5" cy="6.5" r="0.9" fill="currentColor"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@carolinemoschei" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M21.5 8.5c-.1-1.4-1.1-2.5-2.6-2.7C17 5.4 12 5.4 12 5.4s-5 0-6.9.4c-1.5.2-2.5 1.3-2.6 2.7C2.3 10.3 2.3 12 2.3 12s0 1.7.2 3.5c.1 1.4 1.1 2.5 2.6 2.7 1.9.4 6.9.4 6.9.4s5 0 6.9-.4c1.5-.2 2.5-1.3 2.6-2.7.2-1.8.2-3.5.2-3.5s0-1.7-.2-3.5ZM10.4 9.75 15 12l-4.6 2.25V9.75Z" fill="currentColor"/></svg>
+            </a>
+            <a href="https://www.pinterest.com/carolinemoschei" target="_blank" rel="noopener" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M12 2C7 2 3 6 3 11c0 3.7 2.3 6.9 5.6 8.1-.1-.7-.1-1.8.1-2.5l1-4.3s-.3-.7-.3-1.7c0-1.6.9-2.8 2-2.8.9 0 1.3.6 1.3 1.3 0 .8-.5 2-.7 3.1-.2.9.4 1.7 1.3 1.7 1.6 0 2.8-1.7 2.8-4.1 0-2.2-1.6-3.7-3.8-3.7-2.6 0-4.1 1.9-4.1 3.9 0 .8.3 1.6.7 2 .1.1.1.2.1.3-.1.4-.3 1.4-.4 1.6-.1.2-.2.2-.5.1-1.4-.7-2.3-2.8-2.3-4.5 0-3.6 2.6-6.8 7.5-6.8 3.9 0 6.9 2.8 6.9 6.5 0 3.9-2.5 7-6 7-1.2 0-2.3-.6-2.7-1.4l-.7 2.6c-.3 1.1-1 2.5-1.5 3.4 1.1.4 2.2.6 3.4.6 5 0 9-4 9-9S17 2 12 2Z" fill="currentColor"/></svg>
+            </a>
+            <a href="mailto:estudio@carolinemoschei.com" aria-label="E-mail">
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18"><path d="M4 6.5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1Zm0 0 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+        <nav class="site-global-footer__nav" aria-label="Navegação do rodapé">
+          <div class="site-global-footer__col">
+            <h3 class="site-global-footer__heading">Cursos</h3>
+            <a href="/pages/verso-reverso.html">Verso &amp; Reverso</a>
+            <a href="/pages/curso-photoshop.html">Photoshop &amp; Lightroom</a>
+            <a href="/pages/curso-de-fotografia-de-celular.html">Fotografia com Celular</a>
+          </div>
+          <div class="site-global-footer__col">
+            <h3 class="site-global-footer__heading">Guias</h3>
+            <a href="/pages/guia-de-poses/">Todos os Guias de Poses</a>
+            <a href="/pages/guia-iluminacao.html">Blueprints de Iluminação</a>
+            <a href="/pages/guia-fotografia-corporativa.html">Direção Corporativa</a>
+          </div>
+          <div class="site-global-footer__col">
+            <h3 class="site-global-footer__heading">Produtos</h3>
+            <a href="/pages/presets.html">Presets Profissionais</a>
+            <a href="/pages/wsp-2026.html">Workshop 2026</a>
+          </div>
+          <div class="site-global-footer__col">
+            <h3 class="site-global-footer__heading">Contato</h3>
+            <a href="/pages/orcamentos.html">Orçamentos</a>
+            <a href="mailto:estudio@carolinemoschei.com">E-mail</a>
+            <a href="/pages/links.html">Link da Bio</a>
+          </div>
+        </nav>
+      </div>
+      <div class="site-global-footer__bottom">
+        <p>© ${new Date().getFullYear()} Caroline Moschei · Todos os direitos reservados</p>
+        <p><a href="mailto:estudio@carolinemoschei.com">estudio@carolinemoschei.com</a></p>
+      </div>
+    `;
+
+    placeholder.replaceWith(footer);
   };
 
   const getCookie = (name) => {
@@ -1458,6 +1521,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setBioOriginFromUrl();
   const header = renderGlobalHeader();
+  renderGlobalFooter();
   bindNavigationInteractions(header);
   decorateBioLinks();
   ensureBioReturnButton();
