@@ -44,18 +44,17 @@ COLOR_MAP = {
 }
 
 FONT_MAP = {
-    "Monik Font": "Times New Roman",
-    "Monik": "Times New Roman",
-    "sweet-sans-pro": "Outfit",
-    "Sora": "Outfit",
-    "Inter": "Outfit",
-    "Poppins": "Outfit",
-    "Roboto": "Outfit",
-    "Open Sans": "Outfit",
-    "Lato": "Outfit",
+    # Monik stays — it's installed on the VPS/WP and is the brand heading font
+    "sweet-sans-pro": "Open Sans",
+    "Sora": "Open Sans",
+    "Inter": "Open Sans",
+    "Poppins": "Open Sans",
+    "Roboto": "Open Sans",
+    "Lato": "Open Sans",
+    "Outfit": "Open Sans",
 }
 
-# Heading widget types that should get Times New Roman
+# Heading widget types — keep Monik, only body fonts change
 HEADING_WIDGET_TYPES = {"heading", "ha-heading", "ha-fancy-heading"}
 
 # ── Transformation Functions ──────────────────────────────────────────────────
@@ -109,21 +108,21 @@ def transform_settings(settings, is_heading: bool = False):
         if isinstance(stop, dict) and "color" in stop:
             stop["color"] = transform_color(stop["color"])
 
-    # Typography font family
+    # Typography font family — headings keep Monik, body gets Open Sans
     font_keys = ["typography_font_family", "font_family"]
     for key in font_keys:
         if key in result:
             current_font = result[key]
             if is_heading:
-                result[key] = "Times New Roman"
+                # Keep Monik as-is; only remap non-Monik heading fonts
+                if current_font not in ("Monik Font", "Monik"):
+                    result[key] = "Monik Font"
             else:
                 result[key] = transform_font(current_font)
 
-    # Ensure heading typography is set to custom when we override
+    # Ensure heading typography is set to custom when we set Monik
     if is_heading and "typography_font_family" in result:
         result["typography_typography"] = "custom"
-        result["typography_font_style"] = "normal"
-        result["typography_font_weight"] = "400"
 
     # Button-specific overrides
     if result.get("widgetType") == "button" or "button_text" in result:

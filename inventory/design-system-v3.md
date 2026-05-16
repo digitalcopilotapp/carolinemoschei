@@ -39,18 +39,18 @@ Fonte: RAM-73 — Redesign Unificado v3
 
 | Papel | Família | Peso | Uso |
 |-------|---------|------|-----|
-| Títulos | `Times New Roman`, serif | 400 (normal, **sem itálico, sem negrito**) | H1, H2, H3, títulos de seção |
-| Corpo | `Outfit`, `-apple-system`, sans-serif | 300–400 | Parágrafos, listas, descrições |
-| Caption | `Outfit`, `-apple-system`, sans-serif | 400 | Legendas, labels menores |
+| Títulos | `Monik Font` (instalada no WP/VPS) | 400 (normal) | H1, H2, H3, títulos de seção |
+| Corpo | `Open Sans` (disponível no WP/VPS) | 300–400 | Parágrafos, listas, descrições |
+| Caption | `Open Sans` | 400 | Legendas, labels menores |
 
 ### Mapeamento de fontes v2 → v3
 
 | Fonte v2 | Fonte v3 |
 |---------|---------|
-| `Monik Font`, `Monik` | `Times New Roman`, serif |
-| `sweet-sans-pro` | `Outfit`, -apple-system |
-| `Sora` | `Outfit`, -apple-system |
-| `Inter` | `Outfit`, -apple-system |
+| `Monik Font`, `Monik` | `Monik Font` (mantida — fonte da marca, já instalada) |
+| `sweet-sans-pro` | `Open Sans` (disponível no WP/VPS) |
+| `Sora` | `Open Sans` |
+| `Inter` | `Open Sans` |
 
 ### Hierarquia de tamanhos
 
