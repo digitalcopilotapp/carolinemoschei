@@ -1,52 +1,56 @@
+# Caroline Moschei — Static Site Rewrites
+# Generated from serve.json
+
 Options -Indexes
+DirectoryIndex index.html index.php
 
-# ── Redirects 301 ────────────────────────────────────────────
 <IfModule mod_rewrite.c>
-RewriteEngine On
+  RewriteEngine On
+  RewriteBase /
 
-# Legacy page URLs → canonical hub
-RewriteRule ^pages/guia-de-poses\.html$ /guia-de-poses [R=301,L]
-RewriteRule ^guia-gestantes/?$ /guia-de-poses [R=301,L]
-RewriteRule ^guia-de-fotografia-ensaio-pessoal-e-criativo/?$ /guia-de-poses [R=301,L]
-RewriteRule ^combo-guias-2026/?$ /guia-de-poses [R=301,L]
+  # Redirects (301)
+  RewriteRule ^pages/guia-de-poses\.html$ /guia-de-poses [R=301,L]
+  RewriteRule ^guia-gestantes/?$ /guia-de-poses [R=301,L]
+  RewriteRule ^guia-de-fotografia-ensaio-pessoal-e-criativo/?$ /guia-de-poses [R=301,L]
+  RewriteRule ^combo-guias-2026/?$ /guia-de-poses [R=301,L]
 
-# ── Internal rewrites (clean URLs → HTML files) ──────────────
-RewriteRule ^curso-photoshop/?$ /pages/curso-photoshop.html [L]
-RewriteRule ^curso-de-fotografia-de-celular/?$ /pages/curso-de-fotografia-de-celular.html [L]
-RewriteRule ^guia-iluminacao/?$ /pages/guia-iluminacao.html [L]
-RewriteRule ^guia-fotografia-corporativa/?$ /pages/guia-fotografia-corporativa.html [L]
-RewriteRule ^guia-de-poses/?$ /pages/guia-de-poses/index.html [L]
-RewriteRule ^funil/?$ /pages/funil/index.html [L]
-RewriteRule ^links/?$ /pages/links.html [L]
-RewriteRule ^presets/?$ /pages/presets.html [L]
-RewriteRule ^orcamentos/?$ /pages/orcamentos.html [L]
-RewriteRule ^verso-reverso/?$ /pages/verso-reverso.html [L]
-RewriteRule ^wsp-2026/?$ /pages/wsp-2026.html [L]
+  # Preview slugs -novo (board review — noindex via meta tag in each -novo file)
+  RewriteRule ^link-bio-novo/?$ /pages/links-novo.html [L]
+  RewriteRule ^funil-novo/?$ /pages/funil-novo.html [L]
+  RewriteRule ^presets-novo/?$ /pages/presets-novo.html [L]
+  RewriteRule ^guia-de-poses-novo/?$ /pages/guia-de-poses-novo.html [L]
+  RewriteRule ^verso-reverso-novo/?$ /pages/verso-reverso-novo.html [L]
+  RewriteRule ^wsp-2026-novo/?$ /pages/wsp-2026-novo.html [L]
+  RewriteRule ^orcamentos-novo/?$ /pages/orcamentos-novo.html [L]
+  RewriteRule ^curso-photoshop-novo/?$ /pages/curso-photoshop-novo.html [L]
+  RewriteRule ^curso-de-fotografia-de-celular-novo/?$ /pages/curso-de-fotografia-de-celular-novo.html [L]
+  RewriteRule ^guia-iluminacao-novo/?$ /pages/guia-iluminacao-novo.html [L]
+  RewriteRule ^guia-fotografia-corporativa-novo/?$ /pages/guia-fotografia-corporativa-novo.html [L]
 
-# ── Static file passthrough ──────────────────────────────────
-# Serve existing files/directories directly
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
+  # Page rewrites (no extension in URL)
+  RewriteRule ^curso-photoshop/?$ /pages/curso-photoshop.html [L]
+  RewriteRule ^curso-de-fotografia-de-celular/?$ /pages/curso-de-fotografia-de-celular.html [L]
+  RewriteRule ^guia-iluminacao/?$ /pages/guia-iluminacao.html [L]
+  RewriteRule ^guia-fotografia-corporativa/?$ /pages/guia-fotografia-corporativa.html [L]
+  RewriteRule ^guia-de-poses/?$ /pages/guia-de-poses/index.html [L]
+  RewriteRule ^funil/?$ /pages/funil/index.html [L]
+  RewriteRule ^links/?$ /pages/links.html [L]
+  RewriteRule ^presets/?$ /pages/presets.html [L]
+  RewriteRule ^orcamentos/?$ /pages/orcamentos.html [L]
+  RewriteRule ^verso-reverso/?$ /pages/verso-reverso.html [L]
+  RewriteRule ^wsp-2026/?$ /pages/wsp-2026.html [L]
 </IfModule>
 
-# ── Cache headers for static assets ──────────────────────────
+# Cache static assets
 <IfModule mod_expires.c>
-ExpiresActive On
-ExpiresByType image/webp "access plus 1 year"
-ExpiresByType image/jpeg "access plus 1 year"
-ExpiresByType image/png  "access plus 1 year"
-ExpiresByType image/svg+xml "access plus 1 year"
-ExpiresByType text/css  "access plus 1 month"
-ExpiresByType application/javascript "access plus 1 month"
-ExpiresByType font/ttf  "access plus 1 year"
-ExpiresByType font/woff2 "access plus 1 year"
-</IfModule>
-
-# ── Security headers ──────────────────────────────────────────
-<IfModule mod_headers.c>
-Header always set X-Content-Type-Options "nosniff"
-Header always set X-Frame-Options "SAMEORIGIN"
-Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType font/ttf "access plus 6 months"
+  ExpiresByType font/woff2 "access plus 6 months"
+  ExpiresByType video/mp4 "access plus 6 months"
 </IfModule>
