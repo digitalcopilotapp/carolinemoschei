@@ -219,11 +219,13 @@
   background: var(--color-surface);
   box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px var(--color-border);
 }
-.funil-vsl-wrapper iframe {
+.funil-vsl-wrapper iframe,
+.funil-vsl-wrapper video {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
 }
+.funil-vsl-wrapper video { object-fit: contain; background: #000; }
 .funil-vsl-caption {
   text-align: center;
   font-size: 0.8rem;

@@ -5,6 +5,7 @@
     { "source": "/guia-iluminacao", "destination": "/pages/guia-iluminacao.html" },
     { "source": "/guia-fotografia-corporativa", "destination": "/pages/guia-fotografia-corporativa.html" },
     { "source": "/guia-de-poses", "destination": "/pages/guia-de-poses/index.html" },
+    { "source": "/funil", "destination": "/pages/funil/index.html" },
     { "source": "/links", "destination": "/pages/links.html" },
     { "source": "/presets", "destination": "/pages/presets.html" },
     { "source": "/orcamentos", "destination": "/pages/orcamentos.html" },

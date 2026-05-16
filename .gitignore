@@ -44,3 +44,7 @@ incoming/*.zip
 incoming/*.tar*
 tmp/
 *.zip
+reference/wetransfer-2026-videos/
+
+# Large video assets — upload diretamente ao VPS via SCP
+pages/funil/assets/vsl.mp4
