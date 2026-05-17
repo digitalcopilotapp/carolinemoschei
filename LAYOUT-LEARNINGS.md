@@ -237,6 +237,53 @@ O site-interactions.js injeta a nav `<header class="site-global-header">` automa
 
 ---
 
+## 2026-05-17 — funil-v2 (/funil/)
+
+**Status:** in_review — enviado para Caroline Reviewer
+**Reviewer:** Caroline Reviewer (f2321c22-41fa-4c7c-bbdd-45f2e8c52229)
+**Branch/commit:** task/funil-redesign-2026 (último commit `1bf8332`)
+
+### Decisões de layout
+- Mobile (390x844): stack vertical 1 coluna — hero com headline grande + subtítulo + 2 CTAs em coluna, seguido de seção "Caroline Moschei" com foto portrait + bio, seções de benefícios em lista vertical, VSL `<video>` nativo em largura 100%, pricing card centralizado, FAQ accordion, footer com links em 2 colunas.
+- Tablet (768x1024): hero grid 2 colunas (copy à esquerda + foto portrait à direita), seções de benefícios em 2 colunas, VSL `<video>` mantido em largura 100% (sem sidebar), pricing mais legível com espaçamento generoso.
+- Desktop (1440x900): hero com max-width 1200px centrado, layout 2 colunas no hero e bio section, benefícios em grid 4 colunas, VSL centralizado com max-width ~800px, pricing card com destaque lateral, FAQ accordion com tipografia maior.
+
+### VSL — decisão técnica
+- Vídeo: `Manifesto-wide.mp4` (53MB) servido como `/funil/assets/vsl.mp4`
+- Elemento: `<video>` nativo com `controls`, `preload="none"`, `poster` com frame Brooklyn Bridge (00:08 do vídeo)
+- Duração: ~1:30 (VSL de consciência, não conversão direta)
+- Sem autoplay: intenção do board é que o usuário pressione play conscientemente
+- Fallback poster garante conteúdo visível mesmo sem vídeo carregado
+
+### Fontes Monik — resolução de bug (RAM-8)
+- Problema encontrado: `Monik-Regular.ttf` e `Monik-Bold.ttf` locais eram **placeholders HTML** de 2.856 bytes (arquivos corrompidos no git)
+- Solução: fontes reais (~88–94KB cada) localizadas em `wp-content/uploads` no VPS
+- Copiadas para `/home/carolinemoschei.com/public_html/assets/fonts/` no VPS (via SSH)
+- Arquivos locais substituídos pelos reais (commitados no branch)
+- **Regra para futuro:** sempre verificar tamanho dos `.ttf` — se < 5KB, é placeholder. Fontes reais de display ficam entre 50–200KB.
+
+### Padrões que funcionaram
+- `<video>` nativo com `poster` como fallback — sem depender de serviço externo (Vimeo/YouTube)
+- Fontes servidas localmente via `@font-face` em `/assets/fonts/` — sem dependência de CDN de fontes
+- Layout funil sem header/footer padrão (exceção intencional — funil de vendas direto, não faz parte da navegação do site)
+- Hierarquia tipográfica: Monik para headings, peso bold nos CTAs principais, Inter/system-font para corpo de texto
+
+### Padrões que reprovaram (e por quê)
+- Placeholder de fontes TTF no git causou Monik não renderizar no site ao vivo — fontes precisam ser os arquivos binários reais, não HTML de fallback
+- Funil não tem `data-site-header` por design intencional — é exceção documentada (ver "Sistema de headers v4" acima)
+
+### Referências usadas
+- VSL com vídeo nativo `<video>` — padrão de funil de infoproduto BR 2024/2025
+- Layout funil dark com tipografia serif em destaque (Monik como heading display)
+
+### Decisões para reusar
+- Funnis de venda sempre sem header/footer padrão (exceção documentada)
+- VSL sempre `<video>` nativo com `poster` e `preload="none"` — não carregar o vídeo até o usuário pedir
+- Fontes locais: verificar tamanho dos arquivos TTF antes de subir. Placeholder = < 5KB. Real = 50KB+.
+- Grid de benefícios: 1col mobile → 2col tablet → 4col desktop com `repeat(auto-fit, minmax(200px, 1fr))`
+
+---
+
 ## Referência externa
 - [AGENTS.md: Web Engineer](/home/hermes/.paperclip/instances/default/companies/c9260169-f1c6-477a-8091-77df46ef4c25/agents/f5828592-267c-4382-b683-ec02edf9b0b0/instructions/AGENTS.md)
 - [Memória: Web Engineer rebrand](/home/hermes/.claude/projects/-home-hermes/memory/project_web_engineer_rebrand.md)
