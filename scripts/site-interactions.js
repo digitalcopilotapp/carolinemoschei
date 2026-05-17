@@ -267,6 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', onResize, { once: true });
     recalcPositions();
     updateActivePanel();
+
+    // Fallback: activate all panel cards after 1.5s for headless/no-scroll contexts
+    setTimeout(() => {
+      panelCards.forEach((card) => card.classList.add('is-active'));
+    }, 1500);
   }
 
   const galleryFigures = document.querySelectorAll('.gallery-grid figure');
@@ -286,6 +291,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     galleryFigures.forEach((figure) => galleryObserver.observe(figure));
+
+    // Fallback: reveal gallery after 1.5s for headless/no-scroll contexts
+    setTimeout(() => {
+      galleryFigures.forEach((figure) => figure.classList.add('is-revealed'));
+    }, 1500);
   }
 
   const faqItems = document.querySelectorAll('.ps-faq-item');
@@ -509,6 +519,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Pre-mark ALL .smoke-reveal elements (including HTML-embedded) in viewport before enabling animations
+  document.querySelectorAll('.smoke-reveal').forEach((element) => {
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      element.classList.add('is-visible');
+    }
+  });
+  document.body.classList.add('js-ready');
+
   if (smokeTargets.size) {
     const smokeObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -524,6 +543,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     smokeTargets.forEach((element) => smokeObserver.observe(element));
+
+    // Also observe HTML-embedded .smoke-reveal elements not collected via smokeSelectors
+    document.querySelectorAll('.smoke-reveal').forEach((el) => {
+      if (!smokeTargets.has(el)) smokeObserver.observe(el);
+    });
+
+    // Fallback: reveal ALL .smoke-reveal after 1.5s for headless/no-scroll contexts
+    setTimeout(() => {
+      document.querySelectorAll('.smoke-reveal').forEach((el) => el.classList.add('is-visible'));
+    }, 1500);
   }
 
   const cards = document.querySelectorAll('.bio-links-card');
