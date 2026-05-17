@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+{% block title %}{{ 'Editar' if live else 'Nova' }} Live{% endblock %}
+{% block content %}
+<h2 style="font-size:1.1rem; font-weight:400; margin-bottom:20px;">{{ 'Editar Live' if live else 'Nova Live' }}</h2>
+<div class="card">
+  <form method="POST">
+    <div class="form-group">
+      <label>Titulo da Live</label>
+      <input type="text" name="title" value="{{ live.title if live else '' }}" placeholder="Ex: Como criar iluminacao de estudio" required>
+    </div>
+    <div class="form-group">
+      <label>URL do YouTube (ou ID do video)</label>
+      <input type="text" name="youtube_url" value="{{ live.youtube_id if live else '' }}" placeholder="https://youtube.com/watch?v=... ou ID direto" required>
+    </div>
+    <div class="form-group">
+      <label>Descricao</label>
+      <textarea name="description" placeholder="Descricao que aparece na listagem...">{{ live.description if live else '' }}</textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Oferta aparece em (minutos)</label>
+        <input type="number" name="offer_min" value="{{ (live.offer_timestamp // 60) if live else 45 }}" min="0">
+      </div>
+      <div class="form-group">
+        <label>Segundos</label>
+        <input type="number" name="offer_sec" value="{{ (live.offer_timestamp % 60) if live else 0 }}" min="0" max="59">
+      </div>
+    </div>
+    {% if live %}
+    <div class="form-group">
+      <label style="display:inline; margin-right:8px;">
+        <input type="checkbox" name="is_active" {{ 'checked' if live.is_active else '' }}> Live ativa (visivel no site)
+      </label>
+    </div>
+    {% endif %}
+    <div style="display:flex; gap:12px; margin-top:24px;">
+      <button type="submit" class="btn btn--primary">{{ 'Salvar' if live else 'Criar Live' }}</button>
+      <a href="{{ url_for('admin.dashboard') }}" class="btn btn--outline">Cancelar</a>
+    </div>
+  </form>
+</div>
+{% if live %}
+<p style="margin-top:12px; font-size:0.75rem; color:var(--dim);">
+  Thumbnail automatica: <a href="{{ live.thumbnail_url }}" target="_blank">{{ live.thumbnail_url }}</a>
+</p>
+{% endif %}
+{% endblock %}

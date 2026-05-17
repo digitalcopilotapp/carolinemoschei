@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Guias de Poses para Fotógrafos | Caroline Moschei</title>
+  <meta name="description" content="Todos os guias de poses da Caroline Moschei em um só lugar: corporativo, gestantes, pessoal & criativo e iluminação de estúdio.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/site-theme.css">
+  <style>
+    /* ── LOCAL TOKENS ── */
+    .page-guia-poses { padding-top: 0; }
+
+    /* ── HERO ── */
+    .gp-hero {
+      background: var(--color-bg-body);
+      padding: clamp(5rem, 10vw, 8rem) 1.5rem clamp(3rem, 6vw, 5rem);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .gp-hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(208,161,107,0.1) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .gp-hero__eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+    .gp-hero__title {
+      font-family: 'Cormorant Garamond', var(--font-heading);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 600;
+      color: var(--color-ink-primary);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gp-hero__title em {
+      font-style: italic;
+      color: var(--color-accent);
+    }
+    .gp-hero__lead {
+      font-size: 1.05rem;
+      color: var(--color-ink-muted);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.72;
+    }
+    .gp-hero__combo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1.4rem;
+      background: var(--color-accent-soft);
+      border: 1px solid rgba(208,161,107,0.3);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: var(--color-accent);
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 160ms ease;
+    }
+    .gp-hero__combo:hover { opacity: 0.8; }
+
+    /* ── GUIDE GRID ── */
+    .gp-grid-section {
+      padding: clamp(3rem, 6vw, 5rem) 1.5rem;
+      background: var(--color-bg-body);
+    }
+    .gp-grid-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .gp-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 540px) {
+      .gp-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .gp-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    }
+
+    /* ── GUIDE CARD ── */
+    .gp-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+    }
+    .gp-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(208,161,107,0.4);
+      box-shadow: 0 24px 56px rgba(0,0,0,0.35);
+    }
+    .gp-card__cover {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--color-bg-alt);
+    }
+    .gp-card__cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 400ms ease;
+    }
+    .gp-card:hover .gp-card__cover img { transform: scale(1.04); }
+    .gp-card__badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.3rem 0.75rem;
+      background: var(--color-accent);
+      color: var(--color-ink-dark);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+    }
+    .gp-card__body {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .gp-card__eyebrow {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+    .gp-card__title {
+      font-family: 'Cormorant Garamond', var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-ink-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.25;
+    }
+    .gp-card__desc {
+      font-size: 0.88rem;
+      color: var(--color-ink-muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .gp-card__meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .gp-card__pill {
+      padding: 0.25rem 0.7rem;
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      color: var(--color-ink-muted);
+    }
+    .gp-card__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.25rem;
+      padding: 0.65rem 1.4rem;
+      background: var(--color-accent);
+      color: var(--color-ink-dark);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      align-self: flex-start;
+      transition: opacity 160ms ease;
+    }
+    .gp-card:hover .gp-card__cta { opacity: 0.85; }
+
+    /* ── COMBO BANNER ── */
+    .gp-combo {
+      padding: clamp(2.5rem, 5vw, 4rem) 1.5rem;
+      background: var(--color-bg-alt);
+    }
+    .gp-combo__inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .gp-combo-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 2.5rem;
+      background: var(--color-surface);
+      border: 1px solid rgba(208,161,107,0.25);
+      border-radius: var(--radius-lg);
+    }
+    @media (min-width: 640px) {
+      .gp-combo-card { flex-direction: row; align-items: center; }
+    }
+    .gp-combo-card__cover {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 200px;
+    }
+    .gp-combo-card__cover img {
+      width: 100%;
+      border-radius: var(--radius-md);
+    }
+    .gp-combo-card__copy { flex: 1; }
+    .gp-combo-card__tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+    .gp-combo-card__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--color-ink-primary);
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+    .gp-combo-card__desc {
+      font-size: 0.9rem;
+      color: var(--color-ink-muted);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+    .gp-combo-card__cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.8rem 1.75rem;
+      background: var(--color-accent);
+      color: var(--color-ink-dark);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: opacity 160ms ease;
+    }
+    .gp-combo-card__cta:hover { opacity: 0.85; }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--color-bg-body);
+      border-top: 1px solid var(--color-border);
+      padding: 2rem 1.5rem;
+    }
+    .site-footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      text-align: center;
+    }
+    .site-footer-inner p { font-size: 0.8rem; color: var(--color-ink-muted); }
+    .site-footer-social { display: flex; gap: 1.5rem; }
+    .site-footer-social a {
+      font-size: 0.8rem;
+      color: var(--color-ink-muted);
+      text-decoration: none;
+    }
+    .site-footer-social a:hover { color: var(--color-accent); }
+  </style>
+</head>
+<body class="page page-guia-poses">
+  <div data-site-header></div>
+
+  <!-- ── HERO ── -->
+  <header class="gp-hero">
+    <p class="gp-hero__eyebrow">Biblioteca de referências</p>
+    <h1 class="gp-hero__title">
+      Guias de Poses para<br><em>Fotógrafos Profissionais</em>
+    </h1>
+    <p class="gp-hero__lead">
+      Todos os guias da Caroline Moschei reunidos: referências visuais, sequências dirigidas e checklists prontos para o estúdio ou locação.
+    </p>
+    <a class="gp-hero__combo" href="https://carolinemoschei.site/combo-guias-2026/">
+      ✦ Ver combo com todos os guias com desconto
+    </a>
+  </header>
+
+  <!-- ── GUIDES GRID ── -->
+  <section class="gp-grid-section">
+    <div class="gp-grid-inner">
+      <div class="gp-grid">
+
+        <!-- CORPORATIVO -->
+        <a class="gp-card" href="/guia-fotografia-corporativa">
+          <div class="gp-card__cover">
+            <img
+              src="/assets/wp-media/guia-corporativo-desktop.png"
+              alt="Guia de Poses Corporativas — cover"
+              loading="lazy"
+            >
+            <span class="gp-card__badge">Novo</span>
+          </div>
+          <div class="gp-card__body">
+            <p class="gp-card__eyebrow">Guia digital</p>
+            <h2 class="gp-card__title">Poses Corporativas</h2>
+            <p class="gp-card__desc">
+              Mais de 200 variações com sequências dirigidas, triangulações visuais e ajustes rápidos para ensaios de executivos, empreendedoras e equipes.
+            </p>
+            <div class="gp-card__meta">
+              <span class="gp-card__pill">200+ poses</span>
+              <span class="gp-card__pill">Sequências prontas</span>
+              <span class="gp-card__pill">Branding &amp; acessórios</span>
+            </div>
+            <span class="gp-card__cta">Ver guia →</span>
+          </div>
+        </a>
+
+        <!-- GESTANTES -->
+        <a class="gp-card" href="https://carolinemoschei.site/guia-gestantes/">
+          <div class="gp-card__cover">
+            <img
+              src="/assets/wp-media/banner-header-guia-de-poses-pessoal.png"
+              alt="Guia de Poses para Gestantes — cover"
+              loading="lazy"
+            >
+          </div>
+          <div class="gp-card__body">
+            <p class="gp-card__eyebrow">Guia digital</p>
+            <h2 class="gp-card__title">Poses para Gestantes</h2>
+            <p class="gp-card__desc">
+              Roteiro completo para ensaios gestantes: poses por trimestre, posicionamento do parceiro, iluminação e cenografia para registros emocionantes.
+            </p>
+            <div class="gp-card__meta">
+              <span class="gp-card__pill">Por trimestre</span>
+              <span class="gp-card__pill">Duo &amp; família</span>
+              <span class="gp-card__pill">Locação &amp; estúdio</span>
+            </div>
+            <span class="gp-card__cta">Ver guia →</span>
+          </div>
+        </a>
+
+        <!-- PESSOAL E CRIATIVO -->
+        <a class="gp-card" href="https://carolinemoschei.site/guia-de-fotografia-ensaio-pessoal-e-criativo/">
+          <div class="gp-card__cover">
+            <img
+              src="/assets/wp-media/Guia_de_Poses_Pessoal_e_Criativo_2.png"
+              alt="Guia de Poses Pessoal e Criativo — cover"
+              loading="lazy"
+            >
+          </div>
+          <div class="gp-card__body">
+            <p class="gp-card__eyebrow">Guia digital</p>
+            <h2 class="gp-card__title">Ensaio Pessoal &amp; Criativo</h2>
+            <p class="gp-card__desc">
+              Do shooting at home ao ensaio externo com luz natural: poses expressivas, direção criativa e como criar identidade visual única para cada cliente.
+            </p>
+            <div class="gp-card__meta">
+              <span class="gp-card__pill">Luz natural</span>
+              <span class="gp-card__pill">Fashion &amp; editorial</span>
+              <span class="gp-card__pill">Direção criativa</span>
+            </div>
+            <span class="gp-card__cta">Ver guia →</span>
+          </div>
+        </a>
+
+        <!-- ILUMINAÇÃO -->
+        <a class="gp-card" href="/guia-iluminacao">
+          <div class="gp-card__cover">
+            <img
+              src="/assets/wp-media/guia-iluminacao-scaled.png"
+              alt="Guia de Iluminação de Estúdio — cover"
+              loading="lazy"
+            >
+          </div>
+          <div class="gp-card__body">
+            <p class="gp-card__eyebrow">Guia digital</p>
+            <h2 class="gp-card__title">Iluminação de Estúdio</h2>
+            <p class="gp-card__desc">
+              Diagramas de luz para retratos, duos e cenários: mapeamento de equipamentos, angulação de modificadores e receitas prontas para diferentes estilos.
+            </p>
+            <div class="gp-card__meta">
+              <span class="gp-card__pill">Diagramas comentados</span>
+              <span class="gp-card__pill">Flash &amp; luz contínua</span>
+              <span class="gp-card__pill">Receitas prontas</span>
+            </div>
+            <span class="gp-card__cta">Ver guia →</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMBO SECTION ── -->
+  <section class="gp-combo">
+    <div class="gp-combo__inner">
+      <div class="gp-combo-card">
+        <div class="gp-combo-card__cover">
+          <img
+            src="/assets/wp-media/combo-guia-de-poses.png"
+            alt="Combo 4 Guias Caroline Moschei"
+            loading="lazy"
+          >
+        </div>
+        <div class="gp-combo-card__copy">
+          <span class="gp-combo-card__tag">Melhor custo-benefício</span>
+          <h2 class="gp-combo-card__title">Combo com todos os 4 guias</h2>
+          <p class="gp-combo-card__desc">
+            Leve a coleção completa com desconto especial. Corporativo, Gestantes, Pessoal &amp; Criativo e Iluminação — tudo que você precisa para dominar a direção fotográfica em qualquer segmento.
+          </p>
+          <a class="gp-combo-card__cta" href="https://carolinemoschei.site/combo-guias-2026/" target="_blank" rel="noopener">
+            Ver combo com desconto →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div data-site-footer></div>
+
+</body>
+</html>

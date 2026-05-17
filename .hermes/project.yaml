@@ -1,0 +1,9 @@
+slug: carolinemoschei
+name: Caroline Moschei
+kind: discovery
+status: active
+kanban_board: carolinemoschei
+created_at: 2026-05-15
+summary: |
+  Discovery do site carolinemoschei.com (WordPress 6.9.1 + Elementor Pro 3.35.5).
+  Alerta de segurança: plugin leopard-offload com domínios SSRF suspeitos.

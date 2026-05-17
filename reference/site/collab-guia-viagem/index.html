@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Pessoal de Poses e Fotos de Viagem — Caroline Moschei & Jenniffer Thalia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Instrument+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS VARIABLES — Light Luxury Palette
+           ============================================ */
+        :root {
+            --bg: #FFFFFF;
+            --bg-soft: #FAFAF8;
+            --bg-warm: #F8F6F2;
+            --bg-cream: #F3F0EB;
+            --text: #1A1A1A;
+            --text-soft: #555555;
+            --text-muted: #999999;
+            --rose-gold: #B76E79;
+            --rose-light: #D4979F;
+            --rose-bg: rgba(183,110,121,0.06);
+            --rose-border: rgba(183,110,121,0.18);
+            --border: rgba(0,0,0,0.06);
+            --border-hover: rgba(0,0,0,0.12);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 8px 32px rgba(0,0,0,0.06);
+            --shadow-lg: 0 20px 60px rgba(0,0,0,0.08);
+            --shadow-glow: 0 8px 32px rgba(183,110,121,0.15);
+            --font-editorial: 'Cormorant Garamond', Georgia, serif;
+            --font-modern: 'Instrument Sans', -apple-system, sans-serif;
+            --font-futura: 'Space Grotesk', sans-serif;
+            --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1.0);
+            --ease-silk: cubic-bezier(0.43, 0.13, 0.23, 0.96);
+            --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            font-family: var(--font-modern);
+            color: var(--text);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        .eyebrow {
+            font-family: var(--font-futura);
+            font-size: 11px;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--rose-gold);
+            font-weight: 500;
+        }
+
+        .headline-xl {
+            font-family: var(--font-editorial);
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .headline-xl em {
+            font-style: italic;
+            color: var(--rose-gold);
+        }
+
+        .headline-lg {
+            font-family: var(--font-editorial);
+            font-size: clamp(2rem, 5vw, 3.8rem);
+            font-weight: 300;
+            line-height: 1.08;
+            letter-spacing: -0.01em;
+        }
+
+        .headline-md {
+            font-family: var(--font-editorial);
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 400;
+            line-height: 1.15;
+        }
+
+        .body-text {
+            font-family: var(--font-modern);
+            font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+            line-height: 1.7;
+            color: var(--text-soft);
+        }
+
+        .divider {
+            width: 48px;
+            height: 1px;
+            background: var(--rose-gold);
+            opacity: 0.35;
+            margin: 1.5rem 0;
+        }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #B76E79, #C4848D);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            font-family: var(--font-futura);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-apple);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 48px rgba(183,110,121,0.3);
+        }
+
+        .cta-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--rose-gold);
+            border: 1.5px solid var(--rose-gold);
+            padding: 0.85rem 2rem;
+            border-radius: 100px;
+            font-family: var(--font-futura);
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.4s var(--ease-apple);
+        }
+
+        .cta-outline:hover {
+            background: var(--rose-bg);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           SECTIONS
+           ============================================ */
+        .section {
+            padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 6rem);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .container-narrow {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .text-center { text-align: center; }
+
+        /* ============================================
+           HERO MOSAIC
+           ============================================ */
+        .hero-mosaic {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            overflow: hidden;
+        }
+
+        .hero-mosaic::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 120px;
+            background: linear-gradient(180deg, var(--bg) 0%, transparent 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .hero-mosaic::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 120px;
+            background: linear-gradient(0deg, var(--bg) 0%, transparent 100%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .mosaic-side {
+            position: absolute;
+            top: 0;
+            width: 28%;
+            height: 100%;
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            z-index: 1;
+        }
+
+        .mosaic-left {
+            left: 0;
+        }
+
+        .mosaic-left::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 0;
+            width: 120px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, var(--bg) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .mosaic-right {
+            right: 0;
+        }
+
+        .mosaic-right::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0;
+            width: 120px;
+            height: 100%;
+            background: linear-gradient(270deg, transparent 0%, var(--bg) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .mosaic-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            animation: mosaicFloat 6s ease-in-out infinite;
+        }
+
+        .mosaic-col:nth-child(2) {
+            animation-delay: -2s;
+            --col-offset: -20px;
+        }
+
+        .mosaic-img {
+            border-radius: 16px;
+            overflow: hidden;
+            flex: 1;
+            min-height: 180px;
+        }
+
+        .mosaic-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes mosaicFloat {
+            0%, 100% { transform: translateY(var(--col-offset, 0)); }
+            50% { transform: translateY(calc(var(--col-offset, 0) - 12px)); }
+        }
+
+        .hero-center {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            padding: 3rem 2rem;
+            max-width: 680px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            border-radius: 100px;
+            background: var(--rose-bg);
+            border: 1px solid var(--rose-border);
+            margin-bottom: 2rem;
+        }
+
+        .hero-badge span {
+            font-family: var(--font-futura);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rose-gold);
+            font-weight: 500;
+        }
+
+        .hero-sub {
+            font-family: var(--font-modern);
+            font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+            color: var(--text-soft);
+            line-height: 1.7;
+            max-width: 520px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            z-index: 5;
+        }
+
+        .scroll-mouse {
+            width: 22px;
+            height: 36px;
+            border: 1.5px solid rgba(183,110,121,0.35);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-mouse::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 7px;
+            background: var(--rose-gold);
+            border-radius: 3px;
+            animation: scrollDot 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDot {
+            0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            50% { transform: translateX(-50%) translateY(12px); opacity: 0.3; }
+        }
+
+        /* ============================================
+           COLLAB BAR
+           ============================================ */
+        .collab-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 1.5rem;
+        }
+
+        .collab-label {
+            font-family: var(--font-futura);
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .collab-divider {
+            width: 1px;
+            height: 28px;
+            background: var(--border);
+        }
+
+        .collab-profiles {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .collab-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .collab-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid var(--rose-border);
+        }
+
+        .collab-handle {
+            font-size: 0.72rem;
+            color: var(--text-soft);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           PHOTO STRIP
+           ============================================ */
+        .strip-wrapper {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            margin-left: -50vw;
+            overflow: hidden;
+            padding: 2rem 0;
+            mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+
+        .strip-track {
+            display: flex;
+            gap: 14px;
+            animation: stripScroll 40s linear infinite;
+            width: max-content;
+        }
+
+        .strip-photo {
+            width: 140px;
+            height: 185px;
+            border-radius: 14px;
+            overflow: hidden;
+            flex-shrink: 0;
+            transition: transform 0.5s var(--ease-apple);
+        }
+
+        .strip-photo:hover {
+            transform: scale(1.08) translateY(-4px);
+        }
+
+        .strip-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes stripScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ============================================
+           PAIN POINTS
+           ============================================ */
+        .pain-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-top: 3rem;
+            justify-content: center;
+        }
+
+        .pain-card {
+            flex: 0 1 calc(25% - 1rem);
+            min-width: 240px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.5s var(--ease-apple);
+        }
+
+        .pain-card:hover {
+            border-color: var(--rose-border);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .pain-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--rose-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .pain-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--rose-gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .pain-title {
+            font-family: var(--font-editorial);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .pain-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           SOLUTION / FEATURES
+           ============================================ */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .module-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.75rem 2rem;
+            transition: all 0.5s var(--ease-apple);
+        }
+
+        .module-card:hover {
+            border-color: var(--rose-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .module-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: var(--rose-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .module-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--rose-gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .module-title {
+            font-family: var(--font-editorial);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .module-desc {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* ============================================
+           EBOOK PREVIEW CAROUSEL
+           ============================================ */
+        .ebook-carousel-section {
+            background: #ffffff;
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+
+        .ebook-carousel-label {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .ebook-track {
+            display: flex;
+            gap: 20px;
+            animation: ebookScroll 50s linear infinite;
+            width: max-content;
+            mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+
+        .ebook-card {
+            width: 220px;
+            height: 310px;
+            border-radius: 14px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 12px 40px rgba(183,110,121,0.12), 0 4px 16px rgba(0,0,0,0.06);
+            transition: transform 0.5s var(--ease-apple), box-shadow 0.5s var(--ease-apple);
+        }
+
+        .ebook-card:hover {
+            transform: scale(1.04) translateY(-6px);
+        }
+
+        .ebook-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+        }
+
+        @keyframes ebookScroll {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* ============================================
+           STATS BAR
+           ============================================ */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .stat-item .stat-number {
+            font-family: var(--font-editorial);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--rose-gold);
+        }
+
+        .stat-item .stat-label {
+            font-family: var(--font-futura);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* ============================================
+           LOOKBOOK CAROUSEL
+           ============================================ */
+        .lookbook-section {
+            padding: 5rem 0;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            padding: 2rem 40px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .carousel-track::-webkit-scrollbar { display: none; }
+
+        .carousel-track.animated {
+            animation: lookbookScroll var(--scroll-duration, 50s) linear infinite;
+            overflow: visible;
+        }
+
+        .carousel-track.animated:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes lookbookScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(var(--scroll-distance)); }
+        }
+
+        .carousel-card {
+            width: 260px;
+            height: 360px;
+            border-radius: 18px;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: 0 12px 40px rgba(183,110,121,0.12), 0 4px 16px rgba(0,0,0,0.06);
+            transition: transform 0.5s var(--ease-apple), box-shadow 0.5s var(--ease-apple);
+        }
+
+        .carousel-card:hover {
+            transform: scale(1.04) translateY(-6px);
+        }
+
+        .carousel-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.25rem 1.25rem;
+            background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 50%, transparent 100%);
+            color: white;
+        }
+
+        .carousel-label .dest-name {
+            font-family: var(--font-editorial);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .carousel-label .dest-flag {
+            font-size: 0.9rem;
+            margin-left: 6px;
+        }
+
+        /* ============================================
+           CONSULTORIA / LOOKS
+           ============================================ */
+        .consultoria-section {
+            background: var(--bg-soft);
+        }
+
+        .consultoria-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .consultoria-showcase .consultoria-text .body-text {
+            margin-top: 1.25rem;
+        }
+
+        .consultoria-showcase .consultoria-photo {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            aspect-ratio: 3/4;
+        }
+
+        .consultoria-showcase .consultoria-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Looks Carousel — auto-scroll seamless */
+        .looks-carousel {
+            margin-top: 3rem;
+            overflow: hidden;
+            mask-image: linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%);
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 4%, black 96%, transparent 100%);
+        }
+
+        .looks-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            padding: 1rem 0 2rem;
+            will-change: transform;
+        }
+
+        .looks-track:hover {
+            animation-play-state: paused;
+        }
+
+        .looks-track.animated {
+            animation: looksScroll var(--scroll-duration, 40s) linear infinite;
+        }
+
+        @keyframes looksScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(var(--scroll-distance)); }
+        }
+
+        .look-card {
+            width: 200px;
+            height: 280px;
+            border-radius: 16px;
+            overflow: hidden;
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.10);
+            transition: transform 0.5s var(--ease-apple), box-shadow 0.5s var(--ease-apple);
+        }
+
+        .look-card:hover {
+            transform: scale(1.04) translateY(-6px);
+            box-shadow: 0 16px 48px rgba(183,110,121,0.18);
+        }
+
+        .look-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .look-card .look-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2.5rem 1rem 1rem;
+            background: linear-gradient(0deg, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.25) 55%, transparent 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .look-label .look-icon {
+            font-size: 0.85rem;
+        }
+
+        .look-label .look-name {
+            font-family: var(--font-editorial);
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        /* ============================================
+           SOLUTION GRID — Mockup + Texto
+           ============================================ */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .solution-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ebook-mockup {
+            display: flex;
+            justify-content: center;
+        }
+
+        .ebook-cover {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 3/4;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.18), 0 8px 24px rgba(0,0,0,0.10);
+        }
+
+        .ebook-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .ebook-cover-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(180deg,
+                rgba(0,0,0,0.45) 0%,
+                rgba(0,0,0,0.05) 40%,
+                rgba(0,0,0,0.05) 70%,
+                rgba(0,0,0,0.55) 100%
+            );
+            padding: 2rem 1.75rem;
+        }
+
+        .ebook-cover-title {
+            font-family: var(--font-editorial);
+            font-size: clamp(1.4rem, 3vw, 1.9rem);
+            font-weight: 400;
+            font-style: italic;
+            color: #fff;
+            line-height: 1.15;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .ebook-cover-sub {
+            font-family: var(--font-modern);
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.5;
+            margin-top: 0.75rem;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .ebook-cover-bottom {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-modern);
+            font-size: 0.6rem;
+            letter-spacing: 0.04em;
+            color: rgba(255,255,255,0.75);
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .showcase-img {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .showcase-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ============================================
+           AUTHORS
+           ============================================ */
+        .authors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .author-card {
+            text-align: center;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            transition: all 0.5s var(--ease-apple);
+        }
+
+        .author-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .author-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--rose-border);
+            margin-bottom: 1.5rem;
+        }
+
+        .author-name {
+            font-family: var(--font-editorial);
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .author-role {
+            font-family: var(--font-futura);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--rose-gold);
+            margin-bottom: 1.25rem;
+        }
+
+        .author-bio {
+            font-size: 0.95rem;
+            color: var(--text-soft);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           PRICING
+           ============================================ */
+        .pricing-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-header {
+            padding: 2.5rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .pricing-header .eyebrow { margin-bottom: 0.75rem; }
+
+        .price-display {
+            margin: 1rem 0;
+        }
+
+        .price-old {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .price-current {
+            font-family: var(--font-editorial);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--text);
+        }
+
+        .price-current .currency {
+            font-size: 1.5rem;
+            vertical-align: super;
+        }
+
+        .price-installment {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        .pricing-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0 2rem;
+        }
+
+        .pricing-body {
+            padding: 1.5rem 2rem 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+            color: var(--text-soft);
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--rose-gold);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            padding: 1.1rem;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+        }
+
+        .pricing-footer {
+            background: #faf9f8;
+            padding: 1.25rem 2rem;
+            text-align: center;
+        }
+
+        .trust-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .trust-row svg {
+            flex-shrink: 0;
+        }
+
+        /* ============================================
+           GUARANTEE
+           ============================================ */
+        .guarantee-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 3rem auto 0;
+            padding: 2rem;
+            background: var(--bg-warm);
+            border-radius: 20px;
+        }
+
+        .guarantee-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .guarantee-text {
+            font-size: 0.85rem;
+            color: var(--text-soft);
+            line-height: 1.65;
+        }
+
+        .guarantee-text strong {
+            color: var(--text);
+        }
+
+        /* ============================================
+           FAQ
+           ============================================ */
+        .faq-list {
+            max-width: 700px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 0;
+            cursor: pointer;
+            font-family: var(--font-editorial);
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text);
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--rose-gold);
+            transition: transform 0.3s var(--ease-apple);
+            flex-shrink: 0;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--ease-apple);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            padding: 0 0 1.25rem;
+            font-size: 0.88rem;
+            color: var(--text-soft);
+            line-height: 1.65;
+        }
+
+        /* ============================================
+           STICKY BAR — Oferta de Lançamento
+           ============================================ */
+        .sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #fdf0f0 0%, #fce8e8 50%, #fdf0f0 100%);
+            padding: 0.7rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            z-index: 100;
+            transform: translateY(100%);
+            transition: transform 0.5s var(--ease-apple);
+            border-top: 1px solid rgba(183,110,121,0.15);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+        }
+
+        .sticky-bar.visible {
+            transform: translateY(0);
+        }
+
+        .sticky-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sticky-bar-label {
+            font-family: var(--font-futura);
+            font-size: 0.6rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--rose-gold);
+            font-weight: 600;
+        }
+
+        .sticky-bar-desc {
+            font-family: var(--font-modern);
+            font-size: 0.8rem;
+            color: var(--text-soft);
+        }
+
+        .sticky-bar-price {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sticky-bar-price .price-old-sm {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .sticky-bar-price .price-new-sm {
+            font-family: var(--font-editorial);
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .sticky-bar .cta-sticky {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--rose-gold), #C4848D);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.65rem 1.75rem;
+            font-family: var(--font-futura);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-apple);
+            white-space: nowrap;
+        }
+
+        .sticky-bar .cta-sticky:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(183,110,121,0.35);
+        }
+
+        .sticky-bar-left img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .sticky-bar-left span {
+            font-family: var(--font-editorial);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .sticky-bar .cta-primary {
+            padding: 0.65rem 1.75rem;
+            font-size: 0.72rem;
+        }
+
+        /* ============================================
+           SOCIAL PROOF STRIP
+           ============================================ */
+        .social-proof-strip {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .proof-card {
+            width: 140px;
+            height: 200px;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .proof-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           REVEAL ANIMATION
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s var(--ease-silk), transform 1s var(--ease-silk);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 900px) {
+            .mosaic-side { display: none; }
+            .solution-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .ebook-cover { max-width: 320px; }
+            .showcase-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .consultoria-showcase {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .consultoria-showcase .consultoria-photo {
+                aspect-ratio: 3/4;
+                max-height: none;
+                width: 100%;
+                margin: 0 auto;
+            }
+            .consultoria-showcase .consultoria-text { text-align: center; }
+            .authors-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .stats-bar { grid-template-columns: 1fr 1fr; }
+            .sticky-bar { gap: 12px; padding: 0.6rem 1rem; }
+            .sticky-bar-desc { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .collab-bar { flex-direction: column; gap: 8px; }
+            .strip-photo { width: 100px; height: 130px; }
+            .carousel-card { width: 180px; height: 240px; }
+            .look-card { width: 160px; height: 230px; }
+            .pain-card { min-width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .sticky-bar-left .sticky-bar-label { display: none; }
+            .sticky-bar { gap: 8px; padding: 0.5rem 0.75rem; }
+            .stats-bar { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero-mosaic">
+        <!-- Left Mosaic -->
+        <div class="mosaic-side mosaic-left">
+            <div class="mosaic-col">
+                <div class="mosaic-img"><img src="images/img-01.jpg" alt="Foto de viagem 1"></div>
+                <div class="mosaic-img"><img src="images/jhenni-look-1.jpg" alt="Look viagem 1"></div>
+            </div>
+            <div class="mosaic-col" style="--col-offset: -20px;">
+                <div class="mosaic-img"><img src="images/img-03.jpg" alt="Foto de viagem 3"></div>
+                <div class="mosaic-img"><img src="images/jhenni-look-3.jpg" alt="Look viagem 3"></div>
+                <div class="mosaic-img"><img src="images/img-05.jpg" alt="Foto de viagem 5"></div>
+            </div>
+        </div>
+
+        <!-- Hero Center -->
+        <div class="hero-center">
+            <div class="collab-bar">
+                <span class="collab-label">Collab by</span>
+                <div class="collab-divider"></div>
+                <div class="collab-profiles">
+                    <div class="collab-profile">
+                        <img class="collab-avatar" src="images/img-06.jpg" alt="Caroline Moschei">
+                        <span class="collab-handle">Caroline</span>
+                    </div>
+                    <div class="collab-profile">
+                        <img class="collab-avatar" src="images/img-07.jpg" alt="Jenniffer Thalia">
+                        <span class="collab-handle">Jenniffer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-badge"><span>Guia Digital, 105 páginas</span></div>
+
+            <h1 class="headline-xl">
+                Seu guia pessoal de<br><em>poses e fotos</em><br>de viagem
+            </h1>
+
+            <p class="hero-sub">
+                Aprenda a se posicionar, escolher looks e criar fotos incríveis em qualquer destino, mesmo sem experiência com câmeras.
+            </p>
+
+            <div class="hero-actions">
+                <a href="https://pay.hotmart.com/A104917654F?checkoutMode=10&offDiscount=L1COLLAB" class="cta-primary" target="_blank">Quero Meu Guia</a>
+                <a href="#conteúdo" class="cta-outline">Ver Conteúdo Completo</a>
+            </div>
+        </div>
+
+        <!-- Right Mosaic -->
+        <div class="mosaic-side mosaic-right">
+            <div class="mosaic-col" style="--col-offset: -15px;">
+                <div class="mosaic-img"><img src="images/img-05.jpg" alt="Foto viagem 5"></div>
+                <div class="mosaic-img"><img src="images/jhenni-look-1.jpg" alt="Look 1"></div>
+            </div>
+            <div class="mosaic-col">
+                <div class="mosaic-img"><img src="images/img-01.jpg" alt="Foto viagem 1"></div>
+                <div class="mosaic-img"><img src="images/img-03.jpg" alt="Foto viagem 3"></div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-mouse"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PHOTO STRIP
+         ============================================ -->
+    <div class="strip-wrapper">
+        <div class="strip-track">
+            <div class="strip-photo"><img src="images/img-01.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/jhenni-look-2.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/img-03.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/jhenni-look-4.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/img-05.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/jhenni-look-1.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/img-14.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/jhenni-look-5.jpg" alt=""></div>
+            <!-- Duplicated for seamless loop -->
+            <div class="strip-photo"><img src="images/img-01.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/jhenni-look-2.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/img-03.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/jhenni-look-4.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/img-05.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/jhenni-look-1.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/img-14.jpg" alt=""></div>
+            <div class="strip-photo"><img src="images/jhenni-look-5.jpg" alt=""></div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         PAIN POINTS — "Você se identifica?"
+         ============================================ -->
+    <section class="section" style="background: var(--bg-soft);">
+        <div class="container text-center reveal">
+            <span class="eyebrow">Você se identifica?</span>
+            <div class="divider" style="margin: 1rem auto;"></div>
+        </div>
+        <div class="container">
+            <div class="pain-grid">
+                <div class="pain-card reveal">
+                    <div class="pain-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><line x1="17" y1="3" x2="17" y2="7"/><line x1="15" y1="5" x2="19" y2="5"/></svg></div>
+                    <h3 class="pain-title">Não sabe como posar</h3>
+                    <p class="pain-desc">Fica travada na frente da câmera, sem saber o que fazer com as mãos, o corpo ou o olhar.</p>
+                </div>
+                <div class="pain-card reveal">
+                    <div class="pain-icon"><svg viewBox="0 0 24 24"><path d="M6 2l1.5 3.5L11 7l-3.5 1.5L6 12l-1.5-3.5L1 7l3.5-1.5z"/><path d="M14 6l1 2.5L17.5 10l-2.5 1L14 13.5 13 11l-2.5-1L13 8.5z"/><path d="M20 3v4"/><path d="M22 5h-4"/></svg></div>
+                    <h3 class="pain-title">Look errado</h3>
+                    <p class="pain-desc">Escolhe a roupa sem pensar no destino e percebe que nada combinou com a paisagem.</p>
+                </div>
+                <div class="pain-card reveal">
+                    <div class="pain-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div>
+                    <h3 class="pain-title">Ângulos desfavoráveis</h3>
+                    <p class="pain-desc">Fotos de cima pra baixo, pés cortados, enquadramento torto. Detalhes que transformam.</p>
+                </div>
+                <div class="pain-card reveal">
+                    <div class="pain-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9h1"/><path d="M9 13h1"/><path d="M9 17h1"/></svg></div>
+                    <h3 class="pain-title">Pontos turísticos lotados</h3>
+                    <p class="pain-desc">Quer aquela foto linda, mas sempre tem milhares de pessoas atrás. Parece impossível.</p>
+                </div>
+                <div class="pain-card reveal">
+                    <div class="pain-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
+                    <h3 class="pain-title">Luz inadequada</h3>
+                    <p class="pain-desc">Fotografou no sol do meio-dia, com sombras duras e cores chapadas. Existe uma hora mágica.</p>
+                </div>
+                <div class="pain-card reveal">
+                    <div class="pain-icon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg></div>
+                    <h3 class="pain-title">Falta de narrativa</h3>
+                    <p class="pain-desc">Todas parecem iguais: mesma pose, mesmo ângulo. Falta criatividade e intenção.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SOLUTION — Mockup + Texto
+         ============================================ -->
+    <section class="section">
+        <div class="container">
+            <div class="solution-grid reveal">
+                <!-- Ebook mockup -->
+                <div class="ebook-mockup">
+                    <div class="ebook-cover">
+                        <img src="images/img-04.jpg" alt="Guia pessoal de poses e fotos de viagem">
+                        <div class="ebook-cover-overlay">
+                            <div class="ebook-cover-top">
+                                <h3 class="ebook-cover-title">Guia pessoal de poses e fotos de viagem</h3>
+                                <p class="ebook-cover-sub">Aprenda a se posicionar, escolher roupas e orientar suas fotos durante a viagem, mesmo sem experiência.</p>
+                            </div>
+                            <div class="ebook-cover-bottom">
+                                <span>Onde ficar</span><span>|</span><span>Como posar</span><span>|</span><span>O que vestir</span><span>|</span><span>Ângulos certos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Texto -->
+                <div class="solution-text">
+                    <span class="eyebrow">A Solução</span>
+                    <div class="divider"></div>
+                    <h2 class="headline-lg">Tudo para transformar suas fotos de viagem</h2>
+                    <p class="body-text" style="margin-top: 1.5rem;">
+                        Reunimos 12 anos de experiência em fotografia internacional e consultoria de imagem do Istituto Marangoni de Milão. Poses criativas, looks estratégicos, horários ideais, ângulos que favorecem e narrativas visuais, tudo explicado de forma prática e visual.
+                    </p>
+                    <div style="margin-top: 2rem;">
+                        <a href="#conteúdo" class="cta-primary">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+                            Ver Conteúdo Completo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         EBOOK PREVIEW CAROUSEL
+         ============================================ -->
+    <section class="ebook-carousel-section">
+        <div class="ebook-carousel-label">
+            <span class="eyebrow">Veja algumas páginas do guia</span>
+        </div>
+        <div class="ebook-track">
+            <!-- 12 fotos únicas — Carol + Day, destinos variados -->
+            <div class="ebook-card"><img src="images/carol-positano.jpg" alt="Roma" style="object-position:center 20%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-55new.jpg" alt="Nova York" style="object-position:center 30%;"></div>
+            <div class="ebook-card"><img src="images/day-florenca.jpg" alt="Florença" style="object-position:center 40%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-1.jpg" alt="Santorini" style="object-position:center 35%;"></div>
+            <div class="ebook-card"><img src="images/day-paris-eiffel.jpg" alt="Paris Day" style="object-position:center 55%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-5.jpg" alt="Hollywood" style="object-position:center 65%;"></div>
+            <div class="ebook-card"><img src="images/carol-london.jpg" alt="Positano barco" style="object-position:center 35%;"></div>
+            <div class="ebook-card"><img src="images/day-milao-gucci.jpg" alt="Milão" style="object-position:center 30%;"></div>
+            <div class="ebook-card"><img src="images/carol-beverly.jpg" alt="São Francisco" style="object-position:center 40%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-11.jpg" alt="Positano" style="object-position:center 55%;"></div>
+            <div class="ebook-card"><img src="images/carol-tulum.jpg" alt="Tulum" style="object-position:center 30%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-4.jpg" alt="Paris" style="object-position:center 70%;"></div>
+            <!-- Duplicado para loop seamless -->
+            <div class="ebook-card"><img src="images/carol-positano.jpg" alt="Roma" style="object-position:center 20%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-55new.jpg" alt="Nova York" style="object-position:center 30%;"></div>
+            <div class="ebook-card"><img src="images/day-florenca.jpg" alt="Florença" style="object-position:center 40%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-1.jpg" alt="Santorini" style="object-position:center 35%;"></div>
+            <div class="ebook-card"><img src="images/day-paris-eiffel.jpg" alt="Paris Day" style="object-position:center 55%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-5.jpg" alt="Hollywood" style="object-position:center 65%;"></div>
+            <div class="ebook-card"><img src="images/carol-london.jpg" alt="Positano barco" style="object-position:center 35%;"></div>
+            <div class="ebook-card"><img src="images/day-milao-gucci.jpg" alt="Milão" style="object-position:center 30%;"></div>
+            <div class="ebook-card"><img src="images/carol-beverly.jpg" alt="São Francisco" style="object-position:center 40%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-11.jpg" alt="Positano" style="object-position:center 55%;"></div>
+            <div class="ebook-card"><img src="images/carol-tulum.jpg" alt="Tulum" style="object-position:center 30%;"></div>
+            <div class="ebook-card"><img src="images/ebook-preview-4.jpg" alt="Paris" style="object-position:center 70%;"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         STATS BAR
+         ============================================ -->
+    <section class="section" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="container">
+            <div class="stats-bar reveal">
+                <div class="stat-item">
+                    <div class="stat-number">105</div>
+                    <div class="stat-label">Páginas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Poses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Destinos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Anos de experiência</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         O QUE VOCE VAI APRENDER
+         ============================================ -->
+    <section id="conteúdo" class="section" style="background: var(--bg-soft);">
+        <div class="container text-center reveal">
+            <span class="eyebrow">O Que Você Vai Aprender</span>
+            <div class="divider" style="margin: 1rem auto;"></div>
+            <h2 class="headline-lg">Conteúdo completo do guia</h2>
+        </div>
+        <div class="container">
+            <div class="module-grid">
+                <div class="module-card reveal">
+                    <div class="module-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg></div>
+                    <h3 class="module-title">Enquadramento & Regra dos Terços</h3>
+                    <p class="module-desc">Refine seu olhar para não cortar pés ou cabeça sem intenção. Aprenda a usar a regra dos terços para criar fotos mais harmônicas e equilibradas.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 0-4 4c0 2.05.77 3.6 1.77 4.64L6 17h12l-3.77-6.36A6.28 6.28 0 0 0 16 6a4 4 0 0 0-4-4z"/><line x1="12" y1="17" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/><line x1="7" y1="8" x2="5" y2="6"/><line x1="17" y1="8" x2="19" y2="6"/></svg></div>
+                    <h3 class="module-title">Poses por Cenário</h3>
+                    <p class="module-desc">Corpo inteiro, meio corpo, close, de costas, sentada e em movimento. Para cada tipo de cenário, a pose ideal que transforma o resultado.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M8 21l4-9 4 9"/><path d="M12 3l4 9H8l4-9z"/><circle cx="12" cy="6" r="1.5"/><line x1="2" y1="21" x2="22" y2="21"/></svg></div>
+                    <h3 class="module-title">Pontos Turísticos sem Multidão</h3>
+                    <p class="module-desc">Como fotografar na Fontana di Trevi, Torre Eiffel e Igreja de Oia sem ninguém na frente. A dica de ouro: acordar cedo muda tudo.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/><path d="M16 12a4 4 0 0 1-8 0" style="stroke-dasharray:2 2;"/></svg></div>
+                    <h3 class="module-title">Luz & Golden Hour</h3>
+                    <p class="module-desc">Final de tarde na Califórnia, manhã em Santorini, noite em Milão. Como aproveitar cada tipo de luz para valorizar suas fotos.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg></div>
+                    <h3 class="module-title">Guia Completo por Destino</h3>
+                    <p class="module-desc">Milão, Portofino, Florença, Lago di Como, Paris, Miami, Califórnia, Nova York, Las Vegas, Tulum e mais. Com indicações de restaurantes, cafés e cenários secretos.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M20.38 3.46L16 2 12 3.46 8 2 3.62 3.46A2 2 0 0 0 2 5.41V21a1 1 0 0 0 1.5.86L8 19l4 2 4-2 4.5 2.86A1 1 0 0 0 22 21V5.41a2 2 0 0 0-1.62-1.95z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                    <h3 class="module-title">Looks & Produções</h3>
+                    <p class="module-desc">Montagens completas para cada cenário: chic cool na Califórnia, boho em Tulum, elegante em Milão, praiano em Miami. O look certo muda toda a foto.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/><circle cx="5" cy="5" r="1.5"/><circle cx="19" cy="19" r="1.5"/><path d="M3 19a2 2 0 0 0 2 2h1"/><path d="M18 3h1a2 2 0 0 1 2 2v1"/></svg></div>
+                    <h3 class="module-title">Movimento & Narrativa</h3>
+                    <p class="module-desc">Um giro, uma caminhada, um café na mão. Inclua movimento nas poses para criar narrativas que parecem espontâneas e contam a história da viagem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CAROL — FOTOGRAFA PROFISSIONAL
+         ============================================ -->
+    <section class="section">
+        <div class="container text-center reveal">
+            <span class="eyebrow">Fotografia de Viagem</span>
+            <div class="divider" style="margin: 1rem auto;"></div>
+            <h2 class="headline-lg">A arte de posar e fotografar<br>em cada destino</h2>
+        </div>
+
+        <!-- Showcase: foto da Carol + texto -->
+        <div class="container">
+            <div class="consultoria-showcase reveal">
+                <div class="consultoria-photo">
+                    <img src="images/carol-positano.jpg" alt="Caroline Moschei — Fotógrafa Profissional">
+                </div>
+                <div class="consultoria-text">
+                    <h3 class="headline-md" style="margin-bottom: 0.75rem;">Caroline Moschei</h3>
+                    <p class="body-text">Fotógrafa profissional com mais de 12 anos de experiência e trabalhos em 10+ países. Especialista em direção, luz e poses que valorizam cada cenário de viagem. No guia, ela ensina tudo o que aprendeu em anos de fotografia internacional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         LOOKBOOK CAROUSEL — CAROL
+         ============================================ -->
+    <section class="lookbook-section">
+        <div class="container text-center reveal">
+            <span class="eyebrow">Lookbook da Carol</span>
+            <div class="divider" style="margin: 1rem auto;"></div>
+            <h2 class="headline-lg">Fotos reais pelo mundo</h2>
+        </div>
+        <div class="carousel-track" id="lookbookTrack">
+            <div class="carousel-card">
+                <img src="images/carol-positano.jpg" alt="Roma">
+                <div class="carousel-label"><span class="dest-name">Roma</span><span class="dest-flag">🇮🇹</span></div>
+            </div>
+            <div class="carousel-card">
+                <img src="images/carol-california.jpg" alt="Hollywood">
+                <div class="carousel-label"><span class="dest-name">Hollywood</span><span class="dest-flag">🇺🇸</span></div>
+            </div>
+            <div class="carousel-card">
+                <img src="images/carol-nyc.jpg" alt="Nova York">
+                <div class="carousel-label"><span class="dest-name">Nova York</span><span class="dest-flag">🇺🇸</span></div>
+            </div>
+            <div class="carousel-card">
+                <img src="images/carol-santorini.jpg" alt="Santorini">
+                <div class="carousel-label"><span class="dest-name">Santorini</span><span class="dest-flag">🇬🇷</span></div>
+            </div>
+            <div class="carousel-card">
+                <img src="images/carol-tulum-real.jpg" alt="Tulum">
+                <div class="carousel-label"><span class="dest-name">Tulum</span><span class="dest-flag">🇲🇽</span></div>
+            </div>
+            <div class="carousel-card">
+                <img src="images/carol-paris.jpg" alt="Paris">
+                <div class="carousel-label"><span class="dest-name">Paris</span><span class="dest-flag">🇫🇷</span></div>
+            </div>
+            <div class="carousel-card">
+                <img src="images/carol-london.jpg" alt="Positano">
+                <div class="carousel-label"><span class="dest-name">Positano</span><span class="dest-flag">🇮🇹</span></div>
+            </div>
+            <div class="carousel-card">
+                <img src="images/carol-miami.jpg" alt="Miami">
+                <div class="carousel-label"><span class="dest-name">Miami</span><span class="dest-flag">🇺🇸</span></div>
+            </div>
+            <div class="carousel-card">
+                <img src="images/carol-beverly.jpg" alt="San Francisco">
+                <div class="carousel-label"><span class="dest-name">San Francisco</span><span class="dest-flag">🇺🇸</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CONSULTORIA DE IMAGEM
+         ============================================ -->
+    <section class="section consultoria-section">
+        <div class="container text-center reveal">
+            <span class="eyebrow">Consultoria de Imagem</span>
+            <div class="divider" style="margin: 1rem auto;"></div>
+            <h2 class="headline-lg">Looks pensados para<br>cada destino</h2>
+        </div>
+
+        <!-- Showcase: foto da Jenniffer + texto -->
+        <div class="container">
+            <div class="consultoria-showcase reveal">
+                <div class="consultoria-text">
+                    <h3 class="headline-md" style="margin-bottom: 0.75rem;">Jenniffer Thalia</h3>
+                    <p class="body-text">Formada pelo Istituto Marangoni de Milão, Jenniffer traz sua expertise em consultoria de imagem para que você saiba exatamente o que vestir em cada cenário. No guia, ela monta looks completos destino por destino.</p>
+                </div>
+                <div class="consultoria-photo">
+                    <img src="images/img-46.jpg" alt="Jenniffer Thalia — Consultora de Imagem">
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel de Looks — auto-scroll seamless, fotos da Day -->
+        <div class="looks-carousel">
+            <div class="looks-track" id="dayLooksTrack">
+                <div class="look-card">
+                    <img src="images/day-florenca.jpg" alt="Day em Florença">
+                    <div class="look-label"><span class="look-icon">🇮🇹</span><span class="look-name">Florença</span></div>
+                </div>
+                <div class="look-card">
+                    <img src="images/day-milao-gucci.jpg" alt="Day em Milão — Gucci">
+                    <div class="look-label"><span class="look-icon">👜</span><span class="look-name">Milão</span></div>
+                </div>
+                <div class="look-card">
+                    <img src="images/day-paris-eiffel.jpg" alt="Day em Paris — Torre Eiffel">
+                    <div class="look-label"><span class="look-icon">🗼</span><span class="look-name">Paris</span></div>
+                </div>
+                <div class="look-card">
+                    <img src="images/day-lago-como.jpg" alt="Day no Lago di Como">
+                    <div class="look-label"><span class="look-icon">🎾</span><span class="look-name">Lago di Como</span></div>
+                </div>
+                <div class="look-card">
+                    <img src="images/day-milao-galleria.jpg" alt="Day na Galleria Vittorio Emanuele">
+                    <div class="look-label"><span class="look-icon">✨</span><span class="look-name">Galleria</span></div>
+                </div>
+                <div class="look-card">
+                    <img src="images/day-paris-museu.jpg" alt="Day no Museu de Moda — Paris">
+                    <div class="look-label"><span class="look-icon">🎨</span><span class="look-name">Museu</span></div>
+                </div>
+                <div class="look-card">
+                    <img src="images/day-austria.jpg" alt="Day na Áustria">
+                    <div class="look-label"><span class="look-icon">🇦🇹</span><span class="look-name">Áustria</span></div>
+                </div>
+                <div class="look-card">
+                    <img src="images/day-miami-ferrari.jpg" alt="Day em Miami">
+                    <div class="look-label"><span class="look-icon">🌴</span><span class="look-name">Miami</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         AUTHORS / QUEM CRIOU
+         ============================================ -->
+    <section class="section" style="background: var(--bg-warm);">
+        <div class="container text-center reveal">
+            <span class="eyebrow">Quem Criou Este Guia</span>
+            <h2 class="headline-lg" style="margin-top: 0.75rem;">Duas especialistas, um guia completo</h2>
+            <div class="divider" style="margin: 1rem auto;"></div>
+        </div>
+        <div class="container">
+            <div class="authors-grid">
+                <div class="author-card reveal">
+                    <img class="author-avatar" src="images/perfil-carol.jpg" alt="Caroline Moschei">
+                    <h3 class="author-name">Caroline Moschei</h3>
+                    <p class="author-role">Fotógrafa Profissional</p>
+                    <p class="author-bio">Mais de 12 anos de experiência e trabalhos em 10+ países. Especialista em fotografia de estúdio e viagem, com visão apurada sobre luz, direção e estética.</p>
+                </div>
+                <div class="author-card reveal">
+                    <img class="author-avatar" src="images/perfil-day.jpg" alt="Jenniffer Thalia">
+                    <h3 class="author-name">Jenniffer Thalia</h3>
+                    <p class="author-role">Consultora de Imagem, Marangoni</p>
+                    <p class="author-bio">Formada pelo Istituto Marangoni de Milão, acompanhada por mais de 2,4 milhões de mulheres. Uma das consultoras mais indicadas por lojas dos melhores shoppings de São Paulo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         PRICING
+         ============================================ -->
+    <section class="section" style="background: var(--bg-warm);">
+        <div class="container text-center reveal">
+            <span class="eyebrow">Acesso Imediato</span>
+            <div class="divider" style="margin: 1rem auto;"></div>
+            <h2 class="headline-lg">Invista em fotos que você vai<br>amar para sempre</h2>
+        </div>
+
+        <div style="margin-top: 3rem;">
+            <div class="pricing-card reveal">
+                <div class="pricing-header">
+                    <span class="eyebrow">Guia Digital Completo</span>
+                    <div class="price-display">
+                        <p class="price-old">de R$ 159,80</p>
+                        <p class="price-current"><span class="currency">R$</span> 79,90</p>
+                        <p class="price-installment">ou 12x de R$ 7,99 no cartão</p>
+                    </div>
+                </div>
+
+                <div class="pricing-divider"></div>
+
+                <div class="pricing-body">
+                    <ul class="features-list">
+                        <li>105 páginas de conteúdo pratico e visual</li>
+                        <li>100+ variações de poses por cenário</li>
+                        <li>Guia de looks por destino (Paris, Milão, Miami e mais)</li>
+                        <li>Ângulos, iluminação e golden hour</li>
+                        <li>Acesso vitalício, baixe quantas vezes quiser</li>
+                        <li>Entrega imediata no seu e-mail</li>
+                    </ul>
+                    <a href="https://pay.hotmart.com/A104917654F?checkoutMode=10&offDiscount=L1COLLAB" class="cta-primary pricing-cta" target="_blank">Quero Meu Guia Agora</a>
+                </div>
+
+                <div class="pricing-footer">
+                    <div class="trust-row">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--rose-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>Pagamento seguro</span>
+                        <span style="color:var(--border);">|</span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--rose-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>Satisfação garantida 7 dias</span>
+                    </div>
+                    <!-- Payment method icons -->
+                    <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-top:12px;">
+                        <div style="display:flex;align-items:center;justify-content:center;width:48px;height:30px;border:1px solid var(--border);border-radius:6px;background:#fff;">
+                            <svg width="32" height="20" viewBox="0 0 750 471"><g fill="none"><rect fill="#0E4595" width="750" height="471" rx="40"/><polygon fill="#fff" points="278.2,334.2 311.6,138.2 364.8,138.2 331.5,334.2"/><path fill="#fff" d="M524.3,142.7c-10.6-4-27.2-8.3-47.9-8.3-52.8,0-90,26.3-90.2,64.1-0.3,27.9,26.5,43.5,46.8,52.8 20.3,9.3,27.1,15.2,27,23.5-0.1,12.7-16.2,18.5-31.2,18.5-20.8,0-31.9-2.9-49-9.9l-6.7-3l-7.3,42.2 c12.2,5.3,34.7,9.8,58,10.1,56.2,0,92.7-26,93.1-66.4 0.2-22.1-14.1-38.9-45-52.8-18.7-9-30.2-15-30.1-24.2 0-8.1,9.7-16.8,30.7-16.8 17.5-0.3,30.2,3.5,40.1,7.4l4.8,2.2L524.3,142.7"/><path fill="#fff" d="M661.6,138.2h-41.3c-12.8,0-22.4,3.5-28,16.2l-79.3,177.8h56.1l11.2-29h68.6 c1.6,6.8,6.5,29,6.5,29h49.6L661.6,138.2z M596.2,284.5c4.4-11.2,21.4-54.3,21.4-54.3 c-0.3,0.5,4.4-11.3,7.1-18.6l3.6,16.8c0,0,10.3,46.5,12.4,56.1H596.2z"/><path fill="#fff" d="M232.8,138.2l-52.3,133.5-5.6-26.8c-9.7-30.8-39.9-64.2-73.7-80.9l47.8,169.3h56.5l84-195.1 H232.8z"/><path fill="#F7A600" d="M146.9,138.2H59.6l-0.7,3.5c67,16,111.4,54.7,129.7,101.1L170.6,155 C167.2,142.1,157.9,138.7,146.9,138.2z"/></g></svg>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:center;width:48px;height:30px;border:1px solid var(--border);border-radius:6px;background:#fff;">
+                            <svg width="32" height="20" viewBox="0 0 750 471"><g fill="none"><rect fill="#fff" width="750" height="471" rx="40"/><circle fill="#EB001B" cx="299" cy="236" r="148"/><circle fill="#F79E1B" cx="451" cy="236" r="148"/><path fill="#FF5F00" d="M375,119.7c-36.9,29-60.5,73.8-60.5,124.3s23.6,95.3,60.5,124.3 c36.9-29,60.5-73.8,60.5-124.3S411.9,148.7,375,119.7z"/></g></svg>
+                        </div>
+                        <div style="display:flex;align-items:center;justify-content:center;width:48px;height:30px;border:1px solid var(--border);border-radius:6px;background:#e8f8f5;">
+                            <svg width="28" height="14" viewBox="0 0 512 210"><path fill="#32BCAD" d="M112.3,0L0,112.3l112.3,97.2L224.5,97.2V0H112.3z M175.4,80.5l-63.1,63.1l-63.1-54.6 L112.3,25.9h63.1V80.5z"/><path fill="#32BCAD" d="M287.5,0v97.2l112.3,112.3L512,97.2L399.7,0H287.5z M463,80.5l-63.1,63.1 l-63.1-54.6l63.1-63.1H463V80.5z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guarantee -->
+            <div class="guarantee-box reveal">
+                <div class="guarantee-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--rose-gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+                <div class="guarantee-text">
+                    <strong>Garantia de 7 dias:</strong> Se por qualquer motivo o guia não atender as suas expectativas, basta solicitar o reembolso em até 7 dias, sem perguntas, sem burocracia. O risco é todo nosso.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FAQ
+         ============================================ -->
+    <section class="section">
+        <div class="container text-center reveal">
+            <span class="eyebrow">Perguntas Frequentes</span>
+            <div class="divider" style="margin: 1rem auto;"></div>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    O que exatamente eu vou receber?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Um guia digital em PDF com 105 páginas. Poses, dicas de looks por destino, narrativas visuais, ângulos, iluminação e tudo para transformar suas fotos de viagem.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    Como recebo o acesso?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Após a aprovação do pagamento, você receberá um e-mail da Hotmart com o link para acessar o guia. Também pode acessa-lo em consumer.hotmart.com a qualquer momento.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    Preciso ter experiência?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Nao! O guia foi feito para quem nãotem experiência. As dicas são visuais e práticas, basta seguir e aplicar na sua próxima viagem.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    Posso baixar mais de uma vez?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Sim! Acesso vitalício. Basta entrar em 'Minhas Compras' na Hotmart e baixar quantas vezes precisar.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    Que destinos estao incluidos?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Milão, Portofino, Florença, Lago di Como, Paris, Miami, Califórnia, Nova York, Las Vegas, Tulum, Áustria e muito mais, com dicas de restaurantes, cafés e cenários secretos em cada destino.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+                    Posso compartilhar?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Não. A licença é individual e protegida por direitos autorais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CTA FINAL
+         ============================================ -->
+    <section class="section text-center" style="background: var(--bg-cream);">
+        <div class="container-narrow reveal">
+            <h2 class="headline-lg">Suas próximas fotos de viagem<br>merecem ser <em style="color: var(--rose-gold);">inesqueciveis</em></h2>
+            <div style="margin-top: 2rem;">
+                <a href="https://pay.hotmart.com/A104917654F?checkoutMode=10&offDiscount=L1COLLAB" class="cta-primary" target="_blank">Garantir Meu Guia por R$ 79,90</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer>
+        <p>&copy; 2026 Caroline Moschei & Jenniffer Thalia. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- ============================================
+         STICKY BAR
+         ============================================ -->
+    <div class="sticky-bar" id="stickyBar">
+        <div class="sticky-bar-left">
+            <div style="display:flex;">
+                <img src="images/perfil-carol.jpg" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+                <img src="images/perfil-day.jpg" style="width:32px;height:32px;border-radius:50%;object-fit:cover;border:2px solid #fff;margin-left:-10px;box-shadow:0 1px 4px rgba(0,0,0,0.1);">
+            </div>
+            <span class="sticky-bar-label">Oferta de Lançamento</span>
+        </div>
+        <div class="sticky-bar-price">
+            <span class="price-old-sm">R$ 187</span>
+            <span class="price-new-sm">R$ 79,90</span>
+        </div>
+        <a href="https://pay.hotmart.com/A104917654F?checkoutMode=10&offDiscount=L1COLLAB" class="cta-sticky" target="_blank">Quero Meu Guia &rarr;</a>
+    </div>
+
+    <!-- ============================================
+         SCRIPTS
+         ============================================ -->
+    <script>
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Sticky Bar visibility
+        const hero = document.querySelector('.hero-mosaic');
+        const sticky = document.getElementById('stickyBar');
+        const stickyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    sticky.classList.add('visible');
+                } else {
+                    sticky.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0 });
+        stickyObserver.observe(hero);
+
+        // Seamless carousel — clone cards and calculate exact scroll distance
+        function initSeamlessCarousel(trackEl, speed) {
+            if (!trackEl) return;
+            const cards = Array.from(trackEl.children);
+            const gap = parseFloat(getComputedStyle(trackEl).gap) || 20;
+
+            // Calculate width of original set (all cards + gaps between them)
+            let setWidth = 0;
+            cards.forEach(card => { setWidth += card.offsetWidth; });
+            setWidth += gap * cards.length; // gap after each card (including last, before clone)
+
+            // Clone cards for seamless loop
+            cards.forEach(card => {
+                trackEl.appendChild(card.cloneNode(true));
+            });
+
+            // Set CSS variables for animation
+            trackEl.style.setProperty('--scroll-distance', `-${setWidth}px`);
+            trackEl.style.setProperty('--scroll-duration', `${setWidth / speed}s`);
+            trackEl.classList.add('animated');
+        }
+
+        // Init carousels (speed = px/s for smooth feel)
+        window.addEventListener('load', () => {
+            initSeamlessCarousel(document.getElementById('dayLooksTrack'), 45);
+            initSeamlessCarousel(document.getElementById('lookbookTrack'), 35);
+        });
+    </script>
+
+</body>
+</html>

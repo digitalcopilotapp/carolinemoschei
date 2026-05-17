@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Lives Gravadas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink: #080808; --surface: #111; --card: #161616; --bone: #F0EBE3; --caramel: #C8956C; --gold: #D4A574; --gray: #7A756F; --border: rgba(255,255,255,0.06); --red: #dc503c; --green: #4ade80; --font: 'Inter', sans-serif; --ease: cubic-bezier(0.16,1,0.3,1); }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font); background: var(--ink); color: var(--bone); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    /* LOGIN */
+    .login-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px; }
+    .login-box { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 48px 36px; max-width: 380px; width: 100%; text-align: center; }
+    .login-box h1 { font-size: 1.1rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+    .login-box p { font-size: 0.75rem; color: var(--gray); margin-bottom: 28px; }
+    .login-box .field { margin-bottom: 14px; text-align: left; }
+    .login-box label { display: block; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 5px; }
+    .login-box input { width: 100%; padding: 11px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; color: var(--bone); font-family: var(--font); font-size: 0.85rem; outline: none; transition: border-color 0.3s; }
+    .login-box input:focus { border-color: var(--caramel); }
+    .login-box .btn { width: 100%; padding: 13px; background: var(--caramel); color: #fff; font-family: var(--font); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; border: none; border-radius: 50px; cursor: pointer; margin-top: 8px; transition: background 0.3s; }
+    .login-box .btn:hover { background: var(--gold); }
+    .login-box .error { color: var(--red); font-size: 0.7rem; margin-top: 12px; display: none; }
+
+    /* ADMIN PANEL */
+    .admin { display: none; }
+    .admin.active { display: block; }
+
+    .admin-nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; }
+    .admin-nav__title { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--caramel); }
+    .admin-nav__tabs { display: flex; gap: 4px; }
+    .admin-nav__tab { padding: 8px 16px; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); background: none; border: 1px solid transparent; border-radius: 50px; cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+    .admin-nav__tab.active { color: var(--bone); background: rgba(255,255,255,0.06); border-color: var(--border); }
+    .admin-nav__tab:hover { color: var(--bone); }
+    .admin-nav__logout { padding: 8px 16px; font-size: 0.6rem; color: var(--gray); background: none; border: 1px solid var(--border); border-radius: 50px; cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+    .admin-nav__logout:hover { color: var(--red); border-color: var(--red); }
+
+    .admin-content { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+
+    /* TAB PANELS */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* LIVES TAB */
+    .lives-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+    .lives-header h2 { font-size: 1rem; font-weight: 500; }
+    .btn-add { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; background: var(--caramel); color: #fff; font-family: var(--font); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; border: none; border-radius: 50px; cursor: pointer; transition: background 0.3s; }
+    .btn-add:hover { background: var(--gold); }
+
+    .live-table { width: 100%; border-collapse: collapse; }
+    .live-table th { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .live-table td { padding: 14px 12px; border-bottom: 1px solid var(--border); font-size: 0.8rem; vertical-align: middle; }
+    .live-table .thumb { width: 100px; height: 56px; border-radius: 6px; object-fit: cover; background: #000; }
+    .live-table .status { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+    .live-table .status--on { background: var(--green); }
+    .live-table .status--off { background: var(--red); }
+    .live-table .actions { display: flex; gap: 6px; }
+    .btn-sm { padding: 6px 12px; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 6px; border: 1px solid var(--border); background: none; color: var(--bone); cursor: pointer; font-family: var(--font); transition: all 0.2s; }
+    .btn-sm:hover { background: rgba(255,255,255,0.06); }
+    .btn-sm--danger { color: var(--red); border-color: rgba(220,80,60,0.3); }
+    .btn-sm--danger:hover { background: rgba(220,80,60,0.1); }
+
+    /* USERS TAB */
+    .user-table { width: 100%; border-collapse: collapse; }
+    .user-table th { font-size: 0.55rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .user-table td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 0.8rem; }
+    .user-count { font-size: 0.7rem; color: var(--gray); margin-bottom: 20px; }
+
+    /* MODAL FORM */
+    .admin-modal { position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; }
+    .admin-modal.active { display: flex; }
+    .admin-modal__bg { position: absolute; inset: 0; background: rgba(0,0,0,0.7); }
+    .admin-modal__box { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px 28px; max-width: 440px; width: 90%; z-index: 1; }
+    .admin-modal__box h3 { font-size: 0.9rem; font-weight: 500; margin-bottom: 20px; }
+    .admin-modal__box .field { margin-bottom: 14px; }
+    .admin-modal__box label { display: block; font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 5px; }
+    .admin-modal__box input { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; color: var(--bone); font-family: var(--font); font-size: 0.82rem; outline: none; }
+    .admin-modal__box input:focus { border-color: var(--caramel); }
+    .admin-modal__actions { display: flex; gap: 10px; margin-top: 20px; }
+    .admin-modal__actions .btn { flex: 1; padding: 12px; font-family: var(--font); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 50px; cursor: pointer; border: none; }
+    .btn--primary { background: var(--caramel); color: #fff; }
+    .btn--primary:hover { background: var(--gold); }
+    .btn--ghost { background: none; border: 1px solid var(--border); color: var(--gray); }
+    .btn--ghost:hover { color: var(--bone); }
+
+    .empty { text-align: center; padding: 60px 20px; color: var(--gray); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div class="login-page" id="loginPage">
+    <div class="login-box">
+      <h1>Admin</h1>
+      <p>Painel de gerenciamento das Lives</p>
+      <div class="field"><label>Email</label><input type="email" id="loginEmail" placeholder="admin@carolinemoschei.com"></div>
+      <div class="field"><label>Senha</label><input type="password" id="loginPass" placeholder="Senha"></div>
+      <button class="btn" id="loginBtn">Entrar</button>
+      <p class="error" id="loginError"></p>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div class="admin" id="adminPanel">
+    <nav class="admin-nav">
+      <span class="admin-nav__title">Admin Lives</span>
+      <div class="admin-nav__tabs">
+        <button class="admin-nav__tab active" data-tab="lives">Lives</button>
+        <button class="admin-nav__tab" data-tab="users">Leads</button>
+      </div>
+      <button class="admin-nav__logout" id="logoutBtn">Sair</button>
+    </nav>
+
+    <div class="admin-content">
+      <!-- LIVES TAB -->
+      <div class="tab-panel active" id="tab-lives">
+        <div class="lives-header">
+          <h2>Lives Gravadas</h2>
+          <button class="btn-add" id="addLiveBtn">+ Nova Live</button>
+        </div>
+        <table class="live-table">
+          <thead><tr><th>Thumb</th><th>Titulo</th><th>YouTube ID</th><th>Ad (s)</th><th>Status</th><th>Acoes</th></tr></thead>
+          <tbody id="livesBody"></tbody>
+        </table>
+        <div class="empty" id="livesEmpty" style="display:none">Nenhuma live cadastrada</div>
+      </div>
+
+      <!-- USERS TAB -->
+      <div class="tab-panel" id="tab-users">
+        <h2 style="font-size:1rem; font-weight:500; margin-bottom:8px;">Leads Cadastrados</h2>
+        <p class="user-count" id="userCount"></p>
+        <table class="user-table">
+          <thead><tr><th>Nome</th><th>Email</th><th>WhatsApp</th><th>Data</th></tr></thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Add/Edit Live -->
+  <div class="admin-modal" id="liveModal">
+    <div class="admin-modal__bg" id="liveModalBg"></div>
+    <div class="admin-modal__box">
+      <h3 id="liveModalTitle">Nova Live</h3>
+      <input type="hidden" id="liveEditId">
+      <div class="field"><label>Titulo</label><input type="text" id="liveTitle" placeholder="Nome da live"></div>
+      <div class="field"><label>Descricao</label><input type="text" id="liveDesc" placeholder="EP 20 — ART.SESSIONS"></div>
+      <div class="field"><label>YouTube Video ID</label><input type="text" id="liveYtId" placeholder="Ex: janft5jSBeE"></div>
+      <div class="field"><label>Tempo do anuncio (segundos)</label><input type="number" id="liveAdTime" placeholder="90" value="90"></div>
+      <div class="admin-modal__actions">
+        <button class="btn btn--ghost" id="liveModalCancel">Cancelar</button>
+        <button class="btn btn--primary" id="liveModalSave">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API = 'http://localhost:3001/api';
+    let adminToken = localStorage.getItem('carol_admin_token') || '';
+
+    const $ = id => document.getElementById(id);
+    const headers = () => ({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + adminToken });
+
+    // ─── Check existing session ───
+    if (adminToken) showAdmin(); else showLogin();
+
+    function showLogin() { $('loginPage').style.display = 'flex'; $('adminPanel').classList.remove('active'); }
+    function showAdmin() { $('loginPage').style.display = 'none'; $('adminPanel').classList.add('active'); loadLives(); loadUsers(); }
+
+    // ─── Login ───
+    $('loginBtn').onclick = async () => {
+      const email = $('loginEmail').value.trim(), pass = $('loginPass').value;
+      if (!email || !pass) return;
+      try {
+        const res = await fetch(API + '/admin/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password: pass }) });
+        const data = await res.json();
+        if (!res.ok) { $('loginError').textContent = data.error; $('loginError').style.display = 'block'; return; }
+        adminToken = data.token;
+        localStorage.setItem('carol_admin_token', adminToken);
+        showAdmin();
+      } catch { $('loginError').textContent = 'Erro ao conectar com o servidor'; $('loginError').style.display = 'block'; }
+    };
+
+    $('logoutBtn').onclick = () => { adminToken = ''; localStorage.removeItem('carol_admin_token'); showLogin(); };
+
+    // ─── Tabs ───
+    document.querySelectorAll('.admin-nav__tab').forEach(tab => {
+      tab.onclick = () => {
+        document.querySelectorAll('.admin-nav__tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        $('tab-' + tab.dataset.tab).classList.add('active');
+      };
+    });
+
+    // ─── Lives CRUD ───
+    async function loadLives() {
+      try {
+        const res = await fetch(API + '/admin/lives', { headers: headers() });
+        if (!res.ok) { showLogin(); return; }
+        const lives = await res.json();
+        const body = $('livesBody');
+        body.innerHTML = '';
+        if (lives.length === 0) { $('livesEmpty').style.display = ''; return; }
+        $('livesEmpty').style.display = 'none';
+        lives.forEach(l => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><img class="thumb" src="https://i.ytimg.com/vi/${l.youtube_id}/hqdefault.jpg" alt=""></td>
+            <td>${l.title}</td>
+            <td style="font-size:0.7rem;color:var(--gray);font-family:monospace">${l.youtube_id}</td>
+            <td>${l.ad_time}s</td>
+            <td><span class="status ${l.is_active ? 'status--on' : 'status--off'}"></span></td>
+            <td class="actions">
+              <button class="btn-sm" onclick="editLive(${l.id},'${l.title.replace(/'/g,"\\'")}','${(l.description||'').replace(/'/g,"\\'")}','${l.youtube_id}',${l.ad_time})">Editar</button>
+              <button class="btn-sm" onclick="toggleLive(${l.id},${l.is_active?0:1})">${l.is_active?'Desativar':'Ativar'}</button>
+              <button class="btn-sm btn-sm--danger" onclick="deleteLive(${l.id})">Excluir</button>
+            </td>`;
+          body.appendChild(tr);
+        });
+      } catch { console.error('Erro ao carregar lives'); }
+    }
+
+    $('addLiveBtn').onclick = () => {
+      $('liveModalTitle').textContent = 'Nova Live';
+      $('liveEditId').value = '';
+      $('liveTitle').value = ''; $('liveDesc').value = ''; $('liveYtId').value = ''; $('liveAdTime').value = '90';
+      $('liveModal').classList.add('active');
+    };
+
+    window.editLive = (id, title, desc, ytId, adTime) => {
+      $('liveModalTitle').textContent = 'Editar Live';
+      $('liveEditId').value = id;
+      $('liveTitle').value = title; $('liveDesc').value = desc; $('liveYtId').value = ytId; $('liveAdTime').value = adTime;
+      $('liveModal').classList.add('active');
+    };
+
+    $('liveModalCancel').onclick = () => $('liveModal').classList.remove('active');
+    $('liveModalBg').onclick = () => $('liveModal').classList.remove('active');
+
+    $('liveModalSave').onclick = async () => {
+      const id = $('liveEditId').value;
+      const body = { title: $('liveTitle').value, description: $('liveDesc').value, youtube_id: $('liveYtId').value, ad_time: parseInt($('liveAdTime').value) || 90 };
+      if (!body.title || !body.youtube_id) return;
+
+      if (id) {
+        await fetch(API + '/admin/lives/' + id, { method: 'PUT', headers: headers(), body: JSON.stringify(body) });
+      } else {
+        await fetch(API + '/admin/lives', { method: 'POST', headers: headers(), body: JSON.stringify(body) });
+      }
+      $('liveModal').classList.remove('active');
+      loadLives();
+    };
+
+    window.toggleLive = async (id, val) => {
+      await fetch(API + '/admin/lives/' + id, { method: 'PUT', headers: headers(), body: JSON.stringify({ is_active: val }) });
+      loadLives();
+    };
+
+    window.deleteLive = async (id) => {
+      if (!confirm('Excluir esta live?')) return;
+      await fetch(API + '/admin/lives/' + id, { method: 'DELETE', headers: headers() });
+      loadLives();
+    };
+
+    // ─── Users/Leads ───
+    async function loadUsers() {
+      try {
+        const res = await fetch(API + '/admin/users', { headers: headers() });
+        if (!res.ok) return;
+        const users = await res.json();
+        $('userCount').textContent = users.length + ' lead' + (users.length !== 1 ? 's' : '') + ' cadastrado' + (users.length !== 1 ? 's' : '');
+        const body = $('usersBody');
+        body.innerHTML = '';
+        users.forEach(u => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${u.name}</td><td>${u.email}</td><td>${u.phone || '—'}</td><td style="font-size:0.7rem;color:var(--gray)">${new Date(u.created_at).toLocaleDateString('pt-BR')}</td>`;
+          body.appendChild(tr);
+        });
+      } catch { console.error('Erro ao carregar usuarios'); }
+    }
+  </script>
+</body>
+</html>

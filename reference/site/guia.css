@@ -1,0 +1,729 @@
+/* ============================================================
+   CAROLINE MOSCHEI — Paginas de Guia
+   Template base: Guia Iluminacao / Gestantes / Corporativo
+   ============================================================ */
+
+:root {
+  --ink: #080808;
+  --bone: #F0EBE3;
+  --caramel: #C8956C;
+  --gold: #D4A574;
+  --warm-gray: #7A756F;
+  --bg-light: #F5F0EB;
+  --bg-card: #FFFFFF;
+  --text-dark: #2A2520;
+  --text-body: #4A4540;
+  --text-dim: #8A8580;
+  --border: rgba(0,0,0,0.06);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --max-w: 960px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-light);
+  color: var(--text-body);
+  line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  background: var(--ink);
+  color: var(--bone);
+  padding: 60px 24px;
+}
+
+.hero__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero__text {
+  flex: 1;
+}
+
+.hero__text h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.hero__accent {
+  color: var(--caramel);
+}
+
+.hero__sub {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--warm-gray);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.hero__img {
+  flex: 0 0 380px;
+}
+
+.hero__img img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* ============================================================
+   HERO MOSAIC — Grid de fotos como background
+   ============================================================ */
+.hero--mosaic {
+  position: relative;
+  min-height: 520px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hero--mosaic .hero__grid-bg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  z-index: 1;
+}
+
+.hero--mosaic .hero__grid-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3);
+}
+
+.hero--mosaic .hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8,8,8,0.15) 0%, rgba(8,8,8,0.55) 40%, rgba(8,8,8,0.88) 100%);
+  z-index: 2;
+}
+
+.hero--mosaic .hero__inner {
+  position: relative;
+  z-index: 3;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  min-height: 520px;
+  padding: 56px 24px;
+}
+
+.hero--mosaic .hero__text {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero--mosaic .hero__text h1 {
+  font-size: 2.5rem;
+}
+
+.hero--mosaic .hero__sub {
+  max-width: 520px;
+  margin: 0 auto 28px;
+}
+
+@media (max-width: 768px) {
+  .hero--mosaic .hero__grid-bg { grid-template-columns: repeat(3, 1fr); }
+  .hero--mosaic .hero__text h1 { font-size: 1.7rem; }
+  .hero--mosaic .hero__inner { min-height: 400px; }
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  border-radius: 50px;
+  transition: all 0.3s var(--ease);
+  text-align: center;
+}
+
+.btn--primary {
+  background: var(--caramel);
+  color: var(--ink);
+}
+
+.btn--primary:hover {
+  background: var(--gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200,149,108,0.3);
+}
+
+.btn--full { width: 100%; }
+
+/* ============================================================
+   FEATURES
+   ============================================================ */
+.features {
+  padding: 64px 24px;
+  background: var(--bg-light);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.section-sub {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  max-width: 500px;
+  margin: 0 auto 40px;
+}
+
+.features__grid {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feature {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.feature:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+
+.feature__icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.feature h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.feature p {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   GALLERY — Horizontal scroll
+   ============================================================ */
+.gallery {
+  padding: 48px 0;
+  background: var(--ink);
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0%, black 3%, black 97%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 3%, black 97%, transparent 100%);
+}
+
+.gallery__track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  padding: 0;
+  width: max-content;
+  animation: galleryScroll 35s linear infinite;
+  will-change: transform;
+}
+
+.gallery__track::-webkit-scrollbar { display: none; }
+
+.gallery__track img {
+  width: 220px;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  max-width: none;
+}
+
+.gallery__track--reverse {
+  animation: galleryScrollReverse 35s linear infinite;
+}
+
+@keyframes galleryScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes galleryScrollReverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ============================================================
+   MENTORA
+   ============================================================ */
+.mentora {
+  padding: 64px 24px;
+  background: var(--bg-light);
+}
+
+.mentora__inner {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+}
+
+.mentora__bio {
+  flex: 1;
+}
+
+.mentora__logo {
+  width: 80px;
+  margin-bottom: 20px;
+}
+
+.mentora__bio h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+.mentora__bio p {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-body);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.mentora__flags {
+  margin-top: 16px;
+  height: 22px;
+}
+
+.mentora__gallery {
+  flex: 0 0 280px;
+}
+
+.mentora__gallery-track {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.mentora__gallery-track img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+  animation: mentora-reveal 0.8s ease-out both;
+}
+
+.mentora__gallery-track img:nth-child(1) { animation-delay: 0.1s; }
+.mentora__gallery-track img:nth-child(2) { animation-delay: 0.25s; }
+.mentora__gallery-track img:nth-child(3) { animation-delay: 0.4s; }
+.mentora__gallery-track img:nth-child(4) { animation-delay: 0.55s; }
+
+.mentora__gallery-track img:hover {
+  transform: scale(1.05) translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.2);
+}
+
+@keyframes mentora-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing {
+  padding: 64px 24px;
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.pricing__inner {
+  display: flex;
+  justify-content: center;
+}
+
+.pricing__card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 40px 36px;
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+
+.pricing__label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--caramel);
+  margin-bottom: 12px;
+}
+
+.pricing__value {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--bone);
+  margin-bottom: 24px;
+}
+
+.pricing__list {
+  list-style: none;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.pricing__list li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--warm-gray);
+}
+
+.pricing__list li::before {
+  content: '✓ ';
+  color: var(--caramel);
+  font-weight: 600;
+}
+
+.pricing__list li:last-child { border-bottom: none; }
+
+.pricing__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 16px;
+  border: 2px solid rgba(200,149,108,0.3);
+}
+
+/* ============================================================
+   ALUNOS — Carrosseis horizontais com scroll automatico
+   ============================================================ */
+.alunos {
+  padding: 64px 0;
+  background: var(--bg-light);
+  overflow: hidden;
+}
+
+.alunos .container {
+  margin-bottom: 32px;
+}
+
+.alunos__row {
+  margin-bottom: 12px;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0%, black 3%, black 97%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 3%, black 97%, transparent 100%);
+}
+
+.alunos__track {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  animation: scrollLeft 28s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+
+.alunos__track--reverse {
+  animation: scrollRight 28s linear infinite;
+}
+
+.alunos__track img {
+  width: 180px;
+  height: 145px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  max-width: none;
+}
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--ink);
+  color: var(--warm-gray);
+  text-align: center;
+  padding: 40px 24px 100px;
+  font-size: 0.72rem;
+}
+
+.footer__logo {
+  width: 56px;
+  margin: 0 auto 12px;
+  opacity: 0.4;
+}
+
+footer a {
+  color: var(--warm-gray);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ============================================================
+   STICKY BAR
+   ============================================================ */
+.sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(8,8,8,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 12px 20px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 100;
+}
+
+.btn--sticky {
+  background: var(--caramel);
+  color: var(--ink);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border-radius: 50px;
+  transition: background 0.3s;
+}
+
+.btn--sticky:hover {
+  background: var(--gold);
+}
+
+.sticky-bar__author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--bone);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sticky-bar__author img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq {
+  padding: 64px 24px;
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.faq .section-title {
+  color: var(--bone);
+  margin-bottom: 32px;
+}
+
+.faq__list {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.faq__item {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 18px 0;
+}
+
+.faq__item summary {
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--bone);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq__item summary::after {
+  content: '+';
+  font-size: 1.2rem;
+  color: var(--caramel);
+  transition: transform 0.3s var(--ease);
+}
+
+.faq__item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.faq__item p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--warm-gray);
+  line-height: 1.6;
+  margin-top: 12px;
+  padding-right: 24px;
+}
+
+/* ============================================================
+   FEATURES GRID COLS (5 colunas para guias gestantes/corporativo)
+   ============================================================ */
+.features__grid--cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.features__grid--cols .feature {
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero__inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero__img {
+    flex: unset;
+    max-width: 320px;
+  }
+
+  .hero__text h1 {
+    font-size: 1.7rem;
+  }
+
+  .mentora__inner {
+    flex-direction: column;
+  }
+
+  .mentora__gallery {
+    flex: unset;
+    width: 100%;
+  }
+
+  .feature {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .pricing__card {
+    margin: 0 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 40px 16px;
+  }
+
+  .hero__text h1 {
+    font-size: 1.4rem;
+  }
+
+  .hero__img {
+    flex: unset;
+    max-width: 100%;
+  }
+
+  .gallery__track img {
+    width: 160px;
+    height: 240px;
+  }
+
+  .alunos__track img {
+    width: 140px;
+    height: 112px;
+  }
+
+  footer {
+    padding-bottom: max(100px, calc(100px + env(safe-area-inset-bottom)));
+  }
+}

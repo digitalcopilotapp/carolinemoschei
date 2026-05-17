@@ -1,0 +1,1141 @@
+/* ============================================================
+   CAROLINE MOSCHEI — Link na Bio v3
+   Visual-first: usa os banners reais dela como protagonistas
+   ============================================================ */
+
+:root {
+  --ink: #080808;
+  --bone: #F0EBE3;
+  --caramel: #C8956C;
+  --gold: #D4A574;
+  --warm-gray: #7A756F;
+  --border: rgba(255,255,255,0.08);
+  --text: #E8E3DD;
+  --text-dim: #7A756F;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --max-w: 480px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--ink);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ---- Filete dourado (removido — nao existe no original) ---- */
+
+/* ============================================================
+   PROFILE
+   ============================================================ */
+.profile {
+  text-align: center;
+  padding: 48px 24px 16px;
+  max-width: var(--max-w);
+  width: 100%;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar--simple {
+  padding: 0;
+  background: none;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile__name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+
+.profile__bio {
+  margin-top: 10px;
+  line-height: 1.7;
+}
+
+.profile__bio p {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--text);
+}
+
+/* ============================================================
+   MAIN
+   ============================================================ */
+main {
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 0 12px 24px;
+}
+
+/* ---- Dividers ---- */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 4px 14px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider span {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   BANNER IMAGES — Os banners reais da Carol
+   ============================================================ */
+.banners-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.banner-img {
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.banner-img:hover {
+  transform: scale(1.015) translateY(-2px);
+  box-shadow: 0 8px 30px rgba(200,149,108,0.1);
+  border-color: rgba(200,149,108,0.2);
+}
+
+.banner-img {
+  position: relative;
+}
+.banner-img::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.35s var(--ease);
+  pointer-events: none;
+  border-radius: 14px;
+  z-index: 10;
+}
+.banner-img:hover::after {
+  background: rgba(255,255,255,0.03);
+}
+
+.banner-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  text-align: center;
+  padding: 28px 16px 52px;
+  max-width: var(--max-w);
+  width: 100%;
+}
+
+.footer__logo {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 8px;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.footer__logo:hover {
+  opacity: 0.6;
+}
+
+.footer__copy {
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  opacity: 0.5;
+}
+
+/* ============================================================
+   RICH BANNERS — Banners HTML/CSS inline (substituem imagens)
+   ============================================================ */
+.rb {
+  position: relative;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+/* --- Dark variant --- */
+.rb--dark {
+  background: linear-gradient(135deg, #0f0f0f 0%, #000 50%, #080808 100%);
+}
+
+.rb--dark::before {
+  content: '';
+  position: absolute; top: 10px; left: 10px;
+  width: 40px; height: 40px;
+  border-left: 1.5px solid var(--caramel);
+  border-top: 1.5px solid var(--caramel);
+  border-radius: 20px 0 0 0;
+  opacity: 0.5; z-index: 5;
+}
+
+.rb--dark::after {
+  content: '';
+  position: absolute; bottom: 10px; right: 10px;
+  width: 40px; height: 40px;
+  border-right: 1.5px solid var(--caramel);
+  border-bottom: 1.5px solid var(--caramel);
+  border-radius: 0 0 20px 0;
+  opacity: 0.5; z-index: 5;
+}
+
+/* --- Warm variant --- */
+.rb--warm {
+  background: linear-gradient(160deg, #2A2520 0%, #3d2e28 40%, #4a3530 100%);
+}
+
+.rb--warm::before {
+  content: '';
+  position: absolute; inset: 7px;
+  border: 1px solid var(--caramel);
+  border-radius: 2px; opacity: 0.25;
+  pointer-events: none; z-index: 0;
+}
+
+.rb--warm::after { display: none; }
+
+/* --- Cream variant (Verso) --- */
+.rb--cream {
+  background: linear-gradient(135deg, #FAF4ED 0%, #f0e8dd 100%);
+}
+
+.rb--cream::before, .rb--cream::after { display: none; }
+
+/* --- Layout --- */
+.rb__text {
+  position: relative; z-index: 2;
+  width: 52%;
+  padding: 18px 14px 18px 22px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+
+.rb__photos {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* --- Tag badge --- */
+.rb__tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 3px;
+  padding: 2px 8px;
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text); width: fit-content; margin-bottom: 10px;
+}
+
+.rb__tag-dot {
+  width: 5px; height: 5px; border-radius: 50%; background: #dc503c;
+}
+
+/* --- Title --- */
+.rb__title {
+  font-family: var(--font-display);
+  font-weight: 300; line-height: 1.08;
+  text-transform: uppercase; color: var(--text);
+  letter-spacing: 0.02em; margin-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+.rb__title b { font-weight: 600; }
+.rb__title em { font-style: italic; font-weight: 300; color: var(--gold); }
+.rb__title span { font-weight: 500; color: var(--gold); }
+.rb__title--center { text-align: center; font-size: 1.5rem; margin-bottom: 4px; }
+.rb__title--md { font-size: 1.2rem; }
+
+/* --- Subtitle --- */
+.rb__sub {
+  font-size: 0.68rem; color: var(--text-dim); font-weight: 300;
+  line-height: 1.4; margin-bottom: 8px; opacity: 0.85;
+}
+
+/* --- CTA row --- */
+.rb__cta {
+  display: flex; align-items: center; gap: 8px;
+}
+
+.rb__cta-icon {
+  width: 24px; height: 24px; background: var(--caramel);
+  border-radius: 5px; display: flex; align-items: center;
+  justify-content: center; font-size: 0.75rem; flex-shrink: 0;
+  color: #fff;
+}
+
+.rb__cta-label {
+  font-size: 0.72rem; color: var(--text); font-style: italic; font-weight: 300;
+}
+
+/* --- Separator --- */
+.rb__sep {
+  display: flex; align-items: center; margin-bottom: 10px; width: 75%;
+}
+
+.rb__sep-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  border: 1px solid var(--caramel); flex-shrink: 0;
+}
+
+.rb__sep-line { flex: 1; height: 1px; background: var(--caramel); }
+
+/* --- Tags row --- */
+.rb__tags {
+  display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px;
+}
+
+.rb__pill {
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 4px 10px; font-size: 0.62rem;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--text);
+}
+
+/* --- Button --- */
+.rb__btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1.5px solid var(--caramel); border-radius: 50px;
+  padding: 8px 16px; font-size: 0.68rem; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text);
+  background: transparent; font-family: var(--font-body); cursor: pointer;
+}
+
+.rb__btn--filled {
+  background: var(--caramel); color: #fff; border-color: var(--caramel);
+}
+
+.rb__btn-arrow {
+  width: 14px; height: 14px; background: var(--caramel);
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 0.4rem; color: #fff;
+}
+
+/* --- Banner height system (2.2) --- */
+.rb--compact { height: 130px; }
+.rb--standard { height: 155px; }
+.rb--highlight { height: 200px; }
+.rb--vertical { flex-direction: column; height: auto; }
+
+/* --- Orcamentos layout (2.1) --- */
+.rb--orcamentos .rb__photos-left {
+  position: absolute; left: 0; top: 0; width: 42%; height: 100%;
+  display: flex; gap: 2px; z-index: 0;
+}
+.rb--orcamentos .rb__photos-left > div { flex: 1; overflow: hidden; }
+.rb--orcamentos .rb__photos-left img {
+  width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65);
+}
+.rb--orcamentos .rb__gradient-overlay {
+  position: absolute; left: 0; top: 0; width: 44%; height: 100%;
+  background: linear-gradient(to right, transparent 0%, rgba(42,37,32,0.6) 50%, rgba(42,37,32,1) 100%);
+  pointer-events: none; z-index: 1;
+}
+.rb--orcamentos .rb__spacer { width: 42%; }
+.rb--orcamentos .rb__text-right {
+  flex: 1; display: flex; flex-direction: column; justify-content: center;
+  padding: 16px 22px; position: relative; z-index: 2;
+}
+.rb--orcamentos .rb__title { font-size: 1.6rem; font-weight: 400; }
+.rb--orcamentos .rb__desc {
+  font-family: var(--font-display); font-size: 0.72rem;
+  color: var(--bone); letter-spacing: 0.06em;
+}
+
+/* --- Workshop layout (2.1) --- */
+.rb__date-bar {
+  background: var(--bone); color: #2A2520; text-align: center;
+  padding: 7px; font-size: 0.68rem; letter-spacing: 0.16em;
+  text-transform: uppercase; font-weight: 500;
+}
+.rb__workshop-bottom {
+  text-align: center; padding: 14px 16px;
+  background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+}
+.rb__workshop-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1.4rem; color: white;
+}
+.rb__workshop-title em { font-weight: 300; color: var(--gold); }
+.rb__tags--center { justify-content: center; margin-top: 6px; margin-bottom: 0; }
+
+/* --- Portfolio card layout (2.1) --- */
+.rb--portfolio {
+  height: auto; flex-direction: column; align-items: center; padding: 20px 16px 18px;
+}
+.rb__portfolio-info { text-align: center; }
+.rb__portfolio-title {
+  font-family: var(--font-display); font-weight: 400; font-size: 1.05rem;
+  color: var(--bone); letter-spacing: 0.02em; margin-bottom: 4px;
+}
+.rb__portfolio-title em { color: var(--gold); font-weight: 300; }
+.rb__portfolio-categories {
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--text-dim);
+}
+
+/* --- Reversed layout helpers (2.1) --- */
+.rb__text--right { width: 52%; align-items: flex-end; text-align: right; }
+.rb__text--right .rb__title { text-align: right; }
+.rb__text--right .rb__sep { align-self: flex-end; }
+.rb__photos--left { width: 48%; }
+.rb__fade--right {
+  left: auto; right: 0;
+  background: linear-gradient(to left, #000 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
+}
+.rb--warm .rb__fade--right {
+  background: linear-gradient(to left, #2A2520 0%, rgba(42,37,32,0.5) 40%, transparent 100%);
+}
+
+/* --- Mentoria Online layout (2.1) --- */
+.rb__content-pad { padding: 18px 22px 14px; position: relative; z-index: 2; }
+
+/* --- Verso layout (2.1) --- */
+.rb--verso .rb__text { width: 52%; padding: 20px 10px 20px 22px; }
+.rb--verso .rb__label {
+  font-family: var(--font-display); font-weight: 300; font-size: 0.72rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: #2A2520; margin-bottom: 1px;
+}
+.rb--verso .rb__byline {
+  font-size: 0.62rem; color: #7A756F; letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.rb--verso .rb__title { color: #2A2520; font-size: 1.2rem; margin-bottom: 6px; }
+.rb--verso .rb__title em { color: #2A2520; }
+.rb--verso .rb__sub { color: #7A756F; margin-bottom: 10px; }
+.rb--verso .rb__photos { padding: 16px; }
+.rb--verso .rb__photo-cover {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  border-radius: 10px; box-shadow: 0 8px 28px rgba(0,0,0,0.12); display: block;
+}
+
+/* --- Tratamento layout (2.1) --- */
+.rb--tratamento { border: 5px solid red !important; }
+.rb--tratamento .rb__text { width: 48%; }
+.rb--tratamento .rb__title { font-size: 1.1rem; }
+.rb--tratamento .rb__highlight {
+  font-size: 0.68rem; color: var(--gold); margin-bottom: 2px;
+}
+.rb--tratamento .rb__byline {
+  font-size: 0.62rem; color: var(--warm-gray);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* --- Presets layout (2.1) --- */
+.rb--presets { background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #111 100%); }
+.rb--presets .rb__text { width: 58%; text-align: center; align-items: center; }
+.rb--presets .rb__title { text-align: center; font-size: 1.15rem; }
+.rb--presets .rb__sub { text-align: center; }
+.rb--presets .rb__photos {
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* --- Lives layout (2.1) --- */
+.rb__title--center { text-align: center; font-size: 1.5rem; margin-bottom: 4px; }
+.rb__sub--center { text-align: center; margin-bottom: 10px; }
+.rb__cta--center { justify-content: center; }
+
+/* --- Photo mosaic (right side) — 2.4 reduced grid --- */
+.rb__mosaic {
+  position: absolute; inset: 0;
+  display: grid; gap: 4px; padding: 8px;
+  grid-template-columns: 1fr 1.4fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.rb__mosaic-item {
+  border-radius: 5px; overflow: hidden;
+}
+
+.rb__mosaic-item img {
+  width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8);
+  object-position: center top;
+}
+
+/* Default: big photo in col 2 (RIGHT = visible, away from left fade) */
+.rb__mosaic-item--big { grid-row: span 2; grid-column: 2; }
+
+/* Reversed layouts (photos LEFT, fade from RIGHT): big photo in col 1 (LEFT = visible) */
+.rb__photos--left .rb__mosaic {
+  grid-template-columns: 1.4fr 1fr;
+}
+.rb__photos--left .rb__mosaic-item--big { grid-column: 1; }
+.rb__photos--left .rb__mosaic-item:not(.rb__mosaic-item--big) { grid-column: 2; }
+
+/* 2.5 — Filetes opt-in: hide by default, show only on select banners */
+.rb--dark::before, .rb--dark::after { display: none; }
+.rb--filete::before, .rb--filete::after { display: block; }
+
+/* --- Gradient overlay (subtle transition text→photos) --- */
+.rb__fade {
+  position: absolute; left: 0; top: 0;
+  width: 20%; height: 100%;
+  background: linear-gradient(to right, #000 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
+  z-index: 1; pointer-events: none;
+}
+
+.rb--warm .rb__fade {
+  background: linear-gradient(to right, #2A2520 0%, rgba(42,37,32,0.5) 40%, transparent 100%);
+}
+
+/* --- Strip (Workshop) --- */
+.rb__strip {
+  display: flex; gap: 3px; overflow: hidden;
+  height: 80px;
+}
+
+.rb__strip-item {
+  flex: 1; overflow: hidden;
+}
+
+.rb__strip-item img {
+  width: 100%; height: 100%; object-fit: cover; filter: brightness(0.72);
+  object-position: center top;
+}
+
+/* --- Phone mockup --- */
+.rb__phone {
+  width: 80px; height: 160px; background: #000;
+  border-radius: 12px; border: 2px solid #333;
+  overflow: hidden; box-shadow: -8px 4px 20px rgba(0,0,0,0.5);
+}
+
+.rb__phone img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ============================================================
+   PORTRAIT CARDS — 3 cards portrait lado a lado (Iluminação)
+   ============================================================ */
+.rb__portrait-row {
+  position: absolute; inset: 0;
+  display: flex; gap: 5px; padding: 8px;
+  align-items: stretch;
+}
+
+.rb__portrait-card {
+  flex: 1; border-radius: 6px; overflow: hidden;
+  position: relative;
+}
+
+.rb__portrait-card img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: brightness(0.82);
+}
+
+.rb__portrait-card--featured {
+  flex: 1.3;
+}
+
+/* ============================================================
+   HERO + STACK — 1 hero grande + 2 empilhadas (Gestantes)
+   ============================================================ */
+.rb__hero-stack {
+  position: absolute; inset: 0;
+  display: flex; gap: 5px; padding: 8px;
+}
+
+.rb__hero-main {
+  flex: 1.5; border-radius: 6px; overflow: hidden;
+}
+
+.rb__hero-main img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: brightness(0.82);
+}
+
+.rb__hero-side {
+  flex: 1; display: flex; flex-direction: column; gap: 5px;
+}
+
+.rb__hero-side-item {
+  flex: 1; border-radius: 6px; overflow: hidden;
+}
+
+.rb__hero-side-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: brightness(0.82);
+}
+
+/* ============================================================
+   CASCADING CARDS — 3 cards escalonados (Pessoal/Criativo)
+   ============================================================ */
+.rb__cascade {
+  position: absolute; inset: 0;
+  display: flex; gap: 5px; padding: 8px;
+  align-items: flex-end;
+}
+
+.rb__cascade-card {
+  flex: 1; border-radius: 6px; overflow: hidden;
+  position: relative;
+}
+
+.rb__cascade-card:nth-child(1) { height: 70%; align-self: flex-start; }
+.rb__cascade-card:nth-child(2) { height: 100%; }
+.rb__cascade-card:nth-child(3) { height: 82%; align-self: center; }
+
+.rb__cascade-card img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: brightness(0.82);
+}
+
+/* ============================================================
+   OVERLAP CARDS — Cards sobrepostos com rotação (Viagem)
+   ============================================================ */
+.rb__overlap-fan {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; padding: 10px 6px;
+}
+
+.rb__overlap-card {
+  width: 32%; height: 88%;
+  border-radius: 7px; overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  border: 1.5px solid rgba(255,255,255,0.06);
+  flex-shrink: 0; position: relative;
+}
+
+.rb__overlap-card img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: brightness(0.85);
+}
+
+.rb__overlap-card:nth-child(1) {
+  transform: rotate(-4deg) translateX(6px);
+  z-index: 1;
+}
+
+.rb__overlap-card:nth-child(2) {
+  transform: translateY(-2px);
+  z-index: 3;
+}
+
+.rb__overlap-card:nth-child(3) {
+  transform: rotate(4deg) translateX(-6px);
+  z-index: 2;
+}
+
+/* ============================================================
+   SPLIT LAYOUT — 1 grande topo + 2 small embaixo (Tratamento)
+   ============================================================ */
+.rb__split-grid {
+  position: absolute; inset: 0;
+  display: grid; gap: 4px; padding: 8px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.4fr 1fr;
+}
+
+.rb__split-item {
+  border-radius: 5px; overflow: hidden;
+}
+
+.rb__split-item img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: brightness(0.82);
+}
+
+.rb__split-item--wide {
+  grid-column: span 2;
+}
+
+/* ============================================================
+   BANNER HEIGHT — Taller banners for portrait photos
+   ============================================================ */
+.rb--tall { height: 190px; }
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+.profile,
+.banners-section,
+.divider,
+footer {
+  animation: fadeIn 0.5s var(--ease) both;
+}
+
+.profile { animation-delay: 0s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   LIVES BANNER — Mosaic full-bleed com texto centralizado
+   ============================================================ */
+
+/* Mosaic background grid (full banner) */
+.lives-bg {
+  position: absolute; inset: 0; overflow: hidden;
+}
+
+.lives-bg__grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.4fr 1.4fr 0.8fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px; padding: 8px;
+  height: 100%; width: 100%;
+}
+
+.lives-bg__item {
+  border-radius: 5px; overflow: hidden;
+}
+
+.lives-bg__item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: brightness(0.4) saturate(0.85);
+}
+
+.lives-bg__item--span { grid-row: span 2; }
+
+/* Vignette radial — escurece bordas, clareia centro */
+.lives-bg__vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(
+    ellipse 70% 80% at 50% 50%,
+    rgba(0,0,0,0.15) 0%,
+    rgba(0,0,0,0.55) 60%,
+    rgba(0,0,0,0.8) 100%
+  );
+  pointer-events: none; z-index: 1;
+}
+
+/* Centered text overlay */
+.lives-center {
+  position: relative; z-index: 2;
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 20px 16px;
+}
+
+.lives-center__tag {
+  display: inline-block;
+  font-size: 0.5rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: #fff; background: var(--caramel);
+  padding: 3px 14px; border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+/* ============================================================
+   PORTFOLIO V2 — Fan-spread overlapping cards
+   ============================================================ */
+.portfolio-v2__spread {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 14px;
+}
+
+.portfolio-v2__card {
+  width: 95px; height: 125px;
+  border-radius: 7px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.55);
+  border: 1.5px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+  transition: transform 0.45s var(--ease);
+}
+
+.portfolio-v2__card img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: brightness(0.88);
+}
+
+.portfolio-v2__card:nth-child(1) {
+  transform: rotate(-5deg) translateX(8px) translateY(4px);
+  z-index: 1;
+}
+
+.portfolio-v2__card:nth-child(2) {
+  transform: translateY(-3px);
+  z-index: 3;
+}
+
+.portfolio-v2__card:nth-child(3) {
+  transform: rotate(5deg) translateX(-8px) translateY(6px);
+  z-index: 2;
+}
+
+.banner-img:hover .portfolio-v2__card:nth-child(1) {
+  transform: rotate(-7deg) translateX(12px) translateY(2px);
+}
+
+.banner-img:hover .portfolio-v2__card:nth-child(2) {
+  transform: translateY(-7px);
+}
+
+.banner-img:hover .portfolio-v2__card:nth-child(3) {
+  transform: rotate(7deg) translateX(-12px) translateY(4px);
+}
+
+/* ============================================================
+   MENTORIA STRIP — Horizontal photo strip (bottom)
+   ============================================================ */
+.mentoria-strip {
+  display: flex; gap: 3px;
+  padding: 0 8px 8px;
+  height: 68px;
+}
+
+.mentoria-strip__item {
+  flex: 1; border-radius: 5px; overflow: hidden;
+}
+
+.mentoria-strip__item--wide { flex: 1.4; }
+
+.mentoria-strip__item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: brightness(0.7);
+}
+
+/* ============================================================
+   REVERSED FILETES — Espelha os cantos decorativos
+   ============================================================ */
+/* ============================================================
+   COOL VARIANT — Tom frio/corporativo (azul-acinzentado)
+   ============================================================ */
+.rb--cool {
+  background: linear-gradient(135deg, #0c0f14 0%, #080b10 50%, #0e1118 100%);
+}
+
+.rb--cool::before {
+  content: '';
+  position: absolute; top: 10px; left: 10px;
+  width: 40px; height: 40px;
+  border-left: 1.5px solid #8a9aad;
+  border-top: 1.5px solid #8a9aad;
+  border-radius: 20px 0 0 0;
+  opacity: 0.45; z-index: 5;
+}
+
+.rb--cool::after {
+  content: '';
+  position: absolute; bottom: 10px; right: 10px;
+  width: 40px; height: 40px;
+  border-right: 1.5px solid #8a9aad;
+  border-bottom: 1.5px solid #8a9aad;
+  border-radius: 0 0 20px 0;
+  opacity: 0.45; z-index: 5;
+}
+
+.rb--cool .rb__fade {
+  background: linear-gradient(to right, #0c0f14 0%, rgba(12,15,20,0.4) 40%, transparent 100%);
+}
+
+.rb--cool .rb__sep-dot {
+  border-color: #8a9aad;
+}
+
+.rb--cool .rb__sep-line {
+  background: #8a9aad;
+}
+
+.rb--cool .rb__cta-icon {
+  background: #8a9aad;
+}
+
+.rb--cool .rb__tag {
+  border-color: rgba(138,154,173,0.4);
+}
+
+.rb--cool .rb__tag-dot {
+  background: #5b8abf;
+}
+
+.rb--cool .rb__title span {
+  color: #a0b4c8;
+}
+
+/* ============================================================
+   WARM VARIANT — Ajustes para guias (tag dot + title span)
+   ============================================================ */
+.rb--warm .rb__tag-dot {
+  background: var(--caramel);
+}
+
+.rb--warm .rb__title span {
+  color: var(--caramel);
+}
+
+/* ============================================================
+   REVERSED FILETES — Espelha os cantos decorativos
+   ============================================================ */
+.rb--reversed-corners::before {
+  left: auto !important; right: 10px;
+  border-left: none !important;
+  border-right: 1.5px solid var(--caramel);
+  border-radius: 0 20px 0 0 !important;
+}
+
+.rb--reversed-corners::after {
+  right: auto !important; left: 10px;
+  border-right: none !important;
+  border-left: 1.5px solid var(--caramel);
+  border-radius: 0 0 0 20px !important;
+}
+
+/* ============================================================
+   RESPONSIVE — Mobile
+   ============================================================ */
+@media (max-width: 480px) {
+  .profile__bio p {
+    font-size: 0.88rem;
+  }
+
+  .divider span {
+    font-size: 0.7rem;
+  }
+
+  .footer__copy {
+    font-size: 0.7rem;
+  }
+
+}
+
+@media (max-width: 375px) {
+  .profile__bio p {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================================
+   GOLD LINE — Filete decorativo no topo
+   ============================================================ */
+.gold-line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--caramel), transparent);
+  opacity: 0.4;
+}
+
+/* ============================================================
+   TABS — Navegacao por categorias (portfolio)
+   ============================================================ */
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px 12px 8px;
+  max-width: var(--max-w);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tab {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  min-height: 36px;
+}
+
+.tab:hover {
+  color: var(--bone);
+  border-color: rgba(200,149,108,0.3);
+}
+
+.tab.active {
+  background: var(--caramel);
+  color: #fff;
+  border-color: var(--caramel);
+}
+
+.tab-panel {
+  display: none;
+  max-width: var(--max-w);
+  width: 100%;
+  margin: 0 auto;
+  padding: 8px 12px;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* ============================================================
+   GALLERY — Grid de fotos (portfolio)
+   ============================================================ */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.gallery-item {
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: brightness(0.92);
+  transition: filter 0.3s;
+}
+
+.gallery-item:hover img {
+  filter: brightness(1);
+}
+
+/* ============================================================
+   LIGHTBOX — Visualizacao fullscreen
+   ============================================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.lightbox[hidden] {
+  display: none;
+}
+
+.lb-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.lb-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--bone);
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  z-index: 1001;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-close:hover { opacity: 1; }
+
+.lb-prev,
+.lb-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--bone);
+  font-size: 2.5rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+  z-index: 1001;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-prev { left: 12px; }
+.lb-next { right: 12px; }
+.lb-prev:hover,
+.lb-next:hover { opacity: 1; }
+
+@media (min-width: 520px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

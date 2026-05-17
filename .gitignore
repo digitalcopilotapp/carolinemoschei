@@ -37,3 +37,14 @@ tracking/dc-bridge/data/
 
 # Temp
 tmp/
+
+# Hermes worker outputs — raw artifacts não vão pro repo
+vps-snapshot/wp-content/
+incoming/*.zip
+incoming/*.tar*
+tmp/
+*.zip
+reference/wetransfer-2026-videos/
+
+# Large video assets — upload diretamente ao VPS via SCP
+pages/funil/assets/vsl.mp4

@@ -1,0 +1,68 @@
+{% extends "admin/base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div style="display:flex; gap:16px; margin-bottom:24px;">
+  <div class="card stat" style="flex:1"><p class="stat__value">{{ total_lives }}</p><p class="stat__label">Lives ativas</p></div>
+  <div class="card stat" style="flex:1"><p class="stat__value">{{ total_leads }}</p><p class="stat__label">Leads total</p></div>
+</div>
+
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+  <h2 style="font-size:1.1rem; font-weight:400;">Lives</h2>
+  <a href="{{ url_for('admin.live_new') }}" class="btn btn--primary btn--small">+ Nova Live</a>
+</div>
+
+{% if lives %}
+<div class="card" style="padding:0; overflow:hidden;">
+<table>
+  <thead><tr><th>Titulo</th><th>Status</th><th>Leads</th><th>Oferta em</th><th>Acoes</th></tr></thead>
+  <tbody>
+  {% for live in lives %}
+  <tr>
+    <td><strong>{{ live.title }}</strong><br><span style="color:var(--dim); font-size:0.72rem;">/watch/{{ live.slug }}</span></td>
+    <td>
+      <form method="POST" action="{{ url_for('admin.live_toggle', live_id=live.id) }}" style="display:inline">
+        <button type="submit" class="badge {{ 'badge--active' if live.is_active else 'badge--inactive' }}" style="border:none; cursor:pointer; background:inherit;">
+          {{ 'Ativa' if live.is_active else 'Inativa' }}
+        </button>
+      </form>
+    </td>
+    <td>{{ live.leads.count() }}</td>
+    <td>{{ '%02d:%02d' | format(live.offer_timestamp // 60, live.offer_timestamp % 60) }}</td>
+    <td class="actions">
+      <a href="{{ url_for('admin.live_edit', live_id=live.id) }}" class="btn btn--outline btn--small">Editar</a>
+      <a href="{{ url_for('admin.comments', live_id=live.id) }}" class="btn btn--outline btn--small">Chat</a>
+      <form method="POST" action="{{ url_for('admin.live_delete', live_id=live.id) }}" style="display:inline" onsubmit="return confirm('Tem certeza?')">
+        <button type="submit" class="btn btn--danger btn--small">X</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% else %}
+<div class="card" style="text-align:center; color:var(--dim);">
+  <p>Nenhuma live cadastrada ainda.</p>
+  <a href="{{ url_for('admin.live_new') }}" class="btn btn--primary" style="margin-top:16px;">Criar primeira live</a>
+</div>
+{% endif %}
+
+{% if recent_leads %}
+<h2 style="font-size:1.1rem; font-weight:400; margin:32px 0 16px;">Leads recentes</h2>
+<div class="card" style="padding:0; overflow:hidden;">
+<table>
+  <thead><tr><th>Nome</th><th>Email</th><th>Live</th><th>Data</th></tr></thead>
+  <tbody>
+  {% for lead in recent_leads %}
+  <tr>
+    <td>{{ lead.name }}</td>
+    <td>{{ lead.email }}</td>
+    <td>{{ lead.live.title if lead.live else '-' }}</td>
+    <td style="color:var(--dim)">{{ lead.created_at.strftime('%d/%m %H:%M') }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+{% endblock %}

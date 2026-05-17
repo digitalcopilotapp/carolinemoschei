@@ -4,10 +4,21 @@
     { "source": "/curso-de-fotografia-de-celular", "destination": "/pages/curso-de-fotografia-de-celular.html" },
     { "source": "/guia-iluminacao", "destination": "/pages/guia-iluminacao.html" },
     { "source": "/guia-fotografia-corporativa", "destination": "/pages/guia-fotografia-corporativa.html" },
+    { "source": "/guia-de-poses", "destination": "/pages/guia-de-poses/index.html" },
+    { "source": "/funil", "destination": "/pages/funil/index.html" },
     { "source": "/links", "destination": "/pages/links.html" },
     { "source": "/presets", "destination": "/pages/presets.html" },
     { "source": "/orcamentos", "destination": "/pages/orcamentos.html" },
     { "source": "/verso-reverso", "destination": "/pages/verso-reverso.html" },
     { "source": "/wsp-2026", "destination": "/pages/wsp-2026.html" }
+  ],
+  "redirects": [
+    { "source": "/pages/guia-de-poses.html", "destination": "/guia-de-poses", "type": 301 },
+    { "source": "/guia-gestantes", "destination": "/guia-de-poses", "type": 301 },
+    { "source": "/guia-gestantes/", "destination": "/guia-de-poses", "type": 301 },
+    { "source": "/guia-de-fotografia-ensaio-pessoal-e-criativo", "destination": "/guia-de-poses", "type": 301 },
+    { "source": "/guia-de-fotografia-ensaio-pessoal-e-criativo/", "destination": "/guia-de-poses", "type": 301 },
+    { "source": "/combo-guias-2026", "destination": "/guia-de-poses", "type": 301 },
+    { "source": "/combo-guias-2026/", "destination": "/guia-de-poses", "type": 301 }
   ]
 }
