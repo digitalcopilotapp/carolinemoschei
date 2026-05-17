@@ -284,6 +284,44 @@ O site-interactions.js injeta a nav `<header class="site-global-header">` automa
 
 ---
 
+## 2026-05-17 — RAM-123: Fix v5 Dark-on-Dark Text (5 páginas v4)
+
+**Status:** in_review
+**Reviewer:** Caroline Reviewer (RAM-123)
+**Branch/commit:** main (e9e2afc — fixes já no HEAD)
+
+### Diagnóstico do bug
+
+O problema reportado como "dark-on-dark `color: #1e1917`" tinha causa raiz diferente: **animações de entrada com `opacity: 0` como estado padrão**, não conflito de cores. Todos os elementos com `.smoke-reveal` e `.panel-card` (desktop) começavam completamente invisíveis e só se tornavam visíveis via IntersectionObserver ao rolar — o que nunca disparava para conteúdo abaixo da dobra em screenshots Playwright full-page.
+
+### Decisões de layout
+- **smoke-reveal progressive enhancement:** `.smoke-reveal` base sem `opacity: 0`. Estado invisível movido para `body.js-ready .smoke-reveal:not(.is-visible) { opacity: 0 }`. JS pré-marca elementos no viewport ANTES de adicionar `js-ready` ao body → sem flash of invisible content.
+- **panel-card progressive enhancement:** Mesmo padrão. `body.js-ready .panel-card:not(.is-active)` nos breakpoints desktop (≥1024px).
+- **gallery-grid figure:** Mesmo padrão com `body.js-ready .gallery-grid figure:not(.is-revealed)`.
+- **Fallback timeout 1500ms:** Para contextos headless/sem scroll (Playwright, bots), todos os `.smoke-reveal`, `.panel-card` e `.gallery-grid figure` recebem as classes `is-visible`/`is-active`/`is-revealed` após 1.5s. Screenshots tomados em 3s+ sempre mostram conteúdo completo.
+- **`.ps-bonus` seção ws-photoshop:** Background era creme `rgba(242, 238, 230, 1)` causando texto claro-em-claro. Corrigido para dark `linear-gradient(180deg, rgba(10, 10, 16, 0.98), rgba(14, 14, 22, 0.95))`.
+- **`.ps-bonus-card` duplicada:** Havia 2 definições em site-theme.css (linha ~4514 dark + linha ~5192 cream). A segunda sobrescreve a primeira. Corrigida a segunda para dark com `color: rgba(232, 215, 198, 0.88)`.
+
+### Padrões que funcionaram
+- **Progressive enhancement com `body.js-ready`:** Pré-marcar viewport antes de adicionar a classe evita FOIC (flash of invisible content). Padrão reutilizável para qualquer animação de entrada.
+- **setTimeout 1500ms fallback:** Descoberto que IntersectionObserver com threshold 0.25 + rootMargin nunca dispara para elementos fora do viewport em screenshots Playwright full-page. O fallback resolve isso sem quebrar animações em produção.
+- **Cobrir TODOS os `.smoke-reveal` no fallback:** Usar `document.querySelectorAll('.smoke-reveal')` (não `smokeTargets`) no timeout porque páginas como `guia-v4` têm elementos com a classe `smoke-reveal` diretamente no HTML que não estão no array `smokeSelectors` do JS.
+
+### Padrões que reprovaram (e por quê)
+- `opacity: 0` como estado padrão de CSS para animações de entrada — **nunca mais**. Qualquer animação de entrada deve ser implementada como progressive enhancement: visível por padrão, invisível apenas quando `body.js-ready` (ou equivalente) estiver presente.
+- Duas definições CSS do mesmo selector em pontos distantes do arquivo — a segunda sempre ganha. Ao adicionar regra de variante para uma seção, verificar se já existe uma definição do mesmo selector mais acima.
+
+### Referências usadas
+- Diagnóstico por debug Playwright: `getComputedStyle(card).opacity` antes/depois dos timeouts
+- Progressive enhancement pattern para CSS animations (MDN, 2024)
+
+### Decisões para reusar
+- **Regra inegociável:** Toda animação de entrada em CSS usa progressive enhancement com `body.js-ready`. Never `opacity: 0` no seletor base.
+- **Fallback timeout:** Todo observer de animação de entrada recebe `setTimeout(1500, () => { querySelectorAll(selector).forEach(el => el.classList.add('is-visible')) })`.
+- **Screenshot Playwright confiável:** Esperar 3s após load + injetar force-reveal JS para garantir que screenshots mostrem conteúdo completo independente do IntersectionObserver.
+
+---
+
 ## Referência externa
 - [AGENTS.md: Web Engineer](/home/hermes/.paperclip/instances/default/companies/c9260169-f1c6-477a-8091-77df46ef4c25/agents/f5828592-267c-4382-b683-ec02edf9b0b0/instructions/AGENTS.md)
 - [Memória: Web Engineer rebrand](/home/hermes/.claude/projects/-home-hermes/memory/project_web_engineer_rebrand.md)
