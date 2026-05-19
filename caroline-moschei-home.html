@@ -1,0 +1,1684 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caroline Moschei · Fotografia</title>
+<style>
+@font-face {
+  font-family: 'Monik';
+  src: url('Monik-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Tokens ──────────────────────────────────────────── */
+:root{
+  --bg:           oklch(0.985 0.008 75);
+  --fg:           oklch(0.18 0.01 270);
+  --fg-soft:      oklch(0.42 0.01 270);
+  --fg-xsoft:     oklch(0.62 0.008 270);
+  --surface:      oklch(1 0 0);
+  --border:       oklch(0.90 0.008 75);
+  --accent:       oklch(0.55 0.12 28);
+  --accent-deep:  oklch(0.44 0.12 28);
+  --accent-light: oklch(0.55 0.12 28 / 0.1);
+  --accent-fg:    oklch(0.99 0.003 75);
+  --success:      oklch(0.52 0.14 145);
+  --success-fg:   oklch(0.99 0 0);
+  --font:         'Monik', -apple-system, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  --r-sm:  8px;
+  --r-md:  14px;
+  --r-lg:  20px;
+  --r-xl:  28px;
+  --r-pill:999px;
+}
+
+/* ─── Reset ───────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;color-scheme:light}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--font);
+  font-size:clamp(15px,1.6vw,17px);
+  line-height:1.65;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+
+/* ─── Buttons ─────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;
+  font-size:14px;font-weight:600;letter-spacing:-0.01em;
+  border-radius:var(--r-pill);
+  transition:transform .15s ease,filter .18s ease,box-shadow .18s ease;
+  cursor:pointer;
+  font-family:var(--font);
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0) scale(0.98)}
+
+.btn-primary{
+  background:var(--accent);
+  color:var(--accent-fg);
+  border:1px solid transparent;
+  box-shadow:0 2px 12px -4px oklch(0.55 0.12 28 / 0.35);
+}
+.btn-primary:hover{background:var(--accent-deep);box-shadow:0 6px 20px -6px oklch(0.55 0.12 28 / 0.45)}
+
+.btn-outline{
+  background:transparent;
+  color:var(--fg);
+  border:1.5px solid var(--border);
+}
+.btn-outline:hover{border-color:var(--fg);background:var(--surface)}
+
+.btn-wpp{
+  background:var(--accent);
+  color:var(--accent-fg);
+  border:1px solid transparent;
+  box-shadow:0 2px 12px -4px oklch(0.55 0.12 28 / 0.35);
+}
+.btn-wpp:hover{background:var(--accent-deep);box-shadow:0 6px 20px -6px oklch(0.55 0.12 28 / 0.45)}
+
+.btn-lg{padding:16px 36px;font-size:16px}
+
+/* ─── Floating header ─────────────────────────────────── */
+.header-anchor{
+  position:fixed;
+  top:clamp(12px,2vw,20px);
+  left:50%;transform:translateX(-50%);
+  width:min(760px,92vw);
+  z-index:100;
+}
+.header-inner{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  padding:10px 16px;
+  border-radius:var(--r-pill);
+  /* Much lighter: near-white glass + glow border */
+  background:oklch(0.995 0.003 80 / 0.80);
+  backdrop-filter:blur(32px) saturate(220%) brightness(1.06);
+  -webkit-backdrop-filter:blur(32px) saturate(220%) brightness(1.06);
+  border:1px solid oklch(0.88 0.018 75 / 0.45);
+  box-shadow:
+    /* specular highlight top edge */
+    0 1px 0 0 oklch(1 0 0 / 0.90) inset,
+    /* subtle bottom inner */
+    0 -1px 0 0 oklch(0.18 0.01 270 / 0.03) inset,
+    /* drop shadow */
+    0 6px 28px -6px oklch(0.18 0.01 270 / 0.14),
+    0 2px 8px -2px oklch(0.18 0.01 270 / 0.07),
+    /* glow ring on borders */
+    0 0 0 1px oklch(0.55 0.12 28 / 0.08),
+    0 0 20px -4px oklch(0.55 0.12 28 / 0.12);
+}
+/* Left: nav links */
+.header-nav{
+  display:flex;align-items:center;gap:clamp(12px,2.5vw,24px);
+  justify-content:flex-start;
+}
+.header-nav a{
+  font-size:13px;font-weight:500;letter-spacing:-0.01em;
+  color:var(--fg-soft);transition:color .18s;
+}
+.header-nav a:hover{color:var(--fg)}
+/* Center: logo */
+.header-logo{
+  display:flex;align-items:center;justify-content:center;height:36px;
+}
+.header-logo svg{height:28px;width:auto;display:block}
+/* Right: CTA */
+.header-right{display:flex;justify-content:flex-end;align-items:center}
+.btn-nav-cta{
+  padding:7px 18px;font-size:13px;font-weight:600;
+  border-radius:var(--r-pill);
+  background:var(--accent);color:var(--accent-fg);
+  border:none;cursor:pointer;font-family:var(--font);
+  transition:background .18s,transform .12s;
+}
+.btn-nav-cta:hover{background:var(--accent-deep);transform:scale(1.03)}
+/* Hamburger */
+.burger{
+  display:none;flex-direction:column;justify-content:center;
+  gap:5px;width:38px;height:38px;padding:6px;
+  background:none;border:none;cursor:pointer;
+}
+.burger span{
+  display:block;height:1.5px;background:var(--fg);
+  border-radius:2px;transition:transform .25s,opacity .25s,width .2s;
+  transform-origin:left center;
+}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(1px,-1px)}
+.burger.open span:nth-child(2){opacity:0;width:60%}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(1px,1px)}
+/* Mobile overlay */
+.nav-overlay{
+  display:none;position:fixed;inset:0;z-index:99;
+  background:oklch(0.985 0.008 75 / 0.96);
+  backdrop-filter:blur(16px);
+  flex-direction:column;align-items:center;justify-content:center;
+  gap:36px;
+}
+.nav-overlay.open{display:flex}
+.nav-overlay a{
+  font-size:clamp(24px,6vw,32px);font-weight:600;font-style:italic;
+  color:var(--fg);letter-spacing:-0.02em;
+  transition:color .18s;
+}
+.nav-overlay a:hover{color:var(--accent)}
+.nav-overlay .ov-logo{
+  position:absolute;top:clamp(20px,4vw,32px);left:50%;
+  transform:translateX(-50%);height:36px;width:auto;
+}
+.nav-overlay .ov-cta{
+  margin-top:8px;padding:14px 40px;
+  background:var(--accent);color:var(--accent-fg);
+  border-radius:var(--r-pill);font-size:16px;font-weight:700;
+  border:none;cursor:pointer;font-family:var(--font);
+  transition:background .18s,transform .12s;
+}
+.nav-overlay .ov-cta:hover{background:var(--accent-deep);transform:scale(1.03)}
+.btn-close-ov{
+  position:absolute;top:clamp(20px,4vw,32px);right:clamp(20px,4vw,32px);
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;color:var(--fg-soft);
+  background:none;border:none;cursor:pointer;
+}
+@media(max-width:600px){
+  .header-nav{display:none}
+  .burger{display:flex}
+  .header-inner{--hdr-cta-display:none}
+}
+
+/* ─── Hero ────────────────────────────────────────────── */
+/* ─── Studio Gallery Section ─────────────────────────── */
+.studio-section{
+  padding:clamp(72px,9vw,108px) clamp(20px,5vw,80px) clamp(52px,7vw,88px);
+  width:100%;
+  position:relative;
+  background:var(--bg);
+}
+.studio-header{
+  text-align:center;
+  max-width:680px;
+  margin:0 auto clamp(28px,4vw,44px);
+  position:relative;z-index:2;
+}
+.studio-desc{
+  font-size:clamp(15px,1.8vw,17px);
+  color:var(--fg-soft);
+  line-height:1.65;
+  margin-top:14px;
+}
+.studio-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  border-radius:18px;
+  overflow:hidden;
+  height:clamp(320px,44vw,560px);
+  position:relative;z-index:2;
+  max-width:1400px;
+  margin:0 auto;
+}
+.sg-main{overflow:hidden;position:relative}
+.sg-main img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  display:block;
+  transition:transform .7s ease;
+}
+.sg-main:hover img{transform:scale(1.04)}
+.sg-side{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr 1fr;
+  gap:10px;
+}
+.sg-cell{overflow:hidden;position:relative}
+.sg-cell img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center;
+  display:block;
+  transition:transform .7s ease,opacity .9s ease;
+}
+.sg-cell:hover img{transform:scale(1.06)}
+@media(max-width:900px){
+  .studio-grid{grid-template-columns:1fr;height:auto}
+  .sg-main{aspect-ratio:16/9}
+  .sg-side{grid-template-columns:repeat(4,1fr);grid-template-rows:1fr}
+  .sg-cell{aspect-ratio:1/1}
+}
+@media(max-width:600px){
+  .sg-side{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+  .sg-cell:nth-child(n+3){display:none}
+  .studio-grid{gap:6px}
+}
+
+/* ─── Marquee Strip ───────────────────────────────────── */
+.studio-marquee{
+  background:var(--fg);
+  padding:clamp(13px,2vw,20px) 0;
+  overflow:hidden;
+  user-select:none;
+}
+.marquee-inner{
+  display:flex;
+  align-items:center;
+  width:max-content;
+  will-change:transform;
+}
+.marquee-set{
+  display:inline-flex;
+  align-items:center;
+  flex-shrink:0;
+}
+.marquee-word{
+  font-family:var(--font);
+  font-size:clamp(13px,1.5vw,18px);
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:oklch(98% .003 60);
+  padding:0 clamp(14px,2vw,28px);
+  white-space:nowrap;
+}
+.marquee-dot{
+  color:var(--accent);
+  font-size:clamp(13px,1.5vw,18px);
+  opacity:.8;
+  padding:0 2px;
+  flex-shrink:0;
+}
+@media(prefers-reduced-motion:reduce){.marquee-inner{animation:none!important}}
+
+/* ─── Proof strip ─────────────────────────────────────── */
+
+/* ─── Section shared ──────────────────────────────────── */
+.section-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.section-title{font-size:clamp(28px,4vw,46px);font-weight:700;font-style:italic;line-height:1.1;letter-spacing:-0.02em;color:var(--fg);margin-bottom:14px}
+.section-desc{font-size:clamp(15px,1.8vw,17px);color:var(--fg-soft);line-height:1.65}
+
+/* ─── Corp banner ────────────────────────────────────── */
+/* ─── Gallery Marquee ────────────────────────────────── */
+.gallery-section{padding:clamp(56px,8vw,96px) 0;overflow:hidden;position:relative}
+.gallery-fade-l,.gallery-fade-r{
+  position:absolute;top:0;bottom:0;width:clamp(100px,16vw,220px);
+  pointer-events:none;z-index:10;
+}
+.gallery-fade-l{left:0;background:linear-gradient(to right, var(--bg) 0%, var(--bg) 15%, color-mix(in oklch,var(--bg) 60%,transparent) 55%, transparent 100%)}
+.gallery-fade-r{right:0;background:linear-gradient(to left, var(--bg) 0%, var(--bg) 15%, color-mix(in oklch,var(--bg) 60%,transparent) 55%, transparent 100%)}
+.gallery-label{text-align:center;margin-bottom:clamp(32px,5vw,56px);padding:0 20px}
+.gallery-3d{perspective:900px;perspective-origin:50% 0%}
+.gallery-stage{padding:8px 0 8px;transform:rotateX(20deg);transform-origin:top center;transform-style:preserve-3d}
+.mtrack{display:flex;gap:14px;width:max-content;margin-bottom:14px;will-change:transform}
+.mtrack.fwd{animation:mfwd 36s linear infinite}
+.mtrack.rev{animation:mrev 30s linear infinite}
+.mtrack.fwd-slow{animation:mfwd 46s linear infinite}
+@keyframes mfwd{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+@keyframes mrev{from{transform:translateX(-50%)} to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.mtrack{animation:none!important}}
+.mphoto{width:clamp(130px,15vw,180px);aspect-ratio:2/3;border-radius:var(--r-md);overflow:hidden;flex-shrink:0;box-shadow:0 4px 18px -4px oklch(0.18 0.01 270 / 0.13)}
+.mphoto img{width:100%;height:100%;object-fit:cover;object-position:center top;pointer-events:none;transition:transform .5s cubic-bezier(0.23,1,0.32,1)}
+.mphoto:hover img{transform:scale(1.05)}
+
+/* ─── Corporate Gallery Grid ─────────────────────────── */
+.cgrid-section{padding:clamp(56px,8vw,96px) clamp(20px,5vw,60px)}
+.cgrid-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;max-width:1400px;margin:0 auto clamp(28px,4vw,48px)}
+.cgrid-header h2{font-size:clamp(26px,3.5vw,42px);font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1.1;margin:0}
+.cgrid-header .section-eyebrow{flex-shrink:0;margin-bottom:6px}
+.cgrid-header-left{display:flex;flex-direction:column}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(8px,1.2vw,14px);max-width:1400px;margin:0 auto}
+.cgrid-item{overflow:hidden;border-radius:var(--r-lg);aspect-ratio:3/4}
+.cgrid-item img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;transition:transform .65s cubic-bezier(0.23,1,0.32,1)}
+.cgrid-item:hover img{transform:scale(1.04)}
+@media(max-width:640px){
+  .cgrid{grid-template-columns:repeat(2,1fr)}
+  .cgrid-item:last-child{display:none}
+  .cgrid-header{flex-direction:column;align-items:flex-start}
+}
+
+
+/* ─── Scroll Horizontal de Ensaios ────────────────────── */
+.svscroll{position:relative}
+.svscroll-header{text-align:center;padding:clamp(56px,8vw,96px) clamp(20px,5vw,60px) clamp(32px,5vw,56px);max-width:680px;margin:0 auto}
+.svscroll-header .section-desc{max-width:480px;margin:0 auto}
+.svscroll-sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center}
+.svscroll-track{display:flex;gap:clamp(14px,2vw,24px);padding:0 clamp(24px,5vw,80px);will-change:transform}
+.svscroll-dots{position:absolute;bottom:clamp(20px,3vh,32px);left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.svscroll-dot{width:6px;height:6px;border-radius:50%;background:var(--fg);opacity:0.2;border:none;cursor:pointer;padding:0;transition:opacity .25s,transform .25s}
+.svscroll-dot.active{opacity:0.75;transform:scale(1.5)}
+
+/* ─── Scene Card ──────────────────────────────────────── */
+.scard{position:relative;flex:0 0 clamp(280px,34vw,460px);height:clamp(380px,66vh,600px);border-radius:var(--r-xl);overflow:hidden;cursor:pointer;transition:transform .55s cubic-bezier(0.23,1,0.32,1),opacity .55s}
+.scard img{width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(0.23,1,0.32,1);display:block}
+.scard.active img{transform:scale(1.04)}
+/* Frosted glass blur layer — bottom-to-top, sits between image and text overlay */
+.scard::after{
+  content:'';
+  position:absolute;inset:0;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  mask-image:linear-gradient(to top, black 0%, black 28%, transparent 54%);
+  -webkit-mask-image:linear-gradient(to top, black 0%, black 28%, transparent 54%);
+  pointer-events:none;
+  z-index:1;
+}
+.scard-overlay{position:absolute;inset:0;background:linear-gradient(to top,oklch(12% 0.01 270 / 0.85) 0%,oklch(12% 0.01 270 / 0.38) 44%,transparent 70%);display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(14px,2vw,24px);z-index:2}
+.scard-tag{align-self:flex-start;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--fg);background:oklch(97% 0.006 75 / 0.88);padding:4px 10px;border-radius:var(--r-pill);backdrop-filter:blur(10px)}
+.scard-body{color:oklch(97% 0.004 80)}
+.scard-body h3{font-size:clamp(18px,2vw,26px);font-weight:700;font-style:italic;letter-spacing:-0.02em;line-height:1.15;margin-bottom:8px}
+.scard-body p{font-size:clamp(12px,1.3vw,13px);opacity:0.78;line-height:1.55;margin-bottom:14px}
+.scard-cta{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;text-decoration:none;color:oklch(97% 0.004 80);border:1px solid oklch(100% 0 0 / 0.28);border-radius:var(--r-pill);padding:7px 14px;backdrop-filter:blur(10px);background:oklch(100% 0 0 / 0.09);transition:background .2s,border-color .2s}
+.scard-cta:hover{background:oklch(100% 0 0 / 0.18);border-color:oklch(100% 0 0 / 0.5)}
+
+@media(max-width:768px){
+  .svscroll-sticky{position:relative;height:auto;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:24px}
+  .svscroll-track{transform:none!important;padding:0 20px}
+  .scard{flex:0 0 82vw;scroll-snap-align:center;height:clamp(340px,68vw,460px)}
+  .svscroll-dots{display:none}
+}
+
+
+/* ─── Ensaio Gestante ────────────────────────────────── */
+.gest-section{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:0;
+  max-width:1160px;
+  margin:0 auto;
+  padding:clamp(56px,8vw,96px) clamp(20px,4vw,48px);
+  align-items:center;
+}
+.gest-photo-wrap{
+  position:relative;
+  aspect-ratio:2/3;
+  max-height:580px;
+  border-radius:var(--r-xl);
+  overflow:hidden;
+}
+.gest-photo-wrap img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:opacity .9s ease;
+  opacity:0;
+}
+.gest-photo-wrap img.gp-active{opacity:1}
+.gest-content{padding:clamp(24px,4vw,56px)}
+.gest-services{
+  margin-top:clamp(28px,4vw,40px);
+  display:flex;flex-direction:column;
+  border-top:1px solid var(--border);
+}
+.gest-service-link{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:clamp(14px,2vw,18px) 0;
+  border-bottom:1px solid var(--border);
+  color:var(--fg);text-decoration:none;
+  font-size:clamp(15px,1.8vw,17px);font-weight:600;
+  transition:color .2s,padding-left .2s;
+}
+.gest-service-link:hover{color:var(--accent);padding-left:6px}
+.gest-service-link svg{opacity:0.35;transition:opacity .2s,transform .2s;flex-shrink:0}
+.gest-service-link:hover svg{opacity:1;transform:translateX(4px)}
+@media(max-width:768px){
+  .gest-section{grid-template-columns:1fr}
+  .gest-photo-wrap{aspect-ratio:3/2;max-height:300px}
+  .gest-content{padding:28px 0 0}
+}
+
+/* ─── Para fotógrafos ─────────────────────────────────── */
+.pro-section{
+  padding:clamp(64px,9vw,104px) clamp(20px,4vw,48px);
+  background:var(--fg);
+}
+.pro-header{
+  text-align:center;
+  margin-bottom:clamp(40px,6vw,64px);
+}
+.pro-header .section-eyebrow{color:var(--accent)}
+.pro-header .section-title{color:oklch(98.5% 0.008 75)}
+.pro-header .section-desc{color:oklch(98.5% 0.008 75 / 0.55);max-width:520px;margin:12px auto 0}
+.pro-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(14px,2vw,22px);
+  max-width:1100px;
+  margin:0 auto;
+}
+.pro-card{
+  background:oklch(100% 0 0 / 0.05);
+  border:1px solid oklch(100% 0 0 / 0.09);
+  border-radius:var(--r-xl);
+  padding:clamp(26px,3vw,38px);
+  display:flex;flex-direction:column;gap:10px;
+  transition:background .22s,transform .22s;
+}
+.pro-card:hover{background:oklch(100% 0 0 / 0.09);transform:translateY(-3px)}
+.pro-card-eyebrow{
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);
+}
+.pro-card h3{
+  font-size:clamp(20px,2.2vw,26px);font-weight:700;font-style:italic;
+  color:oklch(98.5% 0.008 75);line-height:1.2;letter-spacing:-0.02em;
+}
+.pro-card p{
+  font-size:clamp(13px,1.5vw,14px);color:oklch(98.5% 0.008 75 / 0.58);line-height:1.65;flex:1;
+}
+.pro-card-cta{
+  display:inline-flex;align-items:center;gap:7px;margin-top:8px;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--accent);text-decoration:none;
+  transition:gap .2s;
+}
+.pro-card-cta:hover{gap:12px}
+@media(max-width:768px){.pro-grid{grid-template-columns:1fr}}
+@media(min-width:769px) and (max-width:1023px){
+  .pro-grid{grid-template-columns:repeat(2,1fr)}
+  .pro-card:first-child{grid-column:1/-1}
+}
+
+/* ─── FAQ ─────────────────────────────────────────────── */
+.faq-section{padding:clamp(56px,8vw,96px) clamp(20px,5vw,60px);max-width:760px;margin:0 auto}
+.faq-header{text-align:center;margin-bottom:clamp(36px,5vw,56px)}
+
+.faq-item{border-radius:var(--r-lg);background:var(--surface);border:1px solid var(--border);margin-bottom:12px;overflow:hidden;transition:box-shadow .2s}
+.faq-item:hover{box-shadow:0 4px 20px -6px oklch(0.18 0.01 270 / 0.08)}
+.faq-item summary{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:clamp(16px,2.5vw,22px) clamp(16px,2.5vw,24px);
+  cursor:pointer;list-style:none;
+  font-size:clamp(15px,1.8vw,17px);font-weight:600;font-style:italic;color:var(--fg);
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-chev{flex-shrink:0;width:18px;height:18px;color:var(--fg-soft);transition:transform .25s ease}
+.faq-item[open] .faq-chev{transform:rotate(180deg)}
+.faq-body{padding:0 clamp(16px,2.5vw,24px) clamp(16px,2.5vw,22px);font-size:clamp(14px,1.7vw,15px);color:var(--fg-soft);line-height:1.7}
+
+/* ─── Final CTA ───────────────────────────────────────── */
+.final-cta{padding:clamp(64px,10vw,100px) 20px;text-align:center}
+.final-cta-title{font-size:clamp(40px,7vw,88px);font-weight:700;font-style:italic;line-height:1;letter-spacing:-0.03em;color:var(--fg);margin-bottom:28px}
+.final-cta-sub{font-size:14px;color:var(--fg-xsoft);margin-top:16px}
+
+/* ─── Floating footer ─────────────────────────────────── */
+.footer-anchor{
+  position:fixed;bottom:clamp(12px,2vw,20px);left:50%;transform:translateX(-50%);z-index:50;
+  opacity:0;pointer-events:none;transition:opacity .4s ease;
+}
+.footer-anchor.visible{opacity:1;pointer-events:auto}
+.footer-pill{
+  display:flex;align-items:center;gap:10px;padding:8px 12px 8px 8px;
+  border-radius:var(--r-pill);
+  background:oklch(0.985 0.008 75 / 0.88);
+  backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);
+  border:1px solid var(--border);
+  box-shadow:0 4px 24px -6px oklch(0.18 0.01 270 / 0.12);
+}
+.footer-wpp{
+  display:flex;align-items:center;gap:7px;padding:9px 18px;
+  background:var(--accent);color:var(--accent-fg);
+  font-size:13px;font-weight:700;border-radius:var(--r-pill);
+  transition:filter .18s,transform .12s;font-family:var(--font);
+}
+.footer-wpp:hover{filter:brightness(1.08);transform:scale(1.03)}
+.footer-icon{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:var(--r-pill);color:var(--fg-soft);transition:background .18s,color .18s}
+.footer-icon:hover{background:var(--border);color:var(--fg)}
+.footer-icon svg{width:18px;height:18px}
+
+
+/* ─── Page footer ─────────────────────────────────────── */
+.page-footer{padding:clamp(32px,5vw,56px) 20px clamp(80px,12vw,100px);text-align:center;font-size:12px;color:var(--fg-xsoft);border-top:1px solid var(--border)}
+.page-footer a{color:inherit;margin-right:16px}
+
+/* ─── Magnetic Glow Button ────────────────────────────── */
+.btn-magnetic{
+  position:relative;
+  isolation:isolate;
+  overflow:visible!important;
+  transition:transform .32s cubic-bezier(0.23,1,0.32,1),box-shadow .28s ease!important;
+  will-change:transform;
+}
+.btn-magnetic::before{
+  content:'';
+  position:absolute;inset:0;
+  border-radius:inherit;
+  background:radial-gradient(
+    circle at var(--mx,50%) var(--my,50%),
+    oklch(1 0 0 / 0.30) 0%,
+    transparent 62%
+  );
+  opacity:0;
+  transition:opacity .2s;
+  pointer-events:none;
+  z-index:1;
+}
+.btn-magnetic:hover::before{opacity:1}
+.btn-magnetic::after{
+  content:'';
+  position:absolute;inset:-14px;
+  border-radius:inherit;
+  opacity:0;
+  pointer-events:none;
+  z-index:-1;
+  filter:blur(20px);
+  transition:opacity .35s ease;
+  background:radial-gradient(
+    circle at var(--mx,50%) var(--my,50%),
+    var(--glow-color,currentColor),
+    transparent 70%
+  );
+}
+.btn-magnetic:hover::after{opacity:0.6}
+.btn-primary.btn-magnetic{--glow-color:oklch(0.55 0.12 28 / 0.65)}
+.btn-wpp.btn-magnetic{--glow-color:oklch(0.55 0.12 28 / 0.65)}
+.btn-outline.btn-magnetic{--glow-color:oklch(0.18 0.01 270 / 0.20)}
+@media(prefers-reduced-motion:reduce){.btn-magnetic,.btn-magnetic::before,.btn-magnetic::after{transition:none!important;animation:none!important}}
+
+/* ─── 3D Curved Carousel ──────────────────────────── */
+.caro-section{
+  background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:clamp(12px,2vw,20px);
+  padding:clamp(96px,11vh,128px) 0 clamp(64px,8vh,80px);
+  position:relative;
+  width:100%;
+  /* NO overflow:hidden — would kill perspective 3D context */
+}
+
+/* Wave orbs — siblings to carousel, z-index:0, no overflow:hidden needed */
+.caro-wave{
+  position:absolute;inset:0;
+  z-index:0;pointer-events:none;
+}
+.caro-wave::before,.caro-wave::after{
+  content:'';position:absolute;border-radius:50%;
+  filter:blur(90px);
+}
+.caro-wave::before{
+  width:min(80vw,720px);height:min(80vw,720px);
+  background:radial-gradient(circle,oklch(0.55 0.12 28 / 0.13) 0%,transparent 70%);
+  top:0%;left:-10%;
+  animation:orb-a 20s ease-in-out infinite;
+}
+.caro-wave::after{
+  width:min(65vw,580px);height:min(65vw,580px);
+  background:radial-gradient(circle,oklch(0.50 0.10 50 / 0.09) 0%,transparent 70%);
+  bottom:0%;right:-6%;
+  animation:orb-b 26s ease-in-out infinite;
+}
+@keyframes orb-a{
+  0%,100%{transform:translate(0,0) scale(1)}
+  35%{transform:translate(12%,8%) scale(1.10)}
+  70%{transform:translate(-6%,12%) scale(0.93)}
+}
+@keyframes orb-b{
+  0%,100%{transform:translate(0,0) scale(1)}
+  40%{transform:translate(-10%,-7%) scale(1.08)}
+  75%{transform:translate(8%,-3%) scale(0.96)}
+}
+@media(prefers-reduced-motion:reduce){
+  .caro-wave::before,.caro-wave::after{animation:none}
+}
+
+/* ─── Ver portfólio button ────────────────────────── */
+.btn-portfolio{
+  display:inline-flex;align-items:center;
+  padding:5px 5px 5px 22px;
+  background:linear-gradient(135deg,
+    oklch(0.99 0.006 82) 0%,
+    oklch(0.95 0.014 58) 50%,
+    oklch(0.96 0.008 34) 100%);
+  border:1px solid oklch(0.86 0.014 75);
+  border-radius:999px;
+  font-family:'Fraunces',Georgia,serif;
+  font-size:15px;font-weight:600;letter-spacing:-0.01em;
+  color:oklch(0.18 0.01 270);
+  cursor:pointer;
+  box-shadow:
+    0 2px 20px -6px oklch(0.55 0.12 28 / 0.22),
+    0 1px 0 0 oklch(1 0 0 / 0.85) inset;
+  transition:transform .22s cubic-bezier(0.23,1,0.32,1),box-shadow .22s;
+  text-decoration:none;
+  position:relative;z-index:1;
+}
+.btn-portfolio:hover{
+  transform:translateY(-2px) scale(1.025);
+  box-shadow:0 10px 36px -10px oklch(0.55 0.12 28 / 0.38);
+}
+.btn-portfolio:active{transform:scale(0.97)}
+.pf-badge{
+  display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;
+  background:var(--accent-deep);
+  border-radius:50%;margin-left:14px;flex-shrink:0;
+}
+.pf-badge svg{
+  width:15px;height:15px;
+  stroke:oklch(0.99 0.003 75);
+  fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+.caro-label{
+  font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);
+  position:relative;z-index:1;
+}
+/* perspective lives on scene; mask removed — overlay divs handle fade without breaking preserve-3d */
+.caro-scene{
+  perspective:1700px;
+  perspective-origin:50% 46%;
+  width:100%;
+  max-width:1400px;
+  margin:0 auto;
+  height:clamp(180px,52vh,520px);
+  position:relative;z-index:1;
+  overflow:visible;
+}
+@media(min-width:640px){
+  .caro-scene{height:clamp(260px,38vh,440px)}
+}
+
+
+.caro-fade{
+  position:absolute;top:0;bottom:0;width:clamp(60px,8vw,160px);z-index:10;pointer-events:none;
+}
+.caro-fade.left{left:0;background:linear-gradient(to right,var(--bg) 0%,transparent 100%)}
+.caro-fade.right{right:0;background:linear-gradient(to left,var(--bg) 0%,transparent 100%)}
+@media(max-width:639px){
+  .caro-scene{height:clamp(180px,26vh,260px);perspective:680px;perspective-origin:50% 42%}
+  .caro-fade{width:clamp(30px,5vw,60px)}
+  .caro-section{justify-content:flex-start;padding-top:72px;padding-bottom:16px;gap:clamp(10px,2.5vw,16px)}
+  .caro-hero-text{padding-top:12px}
+}
+.caro-stage{
+  position:absolute;inset:0;
+  transform-style:preserve-3d;
+  transform:rotateX(12deg);
+  cursor:grab;
+}
+.caro-stage:active{cursor:grabbing}
+.caro-card{
+  position:absolute;
+  width:clamp(150px,20vw,220px);
+  aspect-ratio:3/4;
+  top:50%;left:50%;
+  /* centered by JS via marginLeft/marginTop */
+  background:var(--bg);
+  border-radius:16px;overflow:hidden;cursor:pointer;
+  transition:transform 0.60s cubic-bezier(0.16,1,0.3,1),
+             opacity    0.45s ease,
+             box-shadow 0.40s ease,
+             filter     0.45s ease;
+  will-change:transform,opacity,filter;
+}
+.caro-card img{
+  width:100%;height:100%;object-fit:cover;object-position:center 20%;
+  pointer-events:none;
+  transition:transform 0.55s cubic-bezier(0.23,1,0.32,1);
+  display:block;
+}
+.caro-card.active img{transform:scale(1.04)}
+@media(prefers-reduced-motion:reduce){.caro-stage{transition:none!important}.caro-card,.caro-card img{transition:none!important}}
+
+/* ─── Caro hero text ──────────────────────────────────── */
+.caro-hero-text{
+  display:flex;flex-direction:column;align-items:center;
+  gap:clamp(8px,1.2vw,14px);
+  position:relative;z-index:1;
+  text-align:center;
+  width:100%;max-width:640px;
+  margin:0 auto;
+  padding:0 clamp(20px,5vw,48px);
+}
+.caro-hero-title{
+  font-size:clamp(22px,3.2vw,38px);
+  font-weight:700;font-style:italic;
+  line-height:1.1;letter-spacing:-0.02em;
+  color:var(--fg);
+}
+.caro-hero-title em{font-style:normal;color:var(--accent)}
+.caro-hero-desc{
+  font-family:'Fraunces',Georgia,serif;
+  font-size:clamp(13px,1.4vw,15px);
+  font-style:italic;font-weight:300;
+  line-height:1.5;letter-spacing:0.01em;
+  color:var(--fg-soft);
+  max-width:38ch;
+}
+.btn-ghost-light{
+  background:oklch(1 0 0 / 0.08);
+  color:oklch(0.97 0.005 75);
+  border:1.5px solid oklch(1 0 0 / 0.22);
+}
+.btn-ghost-light:hover{background:oklch(1 0 0 / 0.16);border-color:oklch(1 0 0 / 0.42)}
+
+/* ─── Scroll indicator (Lottie-style, pure CSS) ─────── */
+.scroll-lottie{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  margin-top:2px;
+  color:var(--fg-xsoft);
+  user-select:none;
+}
+.sl-mouse{
+  width:14px;height:22px;
+  border:1.5px solid oklch(0.62 0.008 270 / 0.40);
+  border-radius:7px;
+  display:flex;justify-content:center;
+  padding-top:3px;
+  position:relative;
+}
+.sl-dot{
+  width:2px;height:4px;
+  background:var(--fg-soft);
+  border-radius:2px;
+  animation:sl-scroll 1.8s cubic-bezier(0.45,0,0.55,1) infinite;
+}
+@keyframes sl-scroll{
+  0%  {opacity:1;transform:translateY(0)}
+  60% {opacity:0.2;transform:translateY(12px)}
+  61% {opacity:0;transform:translateY(0)}
+  100%{opacity:1;transform:translateY(0)}
+}
+.sl-arrows{display:flex;flex-direction:column;align-items:center;gap:-4px}
+.sl-arr{
+  width:10px;height:6px;
+  animation:sl-fade 1.8s ease-in-out infinite;
+}
+.sl-arr1{animation-delay:0s}
+.sl-arr2{animation-delay:0.18s}
+.sl-arr3{animation-delay:0.36s}
+@keyframes sl-fade{
+  0%,100%{opacity:0.15}
+  30%    {opacity:0.65}
+  60%    {opacity:0.15}
+}
+@media(prefers-reduced-motion:reduce){
+  .sl-dot,.sl-arr{animation:none;opacity:0.3}
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile nav overlay -->
+<div class="nav-overlay" id="nav-overlay" aria-modal="true" role="dialog" aria-label="Menu de navegação">
+  <button class="btn-close-ov" id="btn-close-ov" aria-label="Fechar menu">✕</button>
+  <svg class="ov-logo" viewBox="0 0 105 151" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M52.1752 95.4423L8.44942 51.7165V19.8199L51.119 62.7007C51.5415 63.1232 51.964 62.7007 51.964 62.2783V59.321C51.964 54.2513 50.0628 49.3929 46.4718 46.0131L0.844946 0.174995C0.422474 -0.247477 0 0.174988 0 0.597459V54.885C0 55.0963 1.28896e-05 55.0963 0.211248 55.3075L52.1752 107.271L95.901 63.5457V95.0198L57.6673 133.887C54.0763 137.478 52.1752 142.125 52.1752 147.195V149.519C52.1752 149.941 52.8089 150.152 53.0201 149.941L104.139 98.822C104.139 98.822 104.35 98.6108 104.35 98.3996V44.3232C104.35 43.9008 103.717 43.6895 103.505 43.9008L52.1752 95.4423Z" fill="#80514D"></path>
+  </svg>
+  <a href="#portfolio" onclick="closeNav()">Portfólio</a>
+  <a href="#ensaios" onclick="closeNav()">Ensaios</a>
+  <a href="#faq" onclick="closeNav()">Sobre</a>
+  <a href="#contato" onclick="closeNav()" class="ov-cta">Reservar</a>
+</div>
+
+<!-- Floating Header -->
+<div class="header-anchor" role="banner">
+  <div class="header-inner">
+    <!-- Left: nav links (desktop) / hidden on mobile -->
+    <nav class="header-nav" aria-label="Principal">
+      <a href="#portfolio" style="padding-top: 0px; padding-left: 11px;">Portfólio</a>
+      <a href="#ensaios">Ensaios</a>
+      <a href="#faq">Sobre</a>
+    </nav>
+    <!-- Center: logo mark -->
+    <a href="#" class="header-logo" aria-label="Caroline Moschei — página inicial">
+      <svg viewBox="0 0 105 151" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M52.1752 95.4423L8.44942 51.7165V19.8199L51.119 62.7007C51.5415 63.1232 51.964 62.7007 51.964 62.2783V59.321C51.964 54.2513 50.0628 49.3929 46.4718 46.0131L0.844946 0.174995C0.422474 -0.247477 0 0.174988 0 0.597459V54.885C0 55.0963 1.28896e-05 55.0963 0.211248 55.3075L52.1752 107.271L95.901 63.5457V95.0198L57.6673 133.887C54.0763 137.478 52.1752 142.125 52.1752 147.195V149.519C52.1752 149.941 52.8089 150.152 53.0201 149.941L104.139 98.822C104.139 98.822 104.35 98.6108 104.35 98.3996V44.3232C104.35 43.9008 103.717 43.6895 103.505 43.9008L52.1752 95.4423Z" fill="#80514D"></path>
+      </svg>
+    </a>
+    <!-- Right: CTA + burger -->
+    <div class="header-right">
+      <button class="btn-nav-cta" onclick="document.getElementById('contato').scrollIntoView()" style="display: var(--hdr-cta-display,flex); padding-top: 13px; padding-bottom: 13px;">Reservar</button>
+      <button class="burger" id="burger-btn" aria-label="Abrir menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- 3D Curved Carousel / Hero -->
+<section class="caro-section" aria-labelledby="caro-title" style="padding-top: 93px; margin-top: 0px;">
+  <div class="caro-wave" aria-hidden="true"></div>
+  <div class="caro-hero-text" style="padding-bottom: 36px;">
+    <h1 id="caro-title" class="caro-hero-title" style="padding-top: 27px;">Fotografia <em>premium</em><br>em São Paulo</h1>
+    <p class="caro-hero-desc">Ensaios autorais para quem quer imagens que contam uma história — com luz, cuidado e intenção.</p>
+    <!-- Scroll indicator — pure CSS Lottie-style -->
+    <div class="scroll-lottie" aria-hidden="true">
+      <div class="sl-mouse">
+        <div class="sl-dot"></div>
+      </div>
+      <div class="sl-arrows">
+        <svg class="sl-arr sl-arr1" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L8 7L15 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <svg class="sl-arr sl-arr2" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L8 7L15 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <svg class="sl-arr sl-arr3" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1L8 7L15 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="caro-fade left" aria-hidden="true"></div>
+  <div class="caro-fade right" aria-hidden="true"></div>
+  <div class="caro-scene">
+    <div class="caro-stage" id="caro-stage"></div>
+  </div>
+</section>
+
+<!-- Studio Gallery -->
+<section id="estudio" class="studio-section" data-od-id="estudio" aria-labelledby="studio-title">
+  <div class="studio-header">
+    <span class="section-eyebrow">O Estúdio</span>
+    <h2 class="section-title" id="studio-title">Um espaço incrível,<br>Projetado para você</h2>
+    <p class="studio-desc">Do ciclorama profissional ao camarim preparado, do lounge acolhedor ao cantinho gourmet com adega — cada detalhe pensado para você chegar, relaxar e entregar o melhor de você.</p>
+  </div>
+  <div class="studio-grid">
+    <div class="sg-main">
+      <img src="mpc3jnbc-fotos-estudio-caroline-moschei-10.jpg" alt="Vista geral do estúdio — espaço amplo moderno com ciclorama, iluminação profissional e lounge" loading="lazy" decoding="async">
+    </div>
+    <div class="sg-side">
+      <div class="sg-cell">
+        <img src="mpc3i4qz-fotos-estudio-caroline-moschei-1.jpg" alt="Ciclorama branco com softboxes Godox profissionais montados" loading="lazy" decoding="async">
+      </div>
+      <div class="sg-cell">
+        <img src="mpc3jnc8-fotos-estudio-caroline-moschei-11.jpg" alt="Sala de atendimento com mesa escura, arte na parede e banco estofado" loading="lazy" decoding="async">
+      </div>
+      <div class="sg-cell">
+        <img src="mpc3iyu6-fotos-estudio-caroline-moschei-3.jpg" alt="Lounge com sofá e poltronas de couro para recepção dos clientes" loading="lazy" decoding="async">
+      </div>
+      <div class="sg-cell">
+        <img src="mpc3jk61-fotos-estudio-caroline-moschei-4.jpg" alt="Espaço gourmet com adega e bar de vinhos iluminado" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee Strip -->
+<div class="studio-marquee" aria-hidden="true">
+  <div class="marquee-inner">
+    <div class="marquee-set">
+      <span class="marquee-word">Stylish</span><span class="marquee-dot">·</span>
+      <span class="marquee-word">Camarim</span><span class="marquee-dot">·</span>
+      <span class="marquee-word">Direção</span><span class="marquee-dot">·</span>
+      <span class="marquee-word">Elegância</span><span class="marquee-dot">·</span>
+      <span class="marquee-word">Minimalismo</span><span class="marquee-dot">·</span>
+      <span class="marquee-word">Iluminação</span><span class="marquee-dot">·</span>
+      <span class="marquee-word">São Paulo</span><span class="marquee-dot">·</span>
+      <span class="marquee-word">Premium</span><span class="marquee-dot">·</span>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Gallery marquee -->
+<section class="gallery-section" aria-label="Galeria de portfólio">
+  <div class="gallery-fade-l" aria-hidden="true"></div>
+  <div class="gallery-fade-r" aria-hidden="true"></div>
+  <div class="gallery-label">
+    <p class="section-eyebrow">Portfólio</p>
+    <h2 class="section-title" style="text-align:center">Cada foto conta uma história</h2>
+  </div>
+  <div class="gallery-3d" aria-hidden="true">
+    <div class="gallery-stage">
+      <div class="mtrack fwd" id="t1"></div>
+      <div class="mtrack rev" id="t2"></div>
+      <div class="mtrack fwd-slow" id="t3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Serviços — carousel de cards -->
+<section class="svscroll" id="ensaios" data-od-id="ensaios" aria-labelledby="svscroll-title">
+  <div class="svscroll-header">
+    <p class="section-eyebrow">Serviços</p>
+    <h2 class="section-title" id="svscroll-title">O que posso fazer por você</h2>
+    <p class="section-desc">Cada ensaio é pensado para o seu momento — com tempo, direção e luz certa.</p>
+  </div>
+  <div class="svscroll-sticky">
+    <div class="svscroll-track" id="svtrack">
+
+      <article class="scard active" data-product="corporativo">
+        <img src="thumbs/card_corp.jpg" alt="Headshot corporativo — executiva com postura confiante em estúdio iluminado" loading="lazy" decoding="async" width="600" height="750">
+        <div class="scard-overlay">
+          <div class="scard-body">
+            <h3>Ensaio Corporativo</h3>
+            <p>Headshots profissionais para LinkedIn, site e comunicação executiva — com direção de pose e luz para transmitir presença.</p>
+            <a href="https://wa.me/5541999999999?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Ensaio%20Corporativo" target="_blank" rel="noopener" class="scard-cta" data-cta="reservar" data-product="corporativo">
+              Reservar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="scard" data-product="gestantes">
+        <img src="thumbs/card_gest.jpg" alt="Ensaio gestante — mãe em espera sob luz natural quente com barriga visível" loading="lazy" decoding="async" width="600" height="750">
+        <div class="scard-overlay">
+          <span class="scard-tag">Pacote completo</span>
+          <div class="scard-body">
+            <h3>Ensaio Gestante</h3>
+            <p>O período mais esperado da sua vida, registrado com luz quente e direção sensível — estúdio ou área externa.</p>
+            <a href="https://wa.me/5541999999999?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Ensaio%20Gestante" target="_blank" rel="noopener" class="scard-cta" data-cta="reservar" data-product="gestantes">
+              Reservar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="scard" data-product="pessoal-criativo">
+        <img src="thumbs/card_pessoal.jpg" alt="Ensaio autoral — mulher em ambiente criativo com luz lateral contrastada" loading="lazy" decoding="async" width="600" height="750">
+        <div class="scard-overlay">
+          <div class="scard-body">
+            <h3>Ensaio Pessoal &amp; Criativo</h3>
+            <p>Ensaio autoral com tempo para você se ver — sem timing comercial, com mood totalmente personalizado.</p>
+            <a href="https://wa.me/5541999999999?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Ensaio%20Pessoal" target="_blank" rel="noopener" class="scard-cta" data-cta="reservar" data-product="pessoal-criativo">
+              Reservar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="scard" data-product="iluminacao">
+        <img src="thumbs/card_ilum.jpg" alt="Workshop de iluminação — demonstração de técnica de luz direcional em modelo" loading="lazy" decoding="async" width="600" height="750">
+        <div class="scard-overlay">
+          <span class="scard-tag">Para fotógrafos</span>
+          <div class="scard-body">
+            <h3>Workshop de Iluminação</h3>
+            <p>Direção de luz natural e artificial — workshop intensivo com prática real e material de apoio.</p>
+            <a href="https://wa.me/5541999999999?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Workshop%20de%20Ilumina%C3%A7%C3%A3o" target="_blank" rel="noopener" class="scard-cta" data-cta="reservar" data-product="iluminacao">
+              Saber mais <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="scard" data-product="sob-medida">
+        <img src="thumbs/card_extra.jpg" alt="Ensaio fotográfico sob medida — composição editorial em locação externa" loading="lazy" decoding="async" width="600" height="750">
+        <div class="scard-overlay">
+          <span class="scard-tag">Custom</span>
+          <div class="scard-body">
+            <h3>Ensaio sob medida</h3>
+            <p>Casamentos, books, família, projetos editoriais — me conta sua ideia e construímos juntas.</p>
+            <a href="https://wa.me/5541999999999?text=Olá%2C%20quero%20falar%20sobre%20um%20ensaio%20sob%20medida" target="_blank" rel="noopener" class="scard-cta" data-cta="reservar" data-product="sob-medida">
+              Conversar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <div class="svscroll-dots" aria-hidden="true">
+      <button class="svscroll-dot active" aria-label="Ensaio Corporativo"></button>
+      <button class="svscroll-dot" aria-label="Ensaio Gestante"></button>
+      <button class="svscroll-dot" aria-label="Ensaio Pessoal"></button>
+      <button class="svscroll-dot" aria-label="Workshop de Iluminação"></button>
+      <button class="svscroll-dot" aria-label="Ensaio sob medida"></button>
+    </div>
+  </div>
+</section>
+
+<!-- Ensaio Gestante -->
+<section class="gest-section" id="gestante" data-od-id="gestante" aria-labelledby="gest-title">
+  <div class="gest-photo-wrap" aria-label="Fotos de ensaio gestante">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_10.png"  alt="Ensaio gestante — retrato com luz suave" loading="lazy" class="gp-active">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_20.png"  alt="Ensaio gestante — pose natural com barriga em destaque" loading="lazy">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_30.png"  alt="Ensaio gestante — luz direcional, expressão serena" loading="lazy">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_40.png"  alt="Ensaio gestante — composição editorial intimista" loading="lazy">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_70.png"  alt="Ensaio gestante — retrato íntimo com luz quente" loading="lazy">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_90.png"  alt="Ensaio gestante — fundo neutro em estúdio" loading="lazy">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_120.png" alt="Ensaio gestante — momento de espera" loading="lazy">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_140.png" alt="Ensaio gestante — detalhe da barriga" loading="lazy">
+    <img src="thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_150.png" alt="Ensaio gestante — expressão emocionada" loading="lazy">
+  </div>
+  <div class="gest-content">
+    <p class="section-eyebrow">Ensaio de Gestante</p>
+    <h2 class="section-title" id="gest-title">O momento mais<br>esperado, fotografado<br>com presença</h2>
+    <p class="section-desc">Da preparação ao clique — cada detalhe pensado para que você se sinta e se veja única.</p>
+    <nav class="gest-services" aria-label="Serviços disponíveis">
+      <a href="https://wa.me/5541999999999?text=Olá%2C%20quero%20agendar%20meu%20ensaio%20gestante" target="_blank" rel="noopener" class="gest-service-link" data-cta="gest-agendar">
+        Agende seu ensaio
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+      <a href="https://wa.me/5541999999999?text=Olá%2C%20tenho%20interesse%20no%20Workshop%20Presencial" target="_blank" rel="noopener" class="gest-service-link" data-cta="gest-workshop">
+        Workshop Presencial
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+      <a href="https://wa.me/5541999999999?text=Olá%2C%20tenho%20interesse%20em%20Mentoria%20Particular" target="_blank" rel="noopener" class="gest-service-link" data-cta="gest-mentoria">
+        Mentorias Particular
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+      <a href="https://wa.me/5541999999999?text=Olá%2C%20tenho%20interesse%20no%20Aluguel%20do%20Estúdio" target="_blank" rel="noopener" class="gest-service-link" data-cta="gest-estudio">
+        Aluguel do Estúdio
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    </nav>
+  </div>
+</section>
+
+<!-- Para fotógrafos e profissionais -->
+<section class="pro-section" id="academy" data-od-id="academy" aria-labelledby="pro-title">
+  <div class="pro-header">
+    <p class="section-eyebrow">Para fotógrafos e profissionais</p>
+    <h2 class="section-title" id="pro-title">Caroline Moschei Academy</h2>
+    <p class="section-desc">Conteúdo, formação e recursos para quem quer crescer na fotografia com método e estética.</p>
+  </div>
+  <div class="pro-grid">
+    <article class="pro-card">
+      <span class="pro-card-eyebrow">Formação</span>
+      <h3>Caroline Moschei<br>Academy</h3>
+      <p>Treinamento completo em fotografia de gestantes, iluminação de estúdio e direção de pose — presencial e online.</p>
+      <a href="https://wa.me/5541999999999?text=Olá%2C%20quero%20saber%20mais%20sobre%20a%20Caroline%20Moschei%20Academy" target="_blank" rel="noopener" class="pro-card-cta">
+        Saber mais <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    </article>
+    <article class="pro-card">
+      <span class="pro-card-eyebrow">Guia</span>
+      <h3>Guia de Poses</h3>
+      <p>Para pessoas e profissionais — referências de poses testadas em estúdio, organizadas por tipo de ensaio e formato de corpo.</p>
+      <a href="https://wa.me/5541999999999?text=Olá%2C%20quero%20saber%20mais%20sobre%20o%20Guia%20de%20Poses" target="_blank" rel="noopener" class="pro-card-cta">
+        Acessar <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    </article>
+    <article class="pro-card">
+      <span class="pro-card-eyebrow">Ferramentas</span>
+      <h3>Meus Presets</h3>
+      <p>Os perfis de cor dos meus ensaios — desenvolvidos para pele real com luz natural e de estúdio. Compatível com Lightroom.</p>
+      <a href="https://wa.me/5541999999999?text=Olá%2C%20quero%20saber%20mais%20sobre%20os%20Presets" target="_blank" rel="noopener" class="pro-card-cta">
+        Adquirir <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    </article>
+  </div>
+</section>
+
+<!-- Corporate photo grid -->
+<section class="cgrid-section" aria-labelledby="cgrid-title">
+  <div class="cgrid-header">
+    <div class="cgrid-header-left">
+      <span class="section-eyebrow">Ensaio Corporativo</span>
+      <h2 id="cgrid-title">Presença que fala<br>antes de você</h2>
+    </div>
+    <a href="https://wa.me/5541999999999?text=Olá%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Ensaio%20Corporativo" target="_blank" rel="noopener" class="btn btn-wpp btn-magnetic" data-cta="cgrid-corp" data-product="corporativo">
+      Reservar <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+    </a>
+  </div>
+  <div class="cgrid">
+    <div class="cgrid-item">
+      <img src="thumbs/g_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_20.jpg" alt="Headshot corporativo — executiva com postura elegante" loading="lazy" decoding="async">
+    </div>
+    <div class="cgrid-item">
+      <img src="thumbs/g_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_30.jpg" alt="Retrato corporativo feminino — iluminação direcional de estúdio" loading="lazy" decoding="async">
+    </div>
+    <div class="cgrid-item">
+      <img src="thumbs/g_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_40.jpg" alt="Headshot para LinkedIn — expressão confiante e natural" loading="lazy" decoding="async">
+    </div>
+    <div class="cgrid-item">
+      <img src="thumbs/g_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_50.jpg" alt="Fotografia corporativa com fundo neutro — luz profissional" loading="lazy" decoding="async">
+    </div>
+    <div class="cgrid-item">
+      <img src="thumbs/g_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_60.jpg" alt="Ensaio corporativo — pose natural, iluminação suave" loading="lazy" decoding="async">
+    </div>
+    <div class="cgrid-item">
+      <img src="thumbs/card_corp.jpg" alt="Headshot executiva — presença e confiança em ensaio corporativo" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+<!-- FAQ -->
+<section class="faq-section" id="faq" data-od-id="path-10" aria-labelledby="faq-title">
+  <div class="faq-header">
+    <p class="section-eyebrow">Dúvidas</p>
+    <h2 class="section-title" id="faq-title" style="text-align:center">Perguntas frequentes</h2>
+  </div>
+
+  <details class="faq-item">
+    <summary>Como agendar o meu ensaio?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <div class="faq-body">O agendamento é feito pelo WhatsApp. Clique em qualquer botão "Reservar" desta página — você me manda uma mensagem e combinamos data, horário e detalhes. Respondo em até 2h em horário comercial.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Qual a área de atendimento?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <div class="faq-body">Atendo principalmente em Curitiba e região metropolitana. Aceito propostas de deslocamento para outras cidades e estados — entre em contato para conversarmos sobre logística e custos.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Quanto tempo para receber as fotos?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <div class="faq-body">Corporativo em até 7 dias, gestante em até 14 dias. Ensaios sob medida têm prazo acordado no briefing. A entrega é feita via galeria online para download em alta resolução.</div>
+  </details>
+
+  <details class="faq-item">
+    <summary>Posso pedir mais fotos editadas?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></summary>
+    <div class="faq-body">Sim. Cada pacote inclui um número definido de fotos editadas, mas você pode solicitar edição adicional por um valor extra combinado. Conversamos na entrega da galeria.</div>
+  </details>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta" aria-labelledby="cta-title">
+  <h2 class="final-cta-title" id="cta-title">Bora marcar?</h2>
+  <a href="https://wa.me/5541999999999?text=Olá%2C%20gostaria%20de%20marcar%20um%20ensaio" target="_blank" rel="noopener" class="btn btn-wpp btn-lg btn-magnetic" data-cta="final-wpp" style="font-size:17px;padding:18px 40px">
+    Falar no WhatsApp
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+  </a>
+  <p class="final-cta-sub">Resposta em até 2h em horário comercial</p>
+</section>
+
+<!-- Page footer -->
+<footer class="page-footer" role="contentinfo">
+  <p style="margin-bottom:8px">
+    <a href="/contato">Contato</a>
+    <a href="/imprensa">Imprensa</a>
+    <a href="/termos">Termos</a>
+  </p>
+  <p>© Caroline Moschei · 2026 · feito com cuidado</p>
+</footer>
+
+<!-- Floating footer -->
+<div class="footer-anchor" role="complementary" aria-label="Ações rápidas">
+  <div class="footer-pill">
+    <a href="https://wa.me/5541999999999" target="_blank" rel="noopener" class="footer-wpp" data-cta="footer-wpp">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L.057 23.882a.5.5 0 00.606.658l6.23-1.633A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.898 0-3.678-.51-5.21-1.401l-.374-.216-3.877 1.016 1.035-3.778-.238-.389A9.946 9.946 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"></path></svg>
+      Conversar
+    </a>
+    <a href="mailto:contato@carolinemoschei.site" class="footer-icon" aria-label="Enviar e-mail">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+    </a>
+    <a href="https://instagram.com/carolinemoschei" target="_blank" rel="noopener" class="footer-icon" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+    </a>
+  </div>
+</div>
+
+<script>
+
+
+/* ── Gallery marquee — 3 auto-scrolling tracks ── */
+const photos=[
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_20.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_30.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_40.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_50.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_60.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_70.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_80.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_120.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_140.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_160.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_180.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_200.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_220.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_240.png',
+  'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_260.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_10.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_20.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_30.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_40.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_70.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_90.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_120.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_140.png',
+  'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_150.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_79.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_84.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_94.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_105.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_114.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_125.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_137.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_145.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_163.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_168.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_178.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_194.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_239.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_262.png',
+  'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_281.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_79.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_84.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_94.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_105.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_114.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_125.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_127.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_137.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_139.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_151.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_163.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_168.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_179.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_239.png',
+  'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_252.png',
+  'thumbs/g_ensaios_extra_IMG_1585.jpg',
+  'thumbs/g_ensaios_extra_IMG_1591.jpg',
+  'thumbs/g_ensaios_extra_IMG_1595.jpg',
+  'thumbs/g_ensaios_extra_IMG_1599.jpg',
+  'thumbs/g_ensaios_extra_IMG_3664.jpg',
+  'thumbs/g_ensaios_extra_IMG_3784.jpg',
+  'thumbs/g_ensaios_extra_IMG_3786.jpg',
+  'thumbs/g_ensaios_extra_IMG_3787.jpg',
+  'thumbs/g_ensaios_extra_IMG_3791.jpg',
+  'thumbs/g_IMG_3664.jpg',
+  'thumbs/g_IMG_3784.jpg',
+  'thumbs/g_IMG_3786.jpg',
+  'avatar/carol-positano.jpg',
+];
+function getAlt(src){
+  if(src.includes('corporativo')) return 'Headshot corporativo — expressão confiante em luz de estúdio';
+  if(src.includes('gestantes'))   return 'Ensaio gestante — barriga em luz natural quente';
+  if(src.includes('pessoal'))     return 'Ensaio autoral — expressão natural em luz lateral';
+  if(src.includes('iluminacao'))  return 'Workshop iluminação — técnica de luz direcional';
+  if(src.includes('ensaios_extra')||src.includes('IMG')) return 'Ensaio sob medida em locação externa';
+  return 'Caroline Moschei — fotógrafa';
+}
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
+function buildTrack(el,list){
+  const double=[...list,...list];
+  double.forEach(src=>{
+    const wrap=document.createElement('div');wrap.className='mphoto';
+    const img=document.createElement('img');
+    img.src=src;img.alt=getAlt(src);img.loading='lazy';img.decoding='async';img.width=500;img.height=333;
+    wrap.appendChild(img);el.appendChild(wrap);
+  });
+}
+const t1=document.getElementById('t1');
+const t2=document.getElementById('t2');
+const t3=document.getElementById('t3');
+if(t1)buildTrack(t1,shuffle(photos).slice(0,20));
+if(t2)buildTrack(t2,shuffle(photos).slice(0,20));
+if(t3)buildTrack(t3,shuffle(photos).slice(0,18));
+
+/* ── 3D Curved Carousel — arc layout, each card individual transform ── */
+(function(){
+  const CARDS=[
+    /* Corporativo */
+    {src:'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_20.png',  alt:'Headshot corporativo — expressão confiante em luz de estúdio'},
+    {src:'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_40.png',  alt:'Headshot corporativo — pose profissional em estúdio'},
+    {src:'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_60.png',  alt:'Ensaio corporativo — luz direcional'},
+    {src:'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_80.png',  alt:'Ensaio corporativo — expressão autêntica'},
+    {src:'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_120.png', alt:'Headshot corporativo — fundo neutro'},
+    {src:'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_160.png', alt:'Ensaio corporativo — luz de janela'},
+    {src:'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_200.png', alt:'Ensaio corporativo — ambiente profissional'},
+    {src:'thumbs/g_corporativo_Foto_Guia_de_Poses_Caroline_Moschei_Ensaio_Corporativo_240.png', alt:'Headshot corporativo — expressão confiante'},
+    /* Gestantes */
+    {src:'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_10.png',  alt:'Ensaio gestante — luz natural quente'},
+    {src:'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_30.png',  alt:'Ensaio gestante — barriga em destaque'},
+    {src:'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_70.png',  alt:'Ensaio gestante — amor e delicadeza'},
+    {src:'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_120.png', alt:'Ensaio gestante — luz dourada'},
+    {src:'thumbs/g_gestantes_Fotos_Guia_de_Poses_Caroline_Moschei_150.png', alt:'Ensaio gestante — direção sensível'},
+    /* Pessoal & Criativo */
+    {src:'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_105.png', alt:'Ensaio pessoal — expressão autoral'},
+    {src:'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_125.png', alt:'Ensaio criativo — luz lateral'},
+    {src:'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_145.png', alt:'Ensaio pessoal — identidade visual'},
+    {src:'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_168.png', alt:'Ensaio criativo — composição editorial'},
+    {src:'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_194.png', alt:'Ensaio pessoal — expressão natural'},
+    {src:'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_239.png', alt:'Ensaio criativo — luz ambiente'},
+    {src:'thumbs/g_pessoal_criativo_Guia_de_Poses_Pessoal_e_Criativo_262.png', alt:'Ensaio pessoal — momento autêntico'},
+    /* Iluminação */
+    {src:'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_79.png',  alt:'Workshop iluminação — técnica de luz direcional'},
+    {src:'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_114.png', alt:'Workshop iluminação — luz de chave'},
+    {src:'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_137.png', alt:'Workshop iluminação — contraste dramático'},
+    {src:'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_163.png', alt:'Workshop iluminação — luz natural'},
+    {src:'thumbs/g_iluminacao_Guia_de_Poses_Pessoal_e_Criativo_239.png', alt:'Workshop iluminação — técnica avançada'},
+    /* Ensaios extra */
+    {src:'thumbs/g_ensaios_extra_IMG_1585.jpg', alt:'Ensaio em locação — luz natural ambiente'},
+    {src:'thumbs/g_ensaios_extra_IMG_1591.jpg', alt:'Ensaio sob medida — composição editorial'},
+    {src:'thumbs/g_ensaios_extra_IMG_1595.jpg', alt:'Ensaio sob medida — expressão autêntica'},
+    {src:'thumbs/g_ensaios_extra_IMG_3786.jpg', alt:'Ensaio em locação — momento espontâneo'},
+    {src:'thumbs/g_ensaios_extra_IMG_3791.jpg', alt:'Ensaio sob medida — luz lateral'},
+    /* Avatar */
+    {src:'avatar/carol-final.jpg',    alt:'Caroline Moschei — retrato editorial em luz natural'},
+    {src:'avatar/carol-positano.jpg', alt:'Caroline Moschei — sessão Positano'},
+  ];
+  const N=CARDS.length;
+  let current=0, autoTimer=null, dragStartX=0, dragDelta=0;
+
+  const stage=document.getElementById('caro-stage');
+  const dotsEl=document.getElementById('caro-dots');
+  if(!stage) return;
+
+  /* layout constants — 5 cards desktop (±2), 5 cards mobile (±2) */
+  const isMob=window.innerWidth<640;
+  const W=isMob ? Math.max(72,window.innerWidth*0.17) : Math.min(130,Math.max(90,window.innerWidth*0.08));
+  const H=W*4/3;
+  const SPREAD=isMob ? Math.max(55,window.innerWidth*0.13) : Math.min(165,Math.max(120,window.innerWidth*0.10));
+  const ANGLE=isMob ? 28 : 30;   /* 30° desktop = 7 cards fit arc; 28° mobile = 5 cards */
+  const DEPTH=isMob ? 230 : 360; /* deep Z = strong foreshortening */
+  const OPAC_STEP=0.22;           /* gentler falloff across more cards */
+  const MAX_VIS=isMob ? 2 : 3;   /* mobile: ±2 = 5 cards; desktop: ±3 = 7 cards */
+
+  /* build cards */
+  const cardEls=CARDS.map((c,i)=>{
+    const card=document.createElement('div');
+    card.className='caro-card';
+    card.style.width=W+'px';
+    card.style.marginLeft=(-W/2)+'px';
+    card.style.marginTop=(-H/2)+'px';
+    const img=document.createElement('img');
+    img.src=c.src; img.alt=c.alt;
+    img.loading=i===0?'eager':'lazy';
+    card.appendChild(img);
+    card.addEventListener('click',()=>{ if(Math.abs(dragDelta)<8){ goTo(i); resetAuto(); } });
+    stage.appendChild(card);
+    return card;
+  });
+
+  /* build dots (optional — dotsEl may not exist in HTML) */
+  const dotEls=dotsEl ? CARDS.map((_,i)=>{
+    const d=document.createElement('button');
+    d.className='caro-dot';
+    d.setAttribute('role','tab');
+    d.setAttribute('aria-label',`Foto ${i+1}`);
+    d.addEventListener('click',()=>{ goTo(i); resetAuto(); });
+    dotsEl.appendChild(d);
+    return d;
+  }) : [];
+
+  function getOffset(i){
+    let d=i-current;
+    if(d> N/2) d-=N;
+    if(d<-N/2) d+=N;
+    return d;
+  }
+
+  function render(){
+    cardEls.forEach((card,i)=>{
+      const d=getOffset(i);
+      const abs=Math.abs(d);
+      const isActive=(i===current);
+      card.classList.toggle('active',isActive);
+
+      if(abs>MAX_VIS){
+        /* Snap transform instantly — no CSS transition — so wrapping cards
+           don't sweep across the scene when d changes sign (wrap-around bug) */
+        card.style.transition='opacity 0.45s ease, filter 0.45s ease';
+        card.style.opacity='0';
+        card.style.pointerEvents='none';
+        card.style.filter='blur(10px)';
+        const signX=Math.sign(d)||1;
+        const edgeAngleRad=MAX_VIS*ANGLE*Math.PI/180;
+        const edgeTz=Math.cos(edgeAngleRad)*DEPTH;
+        card.style.transform=`translateX(${signX*SPREAD*(MAX_VIS+2)}px) translateZ(${edgeTz}px) rotateY(${-signX*MAX_VIS*ANGLE}deg)`;
+        return;
+      }
+      /* Restore full transition for visible cards */
+      card.style.transition='transform 0.90s cubic-bezier(0.16,1,0.3,1), opacity 0.70s ease, box-shadow 0.50s ease, filter 0.65s ease';
+      /* CONVEX ARC (center closest to viewer, edges recede):
+         cos(0°)=1  → tz = +DEPTH    (center: closest, biggest)
+         cos(30°)≈.87→ tz = +.87*DEPTH (d=1: slightly farther)
+         cos(60°)=.5 → tz = +.5*DEPTH  (d=2)
+         cos(90°)=0  → tz = 0           (d=3: edges at viewer plane)  */
+      const angleRad=d*ANGLE*Math.PI/180;
+      const tx=d*SPREAD;
+      const tz=Math.cos(angleRad)*DEPTH;
+      const ry=-d*ANGLE;
+      const op=Math.max(0.20,1-abs*OPAC_STEP);
+      const blurPx=abs*(isMob?0.6:1.4);
+      card.style.transform=`translateX(${tx}px) translateZ(${tz}px) rotateY(${ry}deg)`;
+      card.style.opacity=String(op);
+      card.style.filter=blurPx>0?`blur(${blurPx}px)`:'';
+      card.style.pointerEvents=abs>=MAX_VIS?'none':'auto';
+    });
+    if(dotEls.length) dotEls.forEach((d,i)=>{
+      d.classList.toggle('active',i===current);
+      d.setAttribute('aria-selected',String(i===current));
+    });
+  }
+
+  function goTo(idx){ current=((idx%N)+N)%N; render(); }
+  function next(){ goTo(current+1); }
+  function prev(){ goTo(current-1); }
+
+  document.getElementById('caro-prev')?.addEventListener('click',()=>{ prev(); resetAuto(); });
+  document.getElementById('caro-next')?.addEventListener('click',()=>{ next(); resetAuto(); });
+
+  function startAuto(){ autoTimer=setInterval(next,3800); }
+  function resetAuto(){ clearInterval(autoTimer); startAuto(); }
+
+  /* drag */
+  stage.addEventListener('mousedown',e=>{ dragStartX=e.clientX; dragDelta=0; });
+  window.addEventListener('mousemove',e=>{ if(dragStartX!==null) dragDelta=e.clientX-dragStartX; });
+  window.addEventListener('mouseup',()=>{
+    if(dragDelta>52){ prev(); resetAuto(); } else if(dragDelta<-52){ next(); resetAuto(); }
+    dragDelta=0; dragStartX=null;
+  });
+  stage.addEventListener('touchstart',e=>{ dragStartX=e.touches[0].clientX; dragDelta=0; },{passive:true});
+  stage.addEventListener('touchmove',e=>{ dragDelta=e.touches[0].clientX-dragStartX; },{passive:true});
+  stage.addEventListener('touchend',()=>{
+    if(dragDelta>52){ prev(); resetAuto(); } else if(dragDelta<-52){ next(); resetAuto(); }
+    dragDelta=0; dragStartX=null;
+  });
+
+  const sec=stage.closest('.caro-section');
+  sec?.addEventListener('mouseenter',()=>clearInterval(autoTimer));
+  sec?.addEventListener('mouseleave',startAuto);
+
+  render();
+  startAuto();
+})();
+
+/* ── Magnetic Glow Buttons ───────────────────────────── */
+(function(){
+  const PULL=0.22, SCALE=1.035;
+  document.querySelectorAll('.btn-magnetic').forEach(btn=>{
+    let raf;
+    function onMove(e){
+      if(raf) cancelAnimationFrame(raf);
+      raf=requestAnimationFrame(()=>{
+        const r=btn.getBoundingClientRect();
+        const x=e.clientX-r.left, y=e.clientY-r.top;
+        const cx=r.width/2, cy=r.height/2;
+        btn.style.transform=`scale(${SCALE})`;
+        btn.style.setProperty('--mx',`${(x/r.width*100).toFixed(1)}%`);
+        btn.style.setProperty('--my',`${(y/r.height*100).toFixed(1)}%`);
+      });
+    }
+    function onLeave(){
+      if(raf) cancelAnimationFrame(raf);
+      btn.style.transform='';
+      btn.style.setProperty('--mx','50%');
+      btn.style.setProperty('--my','50%');
+    }
+    function onDown(){ btn.style.transform=`scale(0.96)` }
+    function onUp(e){ if(btn.matches(':hover')) onMove(e); else onLeave(); }
+    btn.addEventListener('mousemove',onMove);
+    btn.addEventListener('mouseleave',onLeave);
+    btn.addEventListener('mousedown',onDown);
+    btn.addEventListener('mouseup',onUp);
+  });
+})();
+
+
+// ── Hamburger menu ────────────────────────────────────────
+function closeNav(){
+  const ov=document.getElementById('nav-overlay');
+  const btn=document.getElementById('burger-btn');
+  if(ov){ov.classList.remove('open');document.body.style.overflow=''}
+  if(btn){btn.classList.remove('open');btn.setAttribute('aria-expanded','false')}
+}
+(function(){
+  const btn=document.getElementById('burger-btn');
+  const ov=document.getElementById('nav-overlay');
+  const cls=document.getElementById('btn-close-ov');
+  if(!btn||!ov)return;
+  btn.addEventListener('click',function(){
+    const open=ov.classList.toggle('open');
+    btn.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',String(open));
+    document.body.style.overflow=open?'hidden':'';
+  });
+  if(cls)cls.addEventListener('click',closeNav);
+  ov.addEventListener('click',function(e){if(e.target===ov)closeNav()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeNav()});
+})();
+
+// Infinite marquee — clone sets until 3× container width, loop at 1 setWidth
+(function(){
+  var wrap = document.querySelector('.studio-marquee');
+  if(!wrap) return;
+  var inner = wrap.querySelector('.marquee-inner');
+  var set = inner.querySelector('.marquee-set');
+  if(!set) return;
+
+  function populate(){
+    while(inner.children.length > 1) inner.removeChild(inner.lastChild);
+    var wrapW = wrap.offsetWidth;
+    var setW = set.offsetWidth;
+    if(!setW) return;
+    var needed = Math.ceil((wrapW * 3) / setW) + 2;
+    for(var i=1; i<needed; i++) inner.appendChild(set.cloneNode(true));
+  }
+
+  var speed = 80; // px/s
+  var pos = 0, lastT = null, raf = null, paused = false;
+
+  function tick(t){
+    if(!paused){
+      if(lastT !== null){
+        var dt = Math.min((t - lastT)/1000, 0.05);
+        pos += speed * dt;
+        var setW = set.offsetWidth;
+        if(setW && pos >= setW) pos -= setW;
+        inner.style.transform = 'translateX(-'+pos+'px)';
+      }
+      lastT = t;
+    } else {
+      lastT = null;
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  populate();
+  raf = requestAnimationFrame(tick);
+
+  var resizeTimer;
+  window.addEventListener('resize', function(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function(){
+      cancelAnimationFrame(raf);
+      pos = 0; lastT = null;
+      inner.style.transform = '';
+      populate();
+      raf = requestAnimationFrame(tick);
+    }, 250);
+  });
+
+  wrap.addEventListener('mouseenter', function(){ paused = true; });
+  wrap.addEventListener('mouseleave', function(){ paused = false; });
+})();
+
+// Footer reveal after second section
+(function(){
+  var footer = document.querySelector('.footer-anchor');
+  if(!footer) return;
+  var sections = document.querySelectorAll('main > section, main > div.proof, main > div');
+  // reveal after caro-section (first section) is mostly scrolled past
+  var trigger = document.querySelector('.caro-section');
+  if(!trigger){ footer.classList.add('visible'); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!e.isIntersecting) footer.classList.add('visible');
+      else footer.classList.remove('visible');
+    });
+  },{threshold:0.08});
+  io.observe(trigger);
+})();
+
+/* ─── Horizontal Scroll — Ensaios ─────────────────────── */
+(function(){
+  var section = document.getElementById('ensaios');
+  var sticky  = section && section.querySelector('.svscroll-sticky');
+  var track   = document.getElementById('svtrack');
+  var dots    = section && section.querySelectorAll('.svscroll-dot');
+  if(!section || !sticky || !track) return;
+
+  var MOBILE = 768;
+  var raf = null;
+
+  function isMobile(){ return window.innerWidth <= MOBILE; }
+
+  function setHeight(){
+    if(isMobile()){ section.style.height = ''; return; }
+    var header    = section.querySelector('.svscroll-header');
+    var headerH   = header ? header.offsetHeight : 0;
+    var extraScroll = Math.max(0, track.scrollWidth - sticky.offsetWidth);
+    section.style.height = (headerH + window.innerHeight + extraScroll) + 'px';
+  }
+
+  function updateDots(idx){
+    if(!dots) return;
+    dots.forEach(function(d,i){ d.classList.toggle('active', i === idx); });
+  }
+
+  function onScroll(){
+    if(isMobile()) return;
+    if(raf) return;
+    raf = requestAnimationFrame(function(){
+      raf = null;
+      var stickyRect  = sticky.getBoundingClientRect();
+      var scrolledIn  = -stickyRect.top;
+      var extraScroll = Math.max(0, track.scrollWidth - sticky.offsetWidth);
+      if(extraScroll <= 0) return;
+
+      var progress = Math.max(0, Math.min(1, scrolledIn / extraScroll));
+      track.style.transform = 'translateX(-' + (progress * extraScroll) + 'px)';
+
+      var cards = track.querySelectorAll('.scard');
+      var gap   = parseFloat(getComputedStyle(track).gap) || 20;
+      var cardW = cards[0] ? cards[0].offsetWidth + gap : 300;
+      var idx   = Math.min(cards.length - 1, Math.round((progress * extraScroll) / cardW));
+      updateDots(idx);
+      cards.forEach(function(c,i){ c.classList.toggle('active', i === idx); });
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', function(){ setHeight(); onScroll(); });
+
+  if(dots) dots.forEach(function(d, i){
+    d.addEventListener('click', function(){
+      if(isMobile()){
+        var cards = track.querySelectorAll('.scard');
+        var gap = parseFloat(getComputedStyle(track).gap) || 20;
+        var x = i * ((cards[0] ? cards[0].offsetWidth : 280) + gap);
+        sticky.scrollTo({left: x, behavior:'smooth'});
+        return;
+      }
+      var extraScroll = Math.max(0, track.scrollWidth - sticky.offsetWidth);
+      var cards = track.querySelectorAll('.scard');
+      var gap   = parseFloat(getComputedStyle(track).gap) || 20;
+      var cardW = cards[0] ? cards[0].offsetWidth + gap : 300;
+      var header = section.querySelector('.svscroll-header');
+      var headerH = header ? header.offsetHeight : 0;
+      var targetScroll = section.offsetTop + headerH + (i * cardW / extraScroll) * extraScroll;
+      window.scrollTo({top: targetScroll, behavior:'smooth'});
+    });
+  });
+
+  setTimeout(function(){ setHeight(); onScroll(); }, 200);
+})();
+
+/* ── Gestante photo cycle ── */
+(function(){
+  const imgs=document.querySelectorAll('.gest-photo-wrap img');
+  if(!imgs.length) return;
+  let cur=0;
+  setInterval(()=>{
+    imgs[cur].classList.remove('gp-active');
+    cur=(cur+1)%imgs.length;
+    imgs[cur].classList.add('gp-active');
+  },3400);
+})();
+</script>
+
+
+// inotify probe Mon May 18 08:45:58 PM UTC 2026
+// trigger Mon May 18 08:46:35 PM UTC 2026
+</body></html>

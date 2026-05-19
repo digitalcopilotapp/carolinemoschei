@@ -1,0 +1,18 @@
+# Large binary assets — keep in disk, not in git
+avatar/
+brand-assets/
+portfolio-corporativo/
+portfolio-gestantes/
+portfolio-iluminacao/
+portfolio-pessoal-criativo/
+portfolio-ensaios-extra/
+references/user-uploads/
+screenshots/
+thumbs/
+# OD internal
+.od-skills/
+# Backups (handled by separate watcher in ~/od-projects-backups)
+*.bak
+*.bak-*
+*-v[0-9]*.html
+*-20[0-9][0-9][0-9][0-9][0-9][0-9]-*.html
